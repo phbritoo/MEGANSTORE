@@ -5,10 +5,13 @@
  */
 package regra.fachada;
 
+import regra.basicas.Pagamento;
+
 /**
  *
  * @author aluno
  */
 public class FachadaPagamento {
-    
+    public void cadastrarPagamento (Pagamento pagamento){
+    }
 }

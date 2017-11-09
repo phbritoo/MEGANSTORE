@@ -10,5 +10,80 @@ package regra.basicas;
  * @author paulo
  */
 public class Pagamento {
+    private Integer cardParcelas;
+    private Double cardValor;
+    private String cardnum;
+    private String cardValidade;
+    private String cardTitular;
+
+    /**
+     * @return the cardParcelas
+     */
+    public Integer getCardParcelas() {
+        return cardParcelas;
+    }
+
+    /**
+     * @param cardParcelas the cardParcelas to set
+     */
+    public void setCardParcelas(Integer cardParcelas) {
+        this.cardParcelas = cardParcelas;
+    }
+
+    /**
+     * @return the cardValor
+     */
+    public Double getCardValor() {
+        return cardValor;
+    }
+
+    /**
+     * @param cardValor the cardValor to set
+     */
+    public void setCardValor(Double cardValor) {
+        this.cardValor = cardValor;
+    }
+
+    /**
+     * @return the cardnum
+     */
+    public String getCardnum() {
+        return cardnum;
+    }
+
+    /**
+     * @param cardnum the cardnum to set
+     */
+    public void setCardnum(String cardnum) {
+        this.cardnum = cardnum;
+    }
+
+    /**
+     * @return the cardValidade
+     */
+    public String getCardValidade() {
+        return cardValidade;
+    }
+
+    /**
+     * @param cardValidade the cardValidade to set
+     */
+    public void setCardValidade(String cardValidade) {
+        this.cardValidade = cardValidade;
+    }
+
+    /**
+     * @return the cardTitular
+     */
+    public String getCardTitular() {
+        return cardTitular;
+    }
+
+    /**
+     * @param cardTitular the cardTitular to set
+     */
+    public void setCardTitular(String cardTitular) {
+        this.cardTitular = cardTitular;
+    }
     
 }
