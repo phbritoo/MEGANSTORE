@@ -3,20 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package regra.fachada;
+package negocio.fachada;
 
-import regra.basicas.Produto;
-
+import negocio.basica.Fornecedor;
 /**
  *
- * @author Gabriel
+ * @author aluno
  */
-public class FachadaProduto {
+public class FachadaFornecedor {
     
-    public void cadastrarProduto(Produto produto){
-        
-        
-        
-        
-    }
 }

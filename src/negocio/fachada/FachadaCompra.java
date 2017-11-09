@@ -1,6 +1,6 @@
-package regra.fachada;
+package negocio.fachada;
 
-import regra.basicas.Compra;
+import negocio.basica.Compra;
 
 /**
  *

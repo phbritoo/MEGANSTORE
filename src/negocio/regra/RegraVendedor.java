@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package regra.fachada;
-
-import regra.basicas.Pagamento;
+package negocio.regra;
 
 /**
  *
- * @author aluno
+ * @author paulo
  */
-public class FachadaPagamento {
-    public void cadastrarPagamento (Pagamento pagamento){
-    }
+public class RegraVendedor {
+    
 }

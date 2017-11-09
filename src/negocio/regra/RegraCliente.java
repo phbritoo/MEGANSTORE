@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package regra.fachada;
+package negocio.regra;
 
 /**
  *
- * @author aluno
+ * @author paulo
  */
-public class FachadaCliente {
-    
+public class RegraCliente {
     
 }

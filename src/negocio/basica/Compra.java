@@ -1,5 +1,5 @@
 
-package regra.basicas;
+package negocio.basica;
 
 import java.util.Date;
 
