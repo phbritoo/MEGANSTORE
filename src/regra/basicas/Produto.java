@@ -7,8 +7,52 @@ package regra.basicas;
 
 /**
  *
- * @author paulo
+ * @author Gabriel
  */
 public class Produto {
-    
+    private String prd_nome;
+    private int prd_estoque;
+    private double prd_preco;
+
+    /**
+     * @return the prd_nome
+     */
+    public String getPrd_nome() {
+        return prd_nome;
+    }
+
+    /**
+     * @param prd_nome the prd_nome to set
+     */
+    public void setPrd_nome(String prd_nome) {
+        this.prd_nome = prd_nome;
+    }
+
+    /**
+     * @return the prd_estoque
+     */
+    public int getPrd_estoque() {
+        return prd_estoque;
+    }
+
+    /**
+     * @param prd_estoque the prd_estoque to set
+     */
+    public void setPrd_estoque(int prd_estoque) {
+        this.prd_estoque = prd_estoque;
+    }
+
+    /**
+     * @return the prd_preco
+     */
+    public double getPrd_preco() {
+        return prd_preco;
+    }
+
+    /**
+     * @param prd_preco the prd_preco to set
+     */
+    public void setPrd_preco(double prd_preco) {
+        this.prd_preco = prd_preco;
+    }   
 }

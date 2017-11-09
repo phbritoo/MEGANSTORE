@@ -5,10 +5,18 @@
  */
 package regra.fachada;
 
+import regra.basicas.Produto;
+
 /**
  *
- * @author aluno
+ * @author Gabriel
  */
 public class FachadaProduto {
     
+    public void cadastrarProduto(Produto produto){
+        
+        
+        
+        
+    }
 }
