@@ -11,4 +11,5 @@ package regra.fachada;
  */
 public class FachadaCliente {
     
+    
 }
