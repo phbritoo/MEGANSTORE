@@ -5,6 +5,7 @@
  */
 package regra.fachada;
 
+import regra.basicas.Fornecedor;
 /**
  *
  * @author aluno
