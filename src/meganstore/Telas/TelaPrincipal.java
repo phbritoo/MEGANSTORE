@@ -14,8 +14,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
+    
     public TelaPrincipal() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -28,74 +30,89 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
-        jMenuItem9 = new javax.swing.JMenuItem();
+        menu_cadastros = new javax.swing.JMenu();
+        menu_cadastroCliente = new javax.swing.JMenuItem();
+        menu_cadastroFornecedor = new javax.swing.JMenuItem();
+        menu_cadastroProduto = new javax.swing.JMenuItem();
+        menu_cadastroVendedor = new javax.swing.JMenuItem();
+        menu_vendas = new javax.swing.JMenu();
+        menu_vendasEmitirPed = new javax.swing.JMenuItem();
+        menu_Colsultar = new javax.swing.JMenu();
+        menu_consultarCliente = new javax.swing.JMenuItem();
+        menu_consultarFornecedor = new javax.swing.JMenuItem();
+        menu_consultarProdutos = new javax.swing.JMenuItem();
+        menu_consultarVendedor = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("Cadastros");
+        menu_cadastros.setText("Cadastros");
 
-        jMenuItem2.setText("Cliente");
-        jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Fornecedor");
-        jMenu1.add(jMenuItem3);
-
-        jMenuItem4.setText("Produtos");
-        jMenu1.add(jMenuItem4);
-
-        jMenuItem1.setText("Vendedor");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menu_cadastroCliente.setText("Cliente");
+        menu_cadastroCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menu_cadastroClienteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        menu_cadastros.add(menu_cadastroCliente);
 
-        jMenuBar1.add(jMenu1);
-
-        jMenu3.setText("Vendas");
-
-        jMenuItem5.setText("Emitir Pedido");
-        jMenu3.add(jMenuItem5);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Cosultar");
-
-        jMenuItem6.setText("Cliente");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+        menu_cadastroFornecedor.setText("Fornecedor");
+        menu_cadastroFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
+                menu_cadastroFornecedorActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem6);
+        menu_cadastros.add(menu_cadastroFornecedor);
 
-        jMenuItem7.setText("Fornecedor");
-        jMenu4.add(jMenuItem7);
-
-        jMenuItem8.setText("Produtos");
-        jMenu4.add(jMenuItem8);
-
-        jMenuItem9.setText("Vendedor");
-        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+        menu_cadastroProduto.setText("Produtos");
+        menu_cadastroProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem9ActionPerformed(evt);
+                menu_cadastroProdutoActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuItem9);
+        menu_cadastros.add(menu_cadastroProduto);
 
-        jMenuBar1.add(jMenu4);
+        menu_cadastroVendedor.setText("Vendedor");
+        menu_cadastroVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_cadastroVendedorActionPerformed(evt);
+            }
+        });
+        menu_cadastros.add(menu_cadastroVendedor);
+
+        jMenuBar1.add(menu_cadastros);
+
+        menu_vendas.setText("Vendas");
+
+        menu_vendasEmitirPed.setText("Emitir Pedido");
+        menu_vendas.add(menu_vendasEmitirPed);
+
+        jMenuBar1.add(menu_vendas);
+
+        menu_Colsultar.setText("Cosultar");
+
+        menu_consultarCliente.setText("Cliente");
+        menu_consultarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_consultarClienteActionPerformed(evt);
+            }
+        });
+        menu_Colsultar.add(menu_consultarCliente);
+
+        menu_consultarFornecedor.setText("Fornecedor");
+        menu_Colsultar.add(menu_consultarFornecedor);
+
+        menu_consultarProdutos.setText("Produtos");
+        menu_Colsultar.add(menu_consultarProdutos);
+
+        menu_consultarVendedor.setText("Vendedor");
+        menu_consultarVendedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_consultarVendedorActionPerformed(evt);
+            }
+        });
+        menu_Colsultar.add(menu_consultarVendedor);
+
+        jMenuBar1.add(menu_Colsultar);
 
         setJMenuBar(jMenuBar1);
 
@@ -103,7 +120,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 534, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,17 +130,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void menu_cadastroVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cadastroVendedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        CadastroVendedor cv = new CadastroVendedor();
+        cv.setVisible(true);
+    }//GEN-LAST:event_menu_cadastroVendedorActionPerformed
 
-    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+    private void menu_consultarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultarVendedorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem9ActionPerformed
+    }//GEN-LAST:event_menu_consultarVendedorActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void menu_consultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultarClienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+        ConsultaCliente csc = new ConsultaCliente();
+        csc.setVisible(true);
+    }//GEN-LAST:event_menu_consultarClienteActionPerformed
+
+    private void menu_cadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cadastroClienteActionPerformed
+        // TODO add your handling code here:
+        CadastroCliente cc = new CadastroCliente();
+        cc.setVisible(true);
+    }//GEN-LAST:event_menu_cadastroClienteActionPerformed
+
+    private void menu_cadastroFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cadastroFornecedorActionPerformed
+        // TODO add your handling code here:
+        CadastroFornecedor cf = new CadastroFornecedor();
+        cf.setVisible(true);
+    }//GEN-LAST:event_menu_cadastroFornecedorActionPerformed
+
+    private void menu_cadastroProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cadastroProdutoActionPerformed
+        // TODO add your handling code here:
+        CadastroProduto cp = new CadastroProduto();
+        cp.setVisible(true);
+    }//GEN-LAST:event_menu_cadastroProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,18 +200,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JMenu menu_Colsultar;
+    private javax.swing.JMenuItem menu_cadastroCliente;
+    private javax.swing.JMenuItem menu_cadastroFornecedor;
+    private javax.swing.JMenuItem menu_cadastroProduto;
+    private javax.swing.JMenuItem menu_cadastroVendedor;
+    private javax.swing.JMenu menu_cadastros;
+    private javax.swing.JMenuItem menu_consultarCliente;
+    private javax.swing.JMenuItem menu_consultarFornecedor;
+    private javax.swing.JMenuItem menu_consultarProdutos;
+    private javax.swing.JMenuItem menu_consultarVendedor;
+    private javax.swing.JMenu menu_vendas;
+    private javax.swing.JMenuItem menu_vendasEmitirPed;
     // End of variables declaration//GEN-END:variables
 }
