@@ -1,5 +1,5 @@
   
-package meganstore.basicas;
+package regra.basicas;
 
 
 public class Cliente {

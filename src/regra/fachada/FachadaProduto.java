@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package meganstore.basicas;
+package regra.fachada;
 
 /**
  *
- * @author paulo
+ * @author aluno
  */
-public class Compra {
+public class FachadaProduto {
     
 }
