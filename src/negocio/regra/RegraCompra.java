@@ -5,10 +5,20 @@
  */
 package negocio.regra;
 
+import negocio.basica.Compra;
+
 /**
  *
  * @author paulo
  */
 public class RegraCompra {
+
+    public void validar(Compra compra) {
+        //if(compra == nuul) || (compra.getCliente())
+    }
+
+    public void Incluir(Compra compra) {
+        
+    }
     
 }
