@@ -10,6 +10,7 @@ package negocio.basica;
  * @author Gabriel
  */
 public class Produto {
+    private int prd_cod;
     private String prd_nome;
     private int prd_estoque;
     private double prd_preco;
@@ -55,4 +56,18 @@ public class Produto {
     public void setPrd_preco(double prd_preco) {
         this.prd_preco = prd_preco;
     }   
+
+    /**
+     * @return the prd_cod
+     */
+    public int getPrd_cod() {
+        return prd_cod;
+    }
+
+    /**
+     * @param prd_cod the prd_cod to set
+     */
+    public void setPrd_cod(int prd_cod) {
+        this.prd_cod = prd_cod;
+    }
 }

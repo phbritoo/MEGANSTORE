@@ -5,10 +5,18 @@
  */
 package negocio.regra;
 
+import negocio.basica.Produto;
+
 /**
  *
  * @author paulo
  */
 public class RegraProduto {
+    
+    public void validar(Produto produto){
+        if (produto == null){
+            
+        }
+    }
     
 }
