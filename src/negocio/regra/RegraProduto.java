@@ -6,17 +6,19 @@
 package negocio.regra;
 
 import negocio.basica.Produto;
+import negocio.exceptions.ExceptionsProduto;
 
 /**
  *
  * @author paulo
  */
-public class RegraProduto {
+public class RegraProduto{
     
-    public void validar(Produto produto){
+    public void validar(Produto produto) throws ExceptionsProduto{
+        
         if (produto == null){
-            
+            throw new ExceptionsProduto("objeto produto não criado");
         }
+        
     }
-    
 }

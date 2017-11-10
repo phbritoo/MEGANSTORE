@@ -9,6 +9,15 @@ package negocio.exceptions;
  *
  * @author aluno
  */
-public class ExceptionsProduto {
+public class ExceptionsProduto extends Exception{
+    
+    public ExceptionsProduto(String texto){
+        super(texto);
+    }
+    
+    public ExceptionsProduto(){
+        
+    }
+    
     
 }
