@@ -10,7 +10,7 @@ import negocio.exceptions.ExceptionsProduto;
 
 /**
  *
- * @author paulo
+ * @author Gabriel
  */
 public class RegraProduto{
     

@@ -7,7 +7,7 @@ package negocio.exceptions;
 
 /**
  *
- * @author aluno
+ * @author Gabriel
  */
 public class ExceptionsProduto extends Exception{
     

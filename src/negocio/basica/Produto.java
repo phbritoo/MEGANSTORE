@@ -10,9 +10,9 @@ package negocio.basica;
  * @author Gabriel
  */
 public class Produto {
-    private int prd_cod;
+    private Integer prd_cod;
     private String prd_nome;
-    private int prd_estoque;
+    private Integer prd_estoque;
     private double prd_preco;
 
     /**

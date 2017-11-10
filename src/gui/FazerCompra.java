@@ -16,6 +16,7 @@ public class FazerCompra extends javax.swing.JFrame {
      */
     public FazerCompra() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -88,6 +89,11 @@ public class FazerCompra extends javax.swing.JFrame {
         jButton1.setText("GERAR NOTA");
 
         jButton2.setText("SAIR");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("REMOVER PRODUTO");
 
@@ -115,7 +121,7 @@ public class FazerCompra extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1))
                             .addComponent(jLabel6))
                         .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel7)
@@ -128,10 +134,9 @@ public class FazerCompra extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton4))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
-                                .addGap(22, 22, 22)))))
+                                .addComponent(jButton1)
+                                .addGap(35, 35, 35)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -180,6 +185,11 @@ public class FazerCompra extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
