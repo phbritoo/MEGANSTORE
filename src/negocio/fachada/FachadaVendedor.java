@@ -5,6 +5,9 @@
  */
 package negocio.fachada;
 
+import negocio.basica.Vendedor;
+import negocio.regra.RegraVendedor;
+
 /**
  *
  * @author aluno
@@ -14,7 +17,7 @@ public class FachadaVendedor {
     public void cadastrarVendedor (Vendedor vendedor){
         RegraVendedor rn = new RegraVendedor();
         rn.validar(vendedor);
-        rn.eUnico(vendedor);
+        //rn.eUnico(vendedor);
     }
     
 }
