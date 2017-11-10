@@ -6,12 +6,18 @@
 package negocio.fachada;
 
 import negocio.basica.Pagamento;
+import negocio.exceptions.ExceptionPagamento;
+import negocio.regra.RegraPagamento;
 
 /**
  *
  * @author aluno
  */
 public class FachadaPagamento {
-    public void cadastrarPagamento (Pagamento pagamento){
+    public void cadastrar (Pagamento pagamento) throws ExceptionPagamento{
+        RegraPagamento rn = new RegraPagamento();
+        rn.validar(pagamento);
+        rn.incluir(pagamento);
+               
     }
 }
