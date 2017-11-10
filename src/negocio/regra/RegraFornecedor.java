@@ -5,10 +5,19 @@
  */
 package negocio.regra;
 
+import negocio.exceptions.ExceptionsFornecedor;
+import negocio.basica.Fornecedor;
+
 /**
  *
  * @author paulo
  */
-public class RegraFornecedor {
-    
+public class RegraFornecedor{
+    public void validar(Fornecedor fornecedor)throws ExceptionsFornecedor{
+        if(fornecedor==null){
+            throw new ExceptionsFornecedor();
+        }
+    }
+   
+            
 }
