@@ -7,8 +7,19 @@ package negocio.regra;
 
 /**
  *
- * @author paulo
+ * @author gildo
  */
 public class RegraVendedor {
+    
+    public void validar (Vendedor vendedor) {
+        
+        if (vendedor==null){}
+        if (vendedor.getVend_cod()==null){}
+        if (vendedor.getVend_nome()==null){}
+    }
+    
+    public void eUnico (Vendedor vendedor){
+       return null; 
+    }
     
 }

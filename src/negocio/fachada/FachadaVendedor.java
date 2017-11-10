@@ -11,4 +11,10 @@ package negocio.fachada;
  */
 public class FachadaVendedor {
     
+    public void cadastrarVendedor (Vendedor vendedor){
+        RegraVendedor rn = new RegraVendedor();
+        rn.validar(vendedor);
+        rn.eUnico(vendedor);
+    }
+    
 }
