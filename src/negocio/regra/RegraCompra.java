@@ -6,6 +6,7 @@
 package negocio.regra;
 
 import negocio.basica.Compra;
+import negocio.exceptions.ExceptionsCompra;
 
 /**
  *
@@ -13,8 +14,28 @@ import negocio.basica.Compra;
  */
 public class RegraCompra {
 
-    public void validar(Compra compra) {
-        //if(compra == nuul) || (compra.getCliente())
+    /**
+     *
+     * @param compra
+     * @throws negocio.exceptions.ExceptionsCompra
+     * @throws negocio.exceptions.ExceptionsCompra
+     * @throws ExceptionsCompra
+     */
+    public void validar(Compra compra) throws ExceptionsCompra{
+        if(compra == null){
+            throw new ExceptionsCompra("Objeto Invalido");
+        }
+        if(compra.getCliente() == null){
+               throw new ExceptionsCompra("Cliente Invalido");
+        }
+        if(compra.getVendedor()== null){
+               throw new ExceptionsCompra("Vendedor Invalido");
+        }
+        if(compra.getData()== null){
+               throw new ExceptionsCompra("Data Invalida");
+        }
+        
+        
     }
 
     public void Incluir(Compra compra) {

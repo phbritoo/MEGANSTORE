@@ -12,7 +12,7 @@ public class Compra {
     
   
     private int nf_cod;
-    private double nf_data;
+    private double nf_total;
     private Date data;
     private Vendedor vendedor;
     private Cliente cliente;
@@ -32,17 +32,17 @@ public class Compra {
     }
 
     /**
-     * @return the nf_data
+     * @return the nf_total
      */
-    public double getNf_data() {
-        return nf_data;
+    public double getNf_total() {
+        return nf_total;
     }
 
     /**
-     * @param nf_data the nf_data to set
+     * @param nf_total the nf_total to set
      */
-    public void setNf_data(double nf_data) {
-        this.nf_data = nf_data;
+    public void setNf_total(double nf_total) {
+        this.nf_total = nf_total;
     }
 
     /**
@@ -86,6 +86,7 @@ public class Compra {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
+
     
 }
