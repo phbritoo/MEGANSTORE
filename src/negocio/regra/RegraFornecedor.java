@@ -5,7 +5,7 @@
  */
 package negocio.regra;
 
-import negocio.exceptions.ExceptionsFornecedor;
+import negocio.exception.ExceptionsFornecedor;
 import negocio.basica.Fornecedor;
 
 /**

@@ -6,7 +6,7 @@
 package negocio.regra;
 
 import negocio.basica.Compra;
-import negocio.exceptions.ExceptionsCompra;
+import negocio.exception.ExceptionsCompra;
 
 /**
  *
@@ -17,8 +17,8 @@ public class RegraCompra {
     /**
      *
      * @param compra
-     * @throws negocio.exceptions.ExceptionsCompra
-     * @throws negocio.exceptions.ExceptionsCompra
+     * @throws negocio.exception.ExceptionsCompra
+     * @throws negocio.exception.ExceptionsCompra
      * @throws ExceptionsCompra
      */
     public void validar(Compra compra) throws ExceptionsCompra{

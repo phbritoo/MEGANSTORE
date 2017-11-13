@@ -3,21 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio.exceptions;
+package negocio.exception;
 
 /**
  *
- * @author Gabriel
+ * @author heloi
  */
-public class ExceptionsProduto extends Exception{
+public class DAOPagamentoException extends Exception {
     
-    public ExceptionsProduto(String texto){
+    public DAOPagamentoException(String texto) {
         super(texto);
     }
     
-    public ExceptionsProduto(){
-        
+    public DAOPagamentoException(){
     }
-    
-    
 }

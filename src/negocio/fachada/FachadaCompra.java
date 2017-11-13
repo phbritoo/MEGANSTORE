@@ -1,7 +1,7 @@
 package negocio.fachada;
 
 import negocio.basica.Compra;
-import negocio.exceptions.ExceptionsCompra;
+import negocio.exception.ExceptionsCompra;
 import negocio.regra.RegraCompra;
 
 /**

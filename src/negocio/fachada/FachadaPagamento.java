@@ -6,7 +6,7 @@
 package negocio.fachada;
 
 import negocio.basica.Pagamento;
-import negocio.exceptions.ExceptionPagamento;
+import negocio.exception.ExceptionPagamento;
 import negocio.regra.RegraPagamento;
 
 /**

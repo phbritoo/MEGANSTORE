@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package negocio.exceptions;
+package negocio.exception;
 
 /**
  *
- * @author Djalma
+ * @author heloi
  */
-public class ExceptionsFornecedor extends Exception {
-    public ExceptionsFornecedor(){
-        
-    }
-    public ExceptionsFornecedor(String texto){
+public class ConexaoPagamentoException extends Exception {
+    
+    public ConexaoPagamentoException(String texto) {
         super(texto);
+    }
+    
+    public ConexaoPagamentoException(){
     }
 }

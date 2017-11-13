@@ -12,7 +12,7 @@ package negocio.basica;
 public class Pagamento {
     private Integer cardParcelas;
     private Double cardValor;
-    private String cardnum;
+    private String cardNum;
     private String cardValidade;
     private String cardTitular;
 
@@ -45,17 +45,17 @@ public class Pagamento {
     }
 
     /**
-     * @return the cardnum
+     * @return the cardNum
      */
-    public String getCardnum() {
-        return cardnum;
+    public String getCardNum() {
+        return cardNum;
     }
 
     /**
-     * @param cardnum the cardnum to set
+     * @param cardNum the cardNum to set
      */
-    public void setCardnum(String cardnum) {
-        this.cardnum = cardnum;
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum.trim();
     }
 
     /**
@@ -69,7 +69,7 @@ public class Pagamento {
      * @param cardValidade the cardValidade to set
      */
     public void setCardValidade(String cardValidade) {
-        this.cardValidade = cardValidade;
+        this.cardValidade = cardValidade.trim();
     }
 
     /**
@@ -83,7 +83,7 @@ public class Pagamento {
      * @param cardTitular the cardTitular to set
      */
     public void setCardTitular(String cardTitular) {
-        this.cardTitular = cardTitular;
+        this.cardTitular = cardTitular.trim();
     }
     
 }
