@@ -36,7 +36,7 @@ public class Vendedor {
      * @param vend_nome the vend_nome to set
      */
     public void setVend_nome(String vend_nome) {
-        this.vend_nome = vend_nome;
+        this.vend_nome = vend_nome.trim();
     }
     private Integer vend_cod;
     private String vend_nome;
