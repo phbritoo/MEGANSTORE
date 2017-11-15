@@ -6,6 +6,8 @@
 package dados;
 
 import negocio.basica.Vendedor;
+import negocio.exception.ConexaoVendedorException;
+import negocio.exception.DAOVendedorException;
 
 /**
  *
@@ -17,13 +19,13 @@ public interface DAOVendedor {
      * Salva os dados no BD
      * @param vendedor objeto com o nome do vendedor
      */
-    public void inserir(Vendedor vendedor);
+    public void inserir(Vendedor vendedor) throws DAOVendedorException, ConexaoVendedorException;
     
     /**
      * Busca no BD um registro correspondente ao nome passado
      * @param nome
      * @return nome do vendedor
      */
-    public Vendedor consultar(String nome);
+    public Vendedor consultar(String nome) throws DAOVendedorException, ConexaoVendedorException;
     
 }

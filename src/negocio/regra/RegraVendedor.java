@@ -6,7 +6,10 @@
 package negocio.regra;
 
 import dados.DAOVendedor;
+import dados.DAOVendedorImpl;
 import negocio.basica.Vendedor;
+import negocio.exception.ConexaoVendedorException;
+import negocio.exception.DAOVendedorException;
 import negocio.exception.ExceptionsVendedor;
 
 /**
@@ -32,20 +35,25 @@ public class RegraVendedor {
      * Verifica se o nome já existe no banco de dados
      * @param vendedor Objeto contentdo o nome a ser pesquisado
      */
-    public void eUnico (Vendedor vendedor){
-       DAOVendedor dao = new DAOVendedor() {
-           @Override
-           public void inserir(Vendedor vendedor) {
-               throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eUnico (Vendedor vendedor) throws ExceptionsVendedor{
+       DAOVendedor dao = new DAOVendedorImpl();
+       try{ 
+       if(dao.consultar(vendedor.getVend_nome())!=null){
+            throw new ExceptionsVendedor("Esse funcionário já existe!");
+        }
+       }catch(ConexaoVendedorException e){
+            throw new ExceptionsVendedor("Erro no BD!");
+       }catch(DAOVendedorException e){
+            throw new ExceptionsVendedor("Erro de Aplicação(SQL)!");
+       }
            }
 
-           @Override
            public Vendedor consultar(String nome) {
                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
            }
-       };
        
-    }
+       
+    
     /**
      * Salva os dados no Banco de Dados
      * @param vendedor Objeto com nome a ser salvo no BD
