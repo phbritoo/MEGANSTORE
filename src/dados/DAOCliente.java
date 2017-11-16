@@ -11,17 +11,16 @@ import negocio.exception.DAOClienteException;
 
 /**
  *
- * @author PC
+ * @author William
  */
 public interface DAOCliente {
 
- public void inserir(Cliente cliente) throws DAOClienteException, ConexaoClienteException;
+    public void inserir(Cliente cliente) throws DAOClienteException, ConexaoClienteException;
+ 
+    public void deletar (Cliente cliente) throws DAOClienteException, ConexaoClienteException;
     
-    /**
-     * Busca no BD um registro correspondente ao nome passado
-     * @param nome
-     * @return nome do vendedor
-     */
+    public void alterar (Cliente cliente) throws DAOClienteException, ConexaoClienteException;
+   
     public Cliente consultar(String nome) throws DAOClienteException, ConexaoClienteException;
     
 }

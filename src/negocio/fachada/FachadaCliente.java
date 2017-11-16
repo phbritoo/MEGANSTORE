@@ -5,11 +5,21 @@
  */
 package negocio.fachada;
 
+import negocio.basica.Cliente;
+import negocio.exception.ExceptionsCliente;
+import negocio.regra.RegraCliente;
+
 /**
  *
- * @author aluno
+ * @author William
  */
 public class FachadaCliente {
     
+     public void cadastrarCliente (Cliente cliente) throws ExceptionsCliente{
+        RegraCliente rn = new RegraCliente();
+        rn.validar(cliente);
+        rn.eUnico(cliente);
+        
+    }
     
 }
