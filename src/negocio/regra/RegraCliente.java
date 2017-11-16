@@ -8,11 +8,13 @@ package negocio.regra;
 import dados.DAOCliente;
 import dados.DAOClienteImpl;
 import negocio.basica.Cliente;
+import negocio.exception.ConexaoClienteException;
+import negocio.exception.DAOClienteException;
 import negocio.exception.ExceptionsCliente;
 
 /**
  *
- * @author paulo
+ * @author William
  */
 public class RegraCliente {
     
@@ -25,4 +27,16 @@ public class RegraCliente {
             throw new ExceptionsCliente("Nome inválido!");
         }
     }
+    public void eUnico (Cliente cliente) throws ExceptionsCliente{
+       DAOCliente dao = new DAOClienteImpl();
+       try{ 
+       if(dao.consultar(cliente.getCli_nome())!=null){
+            throw new ExceptionsCliente("Esse Cliente já existe!");
+        }
+       }catch(ConexaoClienteException e){
+            throw new ExceptionsCliente("Erro no BD!");
+       }catch(DAOClienteException e){
+            throw new ExceptionsCliente("Erro de Aplicação(SQL)!");
+       }
+           }
 }

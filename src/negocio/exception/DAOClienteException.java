@@ -14,6 +14,10 @@ public class DAOClienteException extends Exception{
     public DAOClienteException(String texto) {
         super(texto);
     }
+
+    public DAOClienteException() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
    
 }
