@@ -9,14 +9,13 @@ package negocio.exception;
  *
  * @author paulo
  */
-public class ExceptionsCompra extends Exception{
-
-    public ExceptionsCompra() {
-        
-    }
-
-    public ExceptionsCompra(String texto) {
+public class DAOCompraException extends Exception{
+    
+    public DAOCompraException(String texto) {
         super(texto);
+    }
+    
+    public DAOCompraException(){
     }
     
 }
