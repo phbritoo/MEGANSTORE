@@ -14,10 +14,17 @@ import negocio.regra.RegraPagamento;
  * @author aluno
  */
 public class FachadaPagamento {
+    
     public void cadastrar (Pagamento pagamento) throws ExceptionPagamento{
         RegraPagamento rn = new RegraPagamento();
         rn.validar(pagamento);
         rn.incluir(pagamento);
                
+    }
+    public void cadastrar (Integer pacelas, Double Valor) throws ExceptionPagamento{
+        RegraPagamento rn = new RegraPagamento();
+        rn.validar(pacelas, Valor);
+        rn.parcelar(pacelas, Valor);
+              
     }
 }

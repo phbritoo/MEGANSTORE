@@ -59,12 +59,41 @@ public class RegraPagamento {
             throw new ExceptionPagamento("Nome do titular inválido!");
         }// else if (CONSISTIR NOME COM PELO MENOS DUAS PALAVRAS);
     }
-    
+
+    /**
+     *
+     * @param parcelas com a quantidade de parcelas a serem divididas
+     * @param valor todal da compra
+     * @throws ExceptionPagamento
+     */
+    public void validar (Integer parcelas, Double valor) throws ExceptionPagamento{
+        
+        if ((parcelas ==null)||(parcelas == 0)){
+            throw new ExceptionPagamento(this, "Número de parcelas inválido!", JOptionPane.ERROR_MESSAGE);
+        } else if (parcelas > 12) {
+                throw new ExceptionPagamento("Só é possível dividir em até 12x.");
+        }
+        if ((valor ==null)||(valor == 0)){
+            throw new ExceptionPagamento("Valor total inválido!");
+        } 
+    }
     /**
      * Salva os dados no BD
      * @param pagamento. Objeto com os dados a serem salvos
      */
     public void incluir(Pagamento pagamento) {
         
+    }
+    /**
+     * Salva os dados no BD
+     * @param pacelas com a quantidade de parcelas a serem divididas
+     * @param valor todal da compra
+     * @return Valor da parcela que é = valor total / por parcela
+     */
+    public Double parcelar(Integer pacelas, Double valor) {
+        Double valorparcela;
+        valorparcela = valor/pacelas;
+            
+        return valorparcela; 
     }
 }
