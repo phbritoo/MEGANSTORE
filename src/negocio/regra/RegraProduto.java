@@ -6,6 +6,7 @@
 package negocio.regra;
 
 import negocio.basica.Produto;
+import negocio.basica.Vendedor;
 import negocio.exception.ExceptionsProduto;
 
 /**
@@ -31,9 +32,10 @@ public class RegraProduto{
         if ((produto.getPrd_nome() == null) || (produto.getPrd_nome().isEmpty())){
              throw new ExceptionsProduto("Nome inválido");
         }
+    }}      
         
-        
-    public void eUnico (Produto produto) throws ExceptionsProduto{
+   /*
+      public void eUnico (Produto produto) throws ExceptionsProduto{
        DAOProduto dao = new DAOProdutoImpl();
        try{ 
        if(dao.consultar(Produto.getPrd_nome())!=null){
@@ -48,13 +50,14 @@ public class RegraProduto{
            public Produto consultar(Integer codigo) {
                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
            }
-    
+   
     /**
      * Salva os dados no Banco de Dados
      * @param vendedor Objeto com nome a ser salvo no BD
      */
-    public void incluir(Vendedor vendedor) {
+   /*
+        public void incluir(Vendedor vendedor) {
     }
         
     }
-}
+}*/
