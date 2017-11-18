@@ -16,6 +16,7 @@ public class Compra {
     private Date data;
     private Vendedor vendedor;
     private Cliente cliente;
+    private ArrayList<CompraProduto> itens;
 
     /**
      * @return the nf_cod
