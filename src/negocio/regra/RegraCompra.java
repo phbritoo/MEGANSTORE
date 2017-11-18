@@ -35,6 +35,8 @@ public class RegraCompra {
         if(compra.getData()== null){
                throw new ExceptionsCompra("Data Invalida");
         }
+       
+        
     }
 
     public void Incluir(Compra compra) {

@@ -242,6 +242,11 @@ public class CadastroCompra extends javax.swing.JFrame {
         FachadaCompra fc = new  FachadaCompra();
          try {
             fc.cadastrar(compra);
+            txtCodVend.setText("");
+            txtCpfCliente.setText("");
+            txtData.setText("");
+            txtQtd.setText("");
+            txtTotal.setText("");
             
         }catch(ExceptionsCompra ec){
             JOptionPane.showMessageDialog(this,ec.getMessage());
