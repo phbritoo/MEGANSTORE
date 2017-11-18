@@ -17,4 +17,7 @@ public class DAOPagamentoException extends Exception {
     
     public DAOPagamentoException(){
     }
+    public DAOPagamentoException(Exception e) {
+        super(e);
+    }
 }

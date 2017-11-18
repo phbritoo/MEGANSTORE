@@ -43,16 +43,19 @@ public class RegraPagamento {
         
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
         int anoMax = year + 5 - 2000;
-        int anoMin = year - 5 - 2000;
+        int anoMin = year - 2000;
         
         if ((pagamento.getCardValidade()==null)||(pagamento.getCardValidade().isEmpty())){
             throw new ExceptionPagamento("Validade do cartão inválida!");
         } else if ((Integer.parseInt(pagamento.getCardValidade().substring(0,2)) == 00)
                  ||(Integer.parseInt(pagamento.getCardValidade().substring(0,2)) > 12)){
             throw new ExceptionPagamento("Mês inválido!");
-        } else if ((Integer.parseInt(pagamento.getCardValidade().substring(3,5)) > anoMax)
-                || (Integer.parseInt(pagamento.getCardValidade().substring(3,5)) < anoMin)) {
+        }
+        if ( (Integer.parseInt(pagamento.getCardValidade().substring(3,5)) <= anoMin)
+                && (Integer.parseInt(pagamento.getCardValidade().substring(0,2)) < month) 
+                || (Integer.parseInt(pagamento.getCardValidade().substring(3,5)) > anoMax) ){
             throw new ExceptionPagamento("Cartão fora da validade!");
         }
         if ((pagamento.getCardTitular()==null)||(pagamento.getCardNum().isEmpty())){

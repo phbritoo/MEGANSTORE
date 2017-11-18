@@ -85,16 +85,16 @@ public class CadastroPagamento extends javax.swing.JFrame {
         jLabel5.setText("Parcelas:");
 
         lblValor.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblValor.setText("R$ 0,00");
+        lblValor.setText("0,00");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("Valor Total:");
+        jLabel7.setText("Valor Total: R$");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("de");
+        jLabel8.setText("de R$");
 
         lblValorParcela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblValorParcela.setText("R$ 0,00");
+        lblValorParcela.setText("0,00");
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("FINALIZAR COMPRA");
@@ -236,18 +236,22 @@ public class CadastroPagamento extends javax.swing.JFrame {
 
     private void txtParcelasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtParcelasMouseExited
         // Capturar os dados:
+        Pagamento pagamento = new Pagamento();
+        pagamento.setCardParcelas( Integer.parseInt(txtParcelas.getText()) );
+        pagamento.setCardValor( Double.parseDouble(txtValor.getText()) );
         
-        Integer parcelas = Integer.parseInt(txtParcelas.getText());
+        /*Integer parcelas = Integer.parseInt(txtParcelas.getText());
         Double valorTotal = Double.parseDouble(txtValor.getText());
-        
+        */
         FachadaPagamento fp = new FachadaPagamento();
         try {
-            fp.cadastrar(parcelas, valorTotal);
-       /*     txtTitular.setText("");
+            /*     txtTitular.setText("");
             txtNum.setText("");
             txtValidade.setText("");
             txtParcelas.setText("");
             txtValor.setText(""); */
+            Double parcela = fp.cadastrar(pagamento.getCardParcelas(), pagamento.getCardValor());
+            lblValorParcela.setText(String.valueOf(parcela));
         }catch(ExceptionPagamento ep){
             JOptionPane.showMessageDialog(this,ep.getMessage());
         }

@@ -5,9 +5,14 @@
  */
 package dados;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import negocio.basica.Pagamento;
-import negocio.exception.ConexaoPagamentoException;
+import negocio.exception.ConexaoException;
 import negocio.exception.DAOPagamentoException;
+import util.GerenciadorConexao;
+import util.GerenciadorConexaoImpl;
 
 /**
  *
@@ -16,7 +21,24 @@ import negocio.exception.DAOPagamentoException;
 public class DAOPagamentoImpl implements DAOPagamento{
     
     @Override
-    public void inserir (Pagamento pagamento)throws DAOPagamentoException, ConexaoPagamentoException{
+    public void inserir (Pagamento pagamento)throws ConexaoException, DAOPagamentoException{
+        GerenciadorConexao gc = GerenciadorConexaoImpl.getInstancia();
+        Connection con = gc.abrirConexao();
+        String sql = "INSERT INTO PAGAMENTO (CARD_PARCELAS, CARD_VALOR, CARD_NUM, CARD_VALIDADE, CARD_TITULAR) "
+                + "                VALUES (?,?,?,?,?)";
+        try {
+            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm.setInt(1, pagamento.getCardParcelas());
+            pstm.setDouble(2, pagamento.getCardValor());
+            pstm.setString(3, pagamento.getCardNum());
+            pstm.setString(4, pagamento.getCardValidade());
+            pstm.setString(5, pagamento.getCardTitular());
+            pstm.executeUpdate();
+        }catch (SQLException errosql){
+            throw new DAOPagamentoException (errosql.getMessage());
+        }finally {
+            gc.fecharConexao(con);
+        }
     }
     
 }

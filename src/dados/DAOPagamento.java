@@ -6,6 +6,7 @@
 package dados;
 
 import negocio.basica.Pagamento;
+import negocio.exception.ConexaoException;
 import negocio.exception.ConexaoPagamentoException;
 import negocio.exception.DAOPagamentoException;
 
@@ -18,6 +19,8 @@ public interface DAOPagamento {
     /**
      * Salva os dados no BD
      * @param pagamento Objeto com os dados
+     * @throws negocio.exception.DAOPagamentoException
+     * @throws negocio.exception.ConexaoException
      */
-    public void inserir (Pagamento pagamento) throws DAOPagamentoException, ConexaoPagamentoException;
+    public void inserir (Pagamento pagamento) throws DAOPagamentoException, ConexaoException;
 }
