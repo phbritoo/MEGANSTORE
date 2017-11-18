@@ -5,9 +5,12 @@
  */
 package gui;
 
-import negocio.basica.Compra;
-import negocio.basica.Produto;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import negocio.basica.*;
+import negocio.exception.ExceptionsCompra;
+import negocio.fachada.FachadaCompra;
 /**
  *
  * @author paulo
@@ -39,7 +42,7 @@ public class CadastroCompra extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtNomeProd = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listaProduto = new javax.swing.JList();
         jLabel5 = new javax.swing.JLabel();
         txtQtd = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -68,12 +71,12 @@ public class CadastroCompra extends javax.swing.JFrame {
 
         jLabel4.setText("Produto:");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        listaProduto.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listaProduto);
 
         jLabel5.setText("Quantidade:");
 
@@ -226,19 +229,28 @@ public class CadastroCompra extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        //Capturar os dados:
-        
+       
+        CompraProduto  compraProduto = new CompraProduto();
         Compra compra = new Compra();
-       
-        Produto produto = new Produto ();
+              
+        compra.getVendedor().setVend_cod(Integer.parseInt(txtCodVend.getText()));
+        compra.setData(SimpleDateFormat(txtData.getText()));
+        compra.getCliente().setCli_cpf(Integer.parseInt (txtCpfCliente.getText()));
+        compra.setNf_total(Double.parseDouble (txtTotal.getText()));
+        compraProduto.setPrd_qtd(Integer.parseInt (txtQtd.getText()));
         
-        compra.setNf_total(txtTotal.get);
-        compra.setData(txtData);
-        compra.setVendedor(txtCodVend);
-        produto.setPrd_nome(txtNomeProd.getText());
-             
-       
+        FachadaCompra fc = new  FachadaCompra();
+         try {
+            fc.cadastrar(compra);
+            
+        }catch(ExceptionsCompra ec){
+            JOptionPane.showMessageDialog(this,ec.getMessage());
+        }
         
         
+        
+        
+     
         
         
         
@@ -297,8 +309,8 @@ public class CadastroCompra extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList listaProduto;
     private javax.swing.JTextField txtCodVend;
     private javax.swing.JTextField txtCpfCliente;
     private javax.swing.JTextField txtData;
@@ -306,4 +318,8 @@ public class CadastroCompra extends javax.swing.JFrame {
     private javax.swing.JTextField txtQtd;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+    private Date SimpleDateFormat(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
