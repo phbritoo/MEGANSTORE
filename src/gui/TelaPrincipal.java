@@ -99,9 +99,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menu_Colsultar.add(menu_consultarCliente);
 
         menu_consultarFornecedor.setText("Fornecedor");
+        menu_consultarFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_consultarFornecedorActionPerformed(evt);
+            }
+        });
         menu_Colsultar.add(menu_consultarFornecedor);
 
         menu_consultarProdutos.setText("Produtos");
+        menu_consultarProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_consultarProdutosActionPerformed(evt);
+            }
+        });
         menu_Colsultar.add(menu_consultarProdutos);
 
         menu_consultarVendedor.setText("Vendedor");
@@ -138,6 +148,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void menu_consultarVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultarVendedorActionPerformed
         // TODO add your handling code here:
+        ConsultaVendedor cv = new ConsultaVendedor();
+        cv.setVisible(true);
     }//GEN-LAST:event_menu_consultarVendedorActionPerformed
 
     private void menu_consultarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultarClienteActionPerformed
@@ -163,6 +175,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
         CadastroProduto cp = new CadastroProduto();
         cp.setVisible(true);
     }//GEN-LAST:event_menu_cadastroProdutoActionPerformed
+
+    private void menu_consultarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultarFornecedorActionPerformed
+        // TODO add your handling code here:
+        ConsultaFornecedor cf = new ConsultaFornecedor();
+        cf.setVisible(true);
+    }//GEN-LAST:event_menu_consultarFornecedorActionPerformed
+
+    private void menu_consultarProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_consultarProdutosActionPerformed
+        // TODO add your handling code here:
+        ConsultaProduto cp = new ConsultaProduto();
+        cp.setVisible(true);
+    }//GEN-LAST:event_menu_consultarProdutosActionPerformed
 
     /**
      * @param args the command line arguments

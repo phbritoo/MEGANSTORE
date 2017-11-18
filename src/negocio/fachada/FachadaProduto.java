@@ -6,6 +6,8 @@
 package negocio.fachada;
 
 import negocio.basica.Produto;
+import negocio.exception.ExceptionsProduto;
+import negocio.regra.RegraProduto;
 
 /**
  *
@@ -13,10 +15,10 @@ import negocio.basica.Produto;
  */
 public class FachadaProduto {
     
-    public void cadastrarProduto(Produto produto){
-        
-        
-        
-        
-    }
+    public void cadastrarProduto(Produto produto)throws ExceptionsProduto{
+        RegraProduto rn = new RegraProduto();
+        rn.validar(produto);
+        rn.eUnico(produto);
+        rn.incluir(produto);
+    }           
 }
