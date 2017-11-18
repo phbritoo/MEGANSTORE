@@ -6,10 +6,20 @@
 package negocio.fachada;
 
 import negocio.basica.Fornecedor;
+import negocio.exception.ExceptionsFornecedor;
+import negocio.regra.RegraFornecedor;
+
 /**
  *
  * @author aluno
  */
 public class FachadaFornecedor {
+    
+    public void cadastrarFornecedor (Fornecedor fornecedor) throws ExceptionsFornecedor{
+        RegraFornecedor rn = new RegraFornecedor();
+        rn.validar(fornecedor);
+        rn.eUnico(fornecedor);
+        rn.incluir(fornecedor);
+    }
     
 }

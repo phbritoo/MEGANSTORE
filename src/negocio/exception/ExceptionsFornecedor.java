@@ -9,11 +9,12 @@ package negocio.exception;
  *
  * @author Djalma
  */
-public class ExceptionsFornecedor extends Exception {
-    public ExceptionsFornecedor(){
-        
-    }
+public class ExceptionsFornecedor extends Exception {    
+    
     public ExceptionsFornecedor(String texto){
         super(texto);
+    }
+    public ExceptionsFornecedor(){
+        
     }
 }
