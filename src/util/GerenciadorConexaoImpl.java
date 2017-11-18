@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import negocio.exception.ConexaoVendedorException;
+import negocio.exception.ConexaoException;
 
 /**
  *
@@ -35,7 +35,7 @@ public class GerenciadorConexaoImpl implements GerenciadorConexao {
         return instancia;
     }
     @Override
-    public Connection abrirConexao() throws ConexaoVendedorException {
+    public Connection abrirConexao() throws ConexaoException {
         //JDBC
         //DriverManager - Connection - Statement - ResultSet
         Connection c;
@@ -43,16 +43,16 @@ public class GerenciadorConexaoImpl implements GerenciadorConexao {
         c = DriverManager.getConnection(url, usuario, senha);
             return c;
         }catch(SQLException e){
-            throw new ConexaoVendedorException();
+            throw new ConexaoException();
         } 
     }
 
     @Override
-    public void fecharConexao(Connection c) throws ConexaoVendedorException{
+    public void fecharConexao(Connection c) throws ConexaoException{
         try {
             c.close();
         } catch (SQLException ex) {
-            throw new ConexaoVendedorException();
+            throw new ConexaoException();
         }
     }
     

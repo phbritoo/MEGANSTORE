@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import negocio.basica.Vendedor;
-import negocio.exception.ConexaoVendedorException;
+import negocio.exception.ConexaoException;
 import negocio.exception.DAOVendedorException;
 import util.GerenciadorConexao;
 import util.GerenciadorConexaoImpl;
@@ -17,12 +17,12 @@ import util.GerenciadorConexaoImpl;
 public class DAOVendedorImpl implements DAOVendedor{
 
     @Override
-    public void inserir(Vendedor vendedor) throws DAOVendedorException, ConexaoVendedorException{
+    public void inserir(Vendedor vendedor) throws DAOVendedorException, ConexaoException{
         
     }
 
     @Override
-    public Vendedor consultar(String nome) throws DAOVendedorException, ConexaoVendedorException{
+    public Vendedor consultar(String nome) throws DAOVendedorException, ConexaoException{
         Vendedor vendedor = null;
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
         String sql = "SELECT Vend_Nome, Vend_Cod FROM Vendedor WHERE nome=1";

@@ -6,7 +6,7 @@
 package util;
 
 import java.sql.Connection;
-import negocio.exception.ConexaoVendedorException;
+import negocio.exception.ConexaoException;
 
 /**
  *
@@ -16,13 +16,13 @@ public interface GerenciadorConexao {
     /**
      * Abre uma conexao com o BD
      * @return Objeto de conexão
-     * @exception ConexaoVendedorException
+     * @throws ConexaoException
      */
-    public Connection abrirConexao()throws ConexaoVendedorException;
+    public Connection abrirConexao()throws ConexaoException;
     /**
      * Fecha a conexao com o BD
      * @param c Objeto contendo a conexao aberta
-     * @exception ConexaoVendedorException
+     * @throws ConexaoException
      */
-    public void fecharConexao(Connection c) throws ConexaoVendedorException;
+    public void fecharConexao(Connection c) throws ConexaoException;
 }

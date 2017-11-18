@@ -12,7 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.basica.Cliente;
 import negocio.exception.ConexaoClienteException;
-import negocio.exception.ConexaoVendedorException;
+import negocio.exception.ConexaoException;
 import negocio.exception.DAOClienteException;
 import util.GerenciadorConexao;
 import util.GerenciadorConexaoImpl;
@@ -45,7 +45,7 @@ public class DAOClienteImpl implements DAOCliente {
         }
     }catch(SQLException e){
          throw new DAOClienteException();
-    }   catch (ConexaoVendedorException ex) {
+    }   catch (ConexaoException ex) {
             Logger.getLogger(DAOClienteImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cliente;  

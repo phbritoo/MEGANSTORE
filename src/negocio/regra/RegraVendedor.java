@@ -8,7 +8,7 @@ package negocio.regra;
 import dados.DAOVendedor;
 import dados.DAOVendedorImpl;
 import negocio.basica.Vendedor;
-import negocio.exception.ConexaoVendedorException;
+import negocio.exception.ConexaoException;
 import negocio.exception.DAOVendedorException;
 import negocio.exception.ExceptionsVendedor;
 
@@ -41,7 +41,7 @@ public class RegraVendedor {
        if(dao.consultar(vendedor.getVend_nome())!=null){
             throw new ExceptionsVendedor("Esse funcionário já existe!");
         }
-       }catch(ConexaoVendedorException e){
+       }catch(ConexaoException e){
             throw new ExceptionsVendedor("Erro no BD!");
        }catch(DAOVendedorException e){
             throw new ExceptionsVendedor("Erro de Aplicação(SQL)!");
