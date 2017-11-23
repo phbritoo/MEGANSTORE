@@ -7,32 +7,32 @@ package negocio.basica;
 public class Vendedor {
 
     /**
-     * @return the vend_cod
+     * @return the vendedorCodigo
      */
-    public Integer getVend_cod() {
-        return vend_cod;
+    public Integer getVendedorCodigo() {
+        return vendedorCodigo;
     }
 
     /**
-     * @param vend_cod the vend_cod to set
+     * @param vendedorCodigo the vendedorCodigo to set
      */
-    public void setVend_cod(Integer vend_cod) {
-        this.vend_cod = vend_cod;
+    public void setVendedorCodigo(Integer vendedorCodigo) {
+        this.vendedorCodigo = vendedorCodigo;
     }
 
     /**
-     * @return the vend_nome
+     * @return the vendedorNome
      */
-    public String getVend_nome() {
-        return vend_nome;
+    public String getVendedorNome() {
+        return vendedorNome;
     }
 
     /**
-     * @param vend_nome the vend_nome to set
+     * @param vendedorNome the vendedorNome to set
      */
-    public void setVend_nome(String vend_nome) {
-        this.vend_nome = vend_nome.trim();
+    public void setVendedorNome(String vendedorNome) {
+        this.vendedorNome = vendedorNome.trim();
     }
-    private Integer vend_cod;
-    private String vend_nome;
+    private Integer vendedorCodigo;
+    private String vendedorNome;
 }

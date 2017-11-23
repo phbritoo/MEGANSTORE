@@ -27,7 +27,7 @@ public class RegraVendedor {
         if (vendedor==null){
             throw new VendedorException("Objeto inválido!");
         }
-        if ((vendedor.getVend_nome()==null)||(vendedor.getVend_nome().isEmpty())){
+        if ((vendedor.getVendedorNome()==null)||(vendedor.getVendedorNome().isEmpty())){
             throw new VendedorException("Nome inválido!");
         }
     }
@@ -38,7 +38,7 @@ public class RegraVendedor {
     public void eUnico (Vendedor vendedor) throws VendedorException{
        DAOVendedor dao = new DAOVendedorImpl();
        try{ 
-       if(dao.consultar(vendedor.getVend_nome())!=null){
+       if(dao.consultar(vendedor.getVendedorNome())!=null){
             throw new VendedorException("Esse funcionário já existe!");
         }
        }catch(ConexaoException e){

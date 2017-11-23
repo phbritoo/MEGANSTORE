@@ -32,8 +32,8 @@ public class DAOVendedorImpl implements DAOVendedor{
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){
           vendedor = new Vendedor();
-          vendedor.setVend_nome(rs.getString("nome") );
-          vendedor.setVend_cod(rs.getInt("cod"));
+          vendedor.setVendedorNome(rs.getString("nome") );
+          vendedor.setVendedorCodigo(rs.getInt("cod"));
         }
     }catch(SQLException e){
          throw new DAOException();

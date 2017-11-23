@@ -113,7 +113,7 @@ public class CadastroVendedor extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // capturar o nome do novo vendedor a ser cadastrado no banco:
         Vendedor vendedor = new Vendedor();
-        vendedor.setVend_nome(txtNome.getText());
+        vendedor.setVendedorNome(txtNome.getText());
         
         FachadaVendedor f = new FachadaVendedor();
         try{
