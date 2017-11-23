@@ -4,32 +4,32 @@ package negocio.basica;
 
 public class Cliente {
 
-    private Integer cli_cpf;
-    private String cli_tel;
-    private String cli_nome;
+    private Integer clienteCpf;
+    private String clienteTel;
+    private String clienteNome;
 
-    public Integer getCli_cpf() {
-        return cli_cpf;
+    public Integer getClienteCpf() {
+        return clienteCpf;
     }
 
-    public void setCli_cpf(Integer cpf) {
-        this.cli_cpf = cpf;
+    public void setClienteCpf(Integer cpf) {
+        this.clienteCpf = cpf;
     }
 
-    public String getCli_tel() {
-        return cli_tel;
+    public String getClienteTel() {
+        return clienteTel;
     }
 
-    public void setCli_tel(String tel) {
-        this.cli_tel = tel;
+    public void setClienteTel(String tel) {
+        this.clienteTel = tel;
     }
 
-    public String getCli_nome() {
-        return cli_nome;
+    public String getClienteNome() {
+        return clienteNome;
     }
 
-    public void setCli_nome(String nome) {
-        this.cli_nome = nome;
+    public void setClienteNome(String nome) {
+        this.clienteNome = nome;
     }
 
 }    
