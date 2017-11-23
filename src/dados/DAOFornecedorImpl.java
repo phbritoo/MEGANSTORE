@@ -32,8 +32,8 @@ public class DAOFornecedorImpl implements DAOFornecedor{
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){
           fornecedor = new Fornecedor();
-          fornecedor.setForn_cnpj(rs.getString("cnpj") );
-          fornecedor.setForn_nome(rs.getString("nome"));
+          fornecedor.setFornecedorCnpj(rs.getString("cnpj") );
+          fornecedor.setFornecedorNome(rs.getString("nome"));
           
         }
     }catch(SQLException e){

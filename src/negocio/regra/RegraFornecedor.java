@@ -27,7 +27,7 @@ public class RegraFornecedor {
         if (fornecedor==null){
             throw new FornecedorException("Objeto inválido!");
         }
-        if ((fornecedor.getForn_cnpj()==null)||(fornecedor.getForn_cnpj().isEmpty())){
+        if ((fornecedor.getFornecedorCnpj()==null)||(fornecedor.getFornecedorCnpj().isEmpty())){
             throw new FornecedorException("CNPJ inválido!");
         }
     }
@@ -38,7 +38,7 @@ public class RegraFornecedor {
     public void eUnico (Fornecedor fornecedor) throws FornecedorException, DAOException{
        DAOFornecedor dao = new DAOFornecedorImpl();
        try{ 
-       if(dao.consultar(fornecedor.getForn_cnpj())!=null){
+       if(dao.consultar(fornecedor.getFornecedorCnpj())!=null){
             throw new FornecedorException("Esse CNPJ já existe!");
         }
        }catch(ConexaoException e){
