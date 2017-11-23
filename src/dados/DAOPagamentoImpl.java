@@ -23,7 +23,7 @@ public class DAOPagamentoImpl implements DAOPagamento{
     @Override
     public void inserir (Pagamento pagamento)throws ConexaoException, DAOException{
         GerenciadorConexao gc = GerenciadorConexaoImpl.getInstancia();
-        Connection con = gc.abrirConexao();
+        Connection con = gc.conectar();
         String sql = "INSERT INTO PAGAMENTO (CARD_PARCELAS, CARD_VALOR, CARD_NUM, CARD_VALIDADE, CARD_TITULAR) "
                 + "                VALUES (?,?,?,?,?)";
         try {
@@ -37,7 +37,7 @@ public class DAOPagamentoImpl implements DAOPagamento{
         }catch (SQLException errosql){
             throw new DAOException (errosql.getMessage());
         }finally {
-            gc.fecharConexao(con);
+            gc.desconectar(con);
         }
     }
     

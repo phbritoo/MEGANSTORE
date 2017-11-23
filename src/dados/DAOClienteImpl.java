@@ -33,7 +33,7 @@ public class DAOClienteImpl implements DAOCliente {
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
         String sql = "SELECT Cli_nome, Cli_cpf FROM Cliente, Cli_tel WHERE nome=1";
         try{
-        PreparedStatement pstm = ger.abrirConexao().prepareStatement(sql);
+        PreparedStatement pstm = ger.conectar().prepareStatement(sql);
         pstm.setString(1, nome);
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){

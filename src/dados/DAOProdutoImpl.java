@@ -34,7 +34,7 @@ public class DAOProdutoImpl implements DAOProduto{
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
         String sql = "SELECT Cli_nome, Cli_cpf FROM Cliente, Cli_tel WHERE nome=1";
         try{
-        PreparedStatement pstm = ger.abrirConexao().prepareStatement(sql);
+        PreparedStatement pstm = ger.conectar().prepareStatement(sql);
         pstm.setInt(1, codigo);
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){

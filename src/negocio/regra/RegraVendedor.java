@@ -34,6 +34,7 @@ public class RegraVendedor {
     /**
      * Verifica se o nome já existe no banco de dados
      * @param vendedor Objeto contentdo o nome a ser pesquisado
+     * @throws negocio.exception.VendedorException
      */
     public void eUnico (Vendedor vendedor) throws VendedorException{
        DAOVendedor dao = new DAOVendedorImpl();

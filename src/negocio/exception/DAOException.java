@@ -1,6 +1,8 @@
 
 package negocio.exception;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author Gildo
@@ -12,5 +14,9 @@ public class DAOException extends Exception{
     }
     
     public DAOException(){
+    }
+
+    public DAOException(SQLException e) {
+        
     }
 }

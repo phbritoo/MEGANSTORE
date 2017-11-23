@@ -35,7 +35,7 @@ public class GerenciadorConexaoImpl implements GerenciadorConexao {
         return instancia;
     }
     @Override
-    public Connection abrirConexao() throws ConexaoException {
+    public Connection conectar() throws ConexaoException {
         //JDBC
         //DriverManager - Connection - Statement - ResultSet
         Connection c;
@@ -48,7 +48,7 @@ public class GerenciadorConexaoImpl implements GerenciadorConexao {
     }
 
     @Override
-    public void fecharConexao(Connection c) throws ConexaoException{
+    public void desconectar(Connection c) throws ConexaoException{
         try {
             c.close();
         } catch (SQLException ex) {

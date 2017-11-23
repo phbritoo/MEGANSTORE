@@ -27,7 +27,7 @@ public class DAOFornecedorImpl implements DAOFornecedor{
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
         String sql = "SELECT forn_cnpj, forn_nome, forn_tel FROM Fornecedor WHERE cnpj=?";
     try{
-        PreparedStatement pstm = ger.abrirConexao().prepareStatement(sql);
+        PreparedStatement pstm = ger.conectar().prepareStatement(sql);
         pstm.setString(1, cnpj);
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){

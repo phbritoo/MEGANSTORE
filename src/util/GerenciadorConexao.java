@@ -18,11 +18,11 @@ public interface GerenciadorConexao {
      * @return Objeto de conexão
      * @throws ConexaoException
      */
-    public Connection abrirConexao()throws ConexaoException;
+    public Connection conectar()throws ConexaoException;
     /**
      * Fecha a conexao com o BD
      * @param c Objeto contendo a conexao aberta
      * @throws ConexaoException
      */
-    public void fecharConexao(Connection c) throws ConexaoException;
+    public void desconectar(Connection c) throws ConexaoException;
 }
