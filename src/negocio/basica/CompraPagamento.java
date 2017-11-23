@@ -8,32 +8,32 @@ package negocio.basica;
 public class CompraPagamento {
 
     /**
-     * @return the pag_cod
+     * @return the pagCodigo
      */
-    public Integer getPag_cod() {
-        return pag_cod;
+    public Integer getPagCodigo() {
+        return pagCodigo;
     }
 
     /**
-     * @param pag_cod the pag_cod to set
+     * @param pagCodigo the pagCodigo to set
      */
-    public void setPag_cod(Integer pag_cod) {
-        this.pag_cod = pag_cod;
+    public void setPagCodigo(Integer pagCodigo) {
+        this.pagCodigo = pagCodigo;
     }
 
     /**
-     * @return the nf_cod
+     * @return the nfCodigo
      */
-    public Integer getNf_cod() {
-        return nf_cod;
+    public Integer getNfCodigo() {
+        return nfCodigo;
     }
 
     /**
-     * @param nf_cod the nf_cod to set
+     * @param nfCodigo the nfCodigo to set
      */
-    public void setNf_cod(Integer nf_cod) {
-        this.nf_cod = nf_cod;
+    public void setNfCodigo(Integer nfCodigo) {
+        this.nfCodigo = nfCodigo;
     }
-    private Integer pag_cod;
-    private Integer nf_cod;
+    private Integer pagCodigo;
+    private Integer nfCodigo;
 }
