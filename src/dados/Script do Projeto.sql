@@ -58,3 +58,12 @@ PRD_COD   INT  REFERENCES PRODUTO (PRD_COD),
 PRD_PRECO DECIMAL(10,2) NOT NULL,
 PRD_QTD   INT  NOT NULL
 );
+
+INSERT INTO PRODUTO (PRD_NOME, PRD_ESTOQUE, PRD_PRECO)
+               VALUES
+                    ('MOUSE OPTICO', 10, 15.00),
+                    ('PEN DRIVE 32 GB', 20, 49.90),
+                    ('PLACA MÃE ASUS', 12, 329.90),
+                    ('NOTEBOOK GAMER', 8, 4499.99),
+                    ('HD EXTERNO 1TB', 42, 435.00),
+                    ('TECLADO GAMER', 32, 125.90);
