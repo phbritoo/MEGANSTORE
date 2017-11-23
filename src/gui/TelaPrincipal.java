@@ -93,7 +93,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menu_vendas);
 
-        menu_Colsultar.setText("Cosultar");
+        menu_Colsultar.setText("Consultar");
 
         menu_consultarCliente.setText("Cliente");
         menu_consultarCliente.addActionListener(new java.awt.event.ActionListener() {
