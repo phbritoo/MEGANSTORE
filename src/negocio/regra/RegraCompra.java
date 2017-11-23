@@ -26,13 +26,13 @@ public class RegraCompra {
         if(compra == null){
             throw new CompraException("Objeto Invalido");
         }
-        if(compra.getCliente().getCli_cpf() == 0|| compra.getCliente() == null){
+        if(compra.getCliente().getClienteCpf() == 0|| compra.getCliente() == null){
                throw new CompraException("Cliente Invalido");
         }
         if(compra.getVendedor()== null){
                throw new CompraException("Vendedor Invalido");
         }
-        if(compra.getData()== null){
+        if(compra.getNfData()== null){
                throw new CompraException("Data Invalida");
         }
        

@@ -23,14 +23,14 @@ public class RegraCliente {
         if (cliente==null){
             throw new ClienteException("Objeto inválido!");
         }
-        if ((cliente.getCli_nome()==null)||(cliente.getCli_nome().isEmpty())){
+        if ((cliente.getClienteNome()==null)||(cliente.getClienteNome().isEmpty())){
             throw new ClienteException("Nome inválido!");
         }
     }
     public void eUnico (Cliente cliente) throws ClienteException, ConexaoException, DAOException{
        DAOCliente dao = new DAOClienteImpl();
        try{ 
-       if(dao.consultar(cliente.getCli_nome())!=null){
+       if(dao.consultar(cliente.getClienteNome())!=null){
             throw new ClienteException("Esse Cliente já existe!");
         }
        }catch(ConexaoException e){

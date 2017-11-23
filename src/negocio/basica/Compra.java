@@ -12,53 +12,53 @@ import java.util.Date;
 public class Compra {
     
   
-    private int nf_cod;
-    private double nf_total;
-    private Date data;
+    private int nfCodigo;
+    private double nfTotal;
+    private Date nfData;
     private Vendedor vendedor;
     private Cliente cliente;
     private ArrayList<CompraProduto> itens;
 
     /**
-     * @return the nf_cod
+     * @return the nfCodigo
      */
-    public int getNf_cod() {
-        return nf_cod;
+    public int getNfCodigo() {
+        return nfCodigo;
     }
 
     /**
-     * @param nf_cod the nf_cod to set
+     * @param nfCodigo the nfCodigo to set
      */
-    public void setNf_cod(int nf_cod) {
-        this.nf_cod = nf_cod;
+    public void setNfCodigo(int nfCodigo) {
+        this.nfCodigo = nfCodigo;
     }
 
     /**
-     * @return the nf_total
+     * @return the nfTotal
      */
-    public double getNf_total() {
-        return nf_total;
+    public double getNfTotal() {
+        return nfTotal;
     }
 
     /**
-     * @param nf_total the nf_total to set
+     * @param nfTotal the nfTotal to set
      */
-    public void setNf_total(double nf_total) {
-        this.nf_total = nf_total;
+    public void setNfTotal(double nfTotal) {
+        this.nfTotal = nfTotal;
     }
 
     /**
-     * @return the data
+     * @return the nfData
      */
-    public Date getData() {
-        return data;
+    public Date getNfData() {
+        return nfData;
     }
 
     /**
-     * @param data the data to set
+     * @param nfData the nfData to set
      */
-    public void setData(Date data) {
-        this.data = data;
+    public void setNfData(Date nfData) {
+        this.nfData = nfData;
     }
 
     /**

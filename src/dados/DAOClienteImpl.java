@@ -38,9 +38,9 @@ public class DAOClienteImpl implements DAOCliente {
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){
           cliente = new Cliente();
-          cliente.setCli_nome(rs.getString("nome") );
-          cliente.setCli_cpf(rs.getInt("cpf"));
-          cliente.setCli_tel(rs.getString("tel"));
+          cliente.setClienteNome(rs.getString("nome") );
+          cliente.setClienteCpf(rs.getInt("cpf"));
+          cliente.setClienteTel(rs.getString("tel"));
         }
     }catch(SQLException e){
          throw new DAOException();
