@@ -4,10 +4,7 @@ package util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import negocio.exception.ConexaoException;
 
 /**
@@ -22,7 +19,7 @@ public class GerenciadorConexaoImpl implements GerenciadorConexao {
     private final String senha;
     
     private GerenciadorConexaoImpl(){
-    ResourceBundle rb = ResourceBundle.getBundle("MeganStore.util.banco");
+    ResourceBundle rb = ResourceBundle.getBundle("util.banco");
     url = rb.getString("url");
     usuario = rb.getString("usuario");
     senha = rb.getString("senha");

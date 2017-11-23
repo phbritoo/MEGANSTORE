@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 import negocio.basica.Vendedor;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -70,22 +71,25 @@ public class DAOVendedorImpl implements DAOVendedor{
 
     @Override
     public Vendedor consultar(String vendedorNome) throws DAOException, ConexaoException{
-        Vendedor vendedor = null;
-        GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
-        String sql = "SELECT Vend_Nome, Vend_Cod FROM Vendedor WHERE nome=1";
+        Connection c = gc.conectar();
+        String sql = "SELECT Vend_Nome, Vend_Cod FROM Vendedor WHERE Vend_Nome=?";
         try{
-        PreparedStatement pstm = ger.conectar().prepareStatement(sql);
+        PreparedStatement pstm = c.prepareStatement(sql);
         pstm.setString(1, vendedorNome);
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){
-          vendedor = new Vendedor();
-          vendedor.setVendedorNome(rs.getString("nome") );
-          vendedor.setVendedorCodigo(rs.getInt("cod"));
+          Vendedor vendedor = new Vendedor();
+          vendedor.setVendedorNome(rs.getString("Vend_Nome") );
+          vendedor.setVendedorCodigo(rs.getInt("Vend_Cod"));
+          return vendedor;
         }
+        return null;
     }catch(SQLException e){
-         throw new DAOException();
-    }
-        return vendedor;  
+         throw new DAOException("Erro aqui" + e.getMessage());
+    }finally{
+          gc.desconectar(c);
+        }
+          
     }
     
 }
