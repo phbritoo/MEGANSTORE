@@ -45,9 +45,9 @@ public class RegraVendedor {
     public void eUnico (Vendedor vendedor) throws VendedorException{
         try{
             if(DAO.consultar(vendedor.getVendedorNome())!=null)
-                throw new VendedorException();
+                throw new VendedorException("Erro na consulta de eUnico");
         }catch(ConexaoException | DAOException e){
-                throw new VendedorException();
+                throw new VendedorException("Erro na conexao ou dao da consulta de eUnico");
         }
            }
 

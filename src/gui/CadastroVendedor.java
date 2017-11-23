@@ -5,8 +5,6 @@
  */
 package gui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.basica.Vendedor;
 import negocio.exception.ConexaoException;
@@ -125,11 +123,11 @@ public class CadastroVendedor extends javax.swing.JFrame {
             f.cadastrarVendedor(vendedor);
             JOptionPane.showMessageDialog(this, "Vendedor Cadastrado com Sucesso!" );
         } catch (VendedorException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro Regra" + ex.getMessage());
         } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(this, "ERRO! " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "ERRO Conexão! " + ex.getMessage());
         } catch (DAOException ex) {
-            JOptionPane.showMessageDialog(this, "ERRO! " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "ERRO DAO! " + ex.getMessage());
         }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
