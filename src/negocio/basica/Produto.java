@@ -10,64 +10,64 @@ package negocio.basica;
  * @author Gabriel
  */
 public class Produto {
-    private Integer prd_cod;
-    private String prd_nome;
-    private Integer prd_estoque;
-    private double prd_preco;
+    private Integer produtoCodigo;
+    private String produtoNome;
+    private Integer produtoEstoque;
+    private double produtoPreco;
 
     /**
-     * @return the prd_nome
+     * @return the produtoNome
      */
-    public String getPrd_nome() {
-        return prd_nome;
+    public String getProdutoNome() {
+        return produtoNome;
     }
 
     /**
-     * @param prd_nome the prd_nome to set
+     * @param produtoNome the produtoNome to set
      */
-    public void setPrd_nome(String prd_nome) {
-        this.prd_nome = prd_nome;
+    public void setProdutoNome(String produtoNome) {
+        this.produtoNome = produtoNome;
     }
 
     /**
-     * @return the prd_estoque
+     * @return the produtoEstoque
      */
     public int getPrd_estoque() {
-        return prd_estoque;
+        return produtoEstoque;
     }
 
     /**
-     * @param prd_estoque the prd_estoque to set
+     * @param prd_estoque the produtoEstoque to set
      */
     public void setPrd_estoque(int prd_estoque) {
-        this.prd_estoque = prd_estoque;
+        this.produtoEstoque = prd_estoque;
     }
 
     /**
-     * @return the prd_preco
+     * @return the produtoPreco
      */
-    public double getPrd_preco() {
-        return prd_preco;
+    public double getProdutoPreco() {
+        return produtoPreco;
     }
 
     /**
-     * @param prd_preco the prd_preco to set
+     * @param produtoPreco the produtoPreco to set
      */
-    public void setPrd_preco(double prd_preco) {
-        this.prd_preco = prd_preco;
+    public void setProdutoPreco(double produtoPreco) {
+        this.produtoPreco = produtoPreco;
     }   
 
     /**
-     * @return the prd_cod
+     * @return the produtoCodigo
      */
     public int getPrd_cod() {
-        return prd_cod;
+        return produtoCodigo;
     }
 
     /**
-     * @param prd_cod the prd_cod to set
+     * @param prd_cod the produtoCodigo to set
      */
     public void setPrd_cod(int prd_cod) {
-        this.prd_cod = prd_cod;
+        this.produtoCodigo = prd_cod;
     }
 }

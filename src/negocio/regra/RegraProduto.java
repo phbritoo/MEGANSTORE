@@ -29,10 +29,10 @@ public class RegraProduto{
         if (produto.getPrd_estoque() == 0){
              throw new ProdutoException("Estoque inválido");
         }
-        if (produto.getPrd_preco() == 0){
+        if (produto.getProdutoPreco() == 0){
              throw new ProdutoException("Preco inválido");
         }
-        if ((produto.getPrd_nome() == null) || (produto.getPrd_nome().isEmpty())){
+        if ((produto.getProdutoNome() == null) || (produto.getProdutoNome().isEmpty())){
              throw new ProdutoException("Nome inválido");
         }       
     }

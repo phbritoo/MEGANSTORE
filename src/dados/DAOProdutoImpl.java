@@ -40,9 +40,9 @@ public class DAOProdutoImpl implements DAOProduto{
         if(rs.next()){
           produto = new Produto();
           produto.setPrd_cod(rs.getInt("codigo"));
-          produto.setPrd_nome(rs.getString("nome"));
+          produto.setProdutoNome(rs.getString("nome"));
           produto.setPrd_estoque(rs.getInt("estoque"));
-          produto.setPrd_preco(rs.getDouble("preco"));
+          produto.setProdutoPreco(rs.getDouble("preco"));
         }
     }catch(SQLException e){
          throw new DAOException();
