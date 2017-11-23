@@ -6,6 +6,7 @@
 package negocio.fachada;
 
 import negocio.basica.Fornecedor;
+import negocio.exception.DAOException;
 import negocio.exception.FornecedorException;
 import negocio.regra.RegraFornecedor;
 
@@ -15,7 +16,7 @@ import negocio.regra.RegraFornecedor;
  */
 public class FachadaFornecedor {
     
-    public void cadastrarFornecedor (Fornecedor fornecedor) throws FornecedorException{
+    public void cadastrarFornecedor (Fornecedor fornecedor) throws FornecedorException, DAOException{
         RegraFornecedor rn = new RegraFornecedor();
         rn.validar(fornecedor);
         rn.eUnico(fornecedor);

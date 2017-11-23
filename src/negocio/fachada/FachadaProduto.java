@@ -6,6 +6,8 @@
 package negocio.fachada;
 
 import negocio.basica.Produto;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
 import negocio.exception.ProdutoException;
 import negocio.regra.RegraProduto;
 
@@ -15,7 +17,7 @@ import negocio.regra.RegraProduto;
  */
 public class FachadaProduto {
     
-    public void cadastrarProduto(Produto produto)throws ProdutoException{
+    public void cadastrarProduto(Produto produto)throws ProdutoException, ConexaoException, DAOException{
         RegraProduto rn = new RegraProduto();
         rn.validar(produto);
         rn.eUnico(produto);
