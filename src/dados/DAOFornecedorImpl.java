@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import negocio.basica.Fornecedor;
-import negocio.exception.ConexaoFornecedorException;
-import negocio.exception.DAOFornecedorException;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
 import util.GerenciadorConexao;
 import util.GerenciadorConexaoImpl;
 
@@ -17,12 +17,12 @@ import util.GerenciadorConexaoImpl;
 public class DAOFornecedorImpl implements DAOFornecedor{
 
     @Override
-    public void inserir(Fornecedor fornecedor) throws DAOFornecedorException, ConexaoFornecedorException{
+    public void inserir(Fornecedor fornecedor) throws DAOException, ConexaoException{
         
     }
 
     @Override
-    public Fornecedor consultar(String cnpj) throws DAOFornecedorException, ConexaoFornecedorException{
+    public Fornecedor consultar(String cnpj) throws DAOException, ConexaoException{
         Fornecedor fornecedor = null;
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
         String sql = "SELECT forn_cnpj, forn_nome, forn_tel FROM Fornecedor WHERE cnpj=?";
@@ -37,7 +37,7 @@ public class DAOFornecedorImpl implements DAOFornecedor{
           
         }
     }catch(SQLException e){
-         throw new DAOFornecedorException();
+         throw new DAOException();
     }
         return fornecedor;  
     }

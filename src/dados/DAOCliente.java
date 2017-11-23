@@ -6,8 +6,8 @@
 package dados;
 
 import negocio.basica.Cliente;
-import negocio.exception.ConexaoClienteException;
-import negocio.exception.DAOClienteException;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
 
 /**
  *
@@ -15,13 +15,13 @@ import negocio.exception.DAOClienteException;
  */
 public interface DAOCliente {
 
-    public void inserir(Cliente cliente) throws DAOClienteException, ConexaoClienteException;
+    public void inserir(Cliente cliente) throws DAOException, ConexaoException;
  
-    public void deletar (Cliente cliente) throws DAOClienteException, ConexaoClienteException;
+    public void deletar (Cliente cliente) throws DAOException, ConexaoException;
     
-    public void alterar (Cliente cliente) throws DAOClienteException, ConexaoClienteException;
+    public void alterar (Cliente cliente) throws DAOException, ConexaoException;
    
-    public Cliente consultar(String nome) throws DAOClienteException, ConexaoClienteException;
+    public Cliente consultar(String nome) throws DAOException, ConexaoException;
     
 }
     

@@ -8,9 +8,9 @@ package negocio.regra;
 import dados.DAOFornecedor;
 import dados.DAOFornecedorImpl;
 import negocio.basica.Fornecedor;
-import negocio.exception.ConexaoFornecedorException;
-import negocio.exception.DAOFornecedorException;
-import negocio.exception.ExceptionsFornecedor;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
+import negocio.exception.FornecedorException;
 
 /**
  *
@@ -20,31 +20,31 @@ public class RegraFornecedor {
     /**
      * Valida o objeto Fornecedor
      * @param Fornecedor Objeto que retorna apenas o nome do ornecedor
-     * @throws ExceptionsFornecedor 
+     * @throws FornecedorException 
      */
-    public void validar (Fornecedor fornecedor) throws ExceptionsFornecedor {
+    public void validar (Fornecedor fornecedor) throws FornecedorException {
         
         if (fornecedor==null){
-            throw new ExceptionsFornecedor("Objeto inválido!");
+            throw new FornecedorException("Objeto inválido!");
         }
         if ((fornecedor.getForn_cnpj()==null)||(fornecedor.getForn_cnpj().isEmpty())){
-            throw new ExceptionsFornecedor("CNPJ inválido!");
+            throw new FornecedorException("CNPJ inválido!");
         }
     }
     /**
      * Verifica se o nome já existe no banco de dados
      * @param fornecedor Objeto contentdo o CNPJ a ser pesquisado
      */
-    public void eUnico (Fornecedor fornecedor) throws ExceptionsFornecedor{
+    public void eUnico (Fornecedor fornecedor) throws FornecedorException, DAOException{
        DAOFornecedor dao = new DAOFornecedorImpl();
        try{ 
        if(dao.consultar(fornecedor.getForn_cnpj())!=null){
-            throw new ExceptionsFornecedor("Esse CNPJ já existe!");
+            throw new FornecedorException("Esse CNPJ já existe!");
         }
-       }catch(ConexaoFornecedorException e){
-            throw new ExceptionsFornecedor("Erro no BD!");
-       }catch(DAOFornecedorException e){
-            throw new ExceptionsFornecedor("Erro de Aplicação(SQL)!");
+       }catch(ConexaoException e){
+            throw new FornecedorException("Erro no BD!");
+       }catch(DAOException e){
+            throw new FornecedorException("Erro de Aplicação(SQL)!");
        }
            }
 

@@ -8,9 +8,9 @@ package negocio.regra;
 import dados.DAOCliente;
 import dados.DAOClienteImpl;
 import negocio.basica.Cliente;
-import negocio.exception.ConexaoClienteException;
-import negocio.exception.DAOClienteException;
-import negocio.exception.ExceptionsCliente;
+import negocio.exception.DAOException;
+import negocio.exception.ClienteException;
+import negocio.exception.ConexaoException;
 
 /**
  *
@@ -18,25 +18,25 @@ import negocio.exception.ExceptionsCliente;
  */
 public class RegraCliente {
     
-    public void validar (Cliente cliente) throws ExceptionsCliente {
+    public void validar (Cliente cliente) throws ClienteException {
         
         if (cliente==null){
-            throw new ExceptionsCliente("Objeto inválido!");
+            throw new ClienteException("Objeto inválido!");
         }
         if ((cliente.getCli_nome()==null)||(cliente.getCli_nome().isEmpty())){
-            throw new ExceptionsCliente("Nome inválido!");
+            throw new ClienteException("Nome inválido!");
         }
     }
-    public void eUnico (Cliente cliente) throws ExceptionsCliente{
+    public void eUnico (Cliente cliente) throws ClienteException, ConexaoException, DAOException{
        DAOCliente dao = new DAOClienteImpl();
        try{ 
        if(dao.consultar(cliente.getCli_nome())!=null){
-            throw new ExceptionsCliente("Esse Cliente já existe!");
+            throw new ClienteException("Esse Cliente já existe!");
         }
-       }catch(ConexaoClienteException e){
-            throw new ExceptionsCliente("Erro no BD!");
-       }catch(DAOClienteException e){
-            throw new ExceptionsCliente("Erro de Aplicação(SQL)!");
+       }catch(ConexaoException e){
+            throw new ClienteException("Erro no BD!");
+       }catch(DAOException e){
+            throw new ClienteException("Erro de Aplicação(SQL)!");
        }
            }
 }

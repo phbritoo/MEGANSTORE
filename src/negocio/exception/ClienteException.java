@@ -9,12 +9,15 @@ package negocio.exception;
  *
  * @author PC
  */
-public class ConexaoClienteException extends Exception{
+public class ClienteException  extends Exception{
+   
 
-    public ConexaoClienteException(String texto) {
+    public ClienteException(String texto) {
         super(texto);
     }
     
-    public ConexaoClienteException(){
+    public ClienteException(){
     }
 }
+
+    

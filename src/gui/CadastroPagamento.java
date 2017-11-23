@@ -7,7 +7,7 @@ package gui;
 
 import javax.swing.JOptionPane;
 import negocio.basica.Pagamento;
-import negocio.exception.ExceptionPagamento;
+import negocio.exception.PagamentoException;
 import negocio.fachada.FachadaPagamento;
 
 /**
@@ -229,7 +229,7 @@ public class CadastroPagamento extends javax.swing.JFrame {
             txtValidade.setText("");
             txtParcelas.setText("");
             txtValor.setText("");
-        }catch(ExceptionPagamento ep){
+        }catch(PagamentoException ep){
             JOptionPane.showMessageDialog(this,ep.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -252,7 +252,7 @@ public class CadastroPagamento extends javax.swing.JFrame {
             txtValor.setText(""); */
             Double parcela = fp.cadastrar(pagamento.getCardParcelas(), pagamento.getCardValor());
             lblValorParcela.setText(String.valueOf(parcela));
-        }catch(ExceptionPagamento ep){
+        }catch(PagamentoException ep){
             JOptionPane.showMessageDialog(this,ep.getMessage());
         }
     }//GEN-LAST:event_txtParcelasMouseExited

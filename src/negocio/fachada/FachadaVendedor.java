@@ -6,7 +6,7 @@
 package negocio.fachada;
 
 import negocio.basica.Vendedor;
-import negocio.exception.ExceptionsVendedor;
+import negocio.exception.VendedorException;
 import negocio.regra.RegraVendedor;
 
 /**
@@ -15,7 +15,7 @@ import negocio.regra.RegraVendedor;
  */
 public class FachadaVendedor {
     
-    public void cadastrarVendedor (Vendedor vendedor) throws ExceptionsVendedor{
+    public void cadastrarVendedor (Vendedor vendedor) throws VendedorException{
         RegraVendedor rn = new RegraVendedor();
         rn.validar(vendedor);
         rn.eUnico(vendedor);

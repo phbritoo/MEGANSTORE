@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import negocio.basica.Pagamento;
 import negocio.exception.ConexaoException;
-import negocio.exception.DAOPagamentoException;
+import negocio.exception.DAOException;
 import util.GerenciadorConexao;
 import util.GerenciadorConexaoImpl;
 
@@ -21,7 +21,7 @@ import util.GerenciadorConexaoImpl;
 public class DAOPagamentoImpl implements DAOPagamento{
     
     @Override
-    public void inserir (Pagamento pagamento)throws ConexaoException, DAOPagamentoException{
+    public void inserir (Pagamento pagamento)throws ConexaoException, DAOException{
         GerenciadorConexao gc = GerenciadorConexaoImpl.getInstancia();
         Connection con = gc.abrirConexao();
         String sql = "INSERT INTO PAGAMENTO (CARD_PARCELAS, CARD_VALOR, CARD_NUM, CARD_VALIDADE, CARD_TITULAR) "
@@ -35,7 +35,7 @@ public class DAOPagamentoImpl implements DAOPagamento{
             pstm.setString(5, pagamento.getCardTitular());
             pstm.executeUpdate();
         }catch (SQLException errosql){
-            throw new DAOPagamentoException (errosql.getMessage());
+            throw new DAOException (errosql.getMessage());
         }finally {
             gc.fecharConexao(con);
         }

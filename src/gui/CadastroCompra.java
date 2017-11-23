@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import negocio.basica.*;
-import negocio.exception.ExceptionsCompra;
+import negocio.exception.CompraException;
 import negocio.fachada.FachadaCompra;
 /**
  *
@@ -248,7 +248,7 @@ public class CadastroCompra extends javax.swing.JFrame {
             txtQtd.setText("");
             txtTotal.setText("");
             
-        }catch(ExceptionsCompra ec){
+        }catch(CompraException ec){
             JOptionPane.showMessageDialog(this,ec.getMessage());
         }
         

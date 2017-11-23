@@ -5,21 +5,23 @@
  */
 package negocio.exception;
 
+import negocio.regra.RegraPagamento;
+
 /**
  *
- * @author PC
+ * @author aluno
  */
-public class DAOClienteException extends Exception{
+public class PagamentoException extends Exception {
 
-    public DAOClienteException(String texto) {
+    public PagamentoException(String texto) {
         super(texto);
     }
+    
+    public PagamentoException(){
+    }
 
-    public DAOClienteException() {
+    public PagamentoException(RegraPagamento aThis, String número_de_parcelas_inválido, int ERROR_MESSAGE) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-   
 }
-
-

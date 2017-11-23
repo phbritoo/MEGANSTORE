@@ -6,7 +6,7 @@
 package negocio.fachada;
 
 import negocio.basica.Pagamento;
-import negocio.exception.ExceptionPagamento;
+import negocio.exception.PagamentoException;
 import negocio.regra.RegraPagamento;
 
 /**
@@ -16,12 +16,12 @@ import negocio.regra.RegraPagamento;
 public class FachadaPagamento {
     RegraPagamento rn = new RegraPagamento();
     
-    public void cadastrar (Pagamento pagamento) throws ExceptionPagamento{
+    public void cadastrar (Pagamento pagamento) throws PagamentoException{
         rn.validar(pagamento);
         rn.incluir(pagamento);
                
     }
-    /*public void cadastrar (Integer pacelas, Double Valor) throws ExceptionPagamento{
+    /*public void cadastrar (Integer pacelas, Double Valor) throws PagamentoException{
         rn.validar(pacelas, Valor);
         rn.parcelar(pacelas, Valor);
               
@@ -32,10 +32,10 @@ public class FachadaPagamento {
      * @param pacelas
      * @param Valor
      * @return
-     * @throws ExceptionPagamento
+     * @throws PagamentoException
      */
     
-    public Double cadastrar (Integer pacelas, Double Valor) throws ExceptionPagamento{
+    public Double cadastrar (Integer pacelas, Double Valor) throws PagamentoException{
         rn.validar(pacelas, Valor);
         return rn.parcelar(pacelas, Valor);
     }

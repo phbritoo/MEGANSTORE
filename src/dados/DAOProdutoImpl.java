@@ -12,8 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
-import negocio.exception.ConexaoProdutoException;
-import negocio.exception.DAOProdutoException;
+import negocio.exception.DAOException;
 import util.GerenciadorConexao;
 import util.GerenciadorConexaoImpl;
 
@@ -25,12 +24,12 @@ import util.GerenciadorConexaoImpl;
 public class DAOProdutoImpl implements DAOProduto{
     
      @Override
-    public void inserir(Produto produto) throws DAOProdutoException, ConexaoProdutoException {
+    public void inserir(Produto produto) throws DAOException, ConexaoException {
         
     }
 
     @Override
-    public Produto consultar(Integer codigo) throws DAOProdutoException, ConexaoProdutoException {
+    public Produto consultar(Integer codigo) throws DAOException, ConexaoException {
         Produto produto = null;
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
         String sql = "SELECT Cli_nome, Cli_cpf FROM Cliente, Cli_tel WHERE nome=1";
@@ -46,7 +45,7 @@ public class DAOProdutoImpl implements DAOProduto{
           produto.setPrd_preco(rs.getDouble("preco"));
         }
     }catch(SQLException e){
-         throw new DAOProdutoException();
+         throw new DAOException();
     }    catch (ConexaoException ex) {   
              Logger.getLogger(DAOProdutoImpl.class.getName()).log(Level.SEVERE, null, ex);
          }   
@@ -54,12 +53,12 @@ public class DAOProdutoImpl implements DAOProduto{
     }
 
     @Override
-    public void deletar(Produto produto) throws DAOProdutoException, ConexaoProdutoException {
+    public void deletar(Produto produto) throws DAOException, ConexaoException {
        
     }
 
     @Override
-    public void alterar(Produto produto) throws DAOProdutoException, ConexaoProdutoException {
+    public void alterar(Produto produto) throws DAOException, ConexaoException {
       
     }
        

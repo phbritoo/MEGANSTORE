@@ -6,7 +6,7 @@
 package negocio.fachada;
 
 import negocio.basica.Cliente;
-import negocio.exception.ExceptionsCliente;
+import negocio.exception.ClienteException;
 import negocio.regra.RegraCliente;
 
 /**
@@ -15,7 +15,7 @@ import negocio.regra.RegraCliente;
  */
 public class FachadaCliente {
     
-     public void cadastrarCliente (Cliente cliente) throws ExceptionsCliente{
+     public void cadastrarCliente (Cliente cliente) throws ClienteException{
         RegraCliente rn = new RegraCliente();
         rn.validar(cliente);
         rn.eUnico(cliente);

@@ -7,15 +7,14 @@ package negocio.exception;
 
 /**
  *
- * @author paulo
+ * @author Djalma
  */
-public class ConexaoCompraException extends Exception{
+public class FornecedorException extends Exception {    
     
-    public ConexaoCompraException(String texto) {
+    public FornecedorException(String texto){
         super(texto);
     }
-    
-    public ConexaoCompraException(){
+    public FornecedorException(){
+        
     }
-    
 }

@@ -8,9 +8,9 @@ package negocio.regra;
 import dados.DAOProduto;
 import dados.DAOProdutoImpl;
 import negocio.basica.Produto;
-import negocio.exception.ConexaoProdutoException;
-import negocio.exception.DAOProdutoException;
-import negocio.exception.ExceptionsProduto;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
+import negocio.exception.ProdutoException;
 
 /**
  *
@@ -18,35 +18,35 @@ import negocio.exception.ExceptionsProduto;
  */
 public class RegraProduto{
     
-    public void validar(Produto produto) throws ExceptionsProduto{
+    public void validar(Produto produto) throws ProdutoException{
         
         if (produto == null){
-            throw new ExceptionsProduto("objeto produto não criado");
+            throw new ProdutoException("objeto produto não criado");
         }
         if (produto.getPrd_cod() == 0){
-             throw new ExceptionsProduto("Código inválido");
+             throw new ProdutoException("Código inválido");
         }        
         if (produto.getPrd_estoque() == 0){
-             throw new ExceptionsProduto("Estoque inválido");
+             throw new ProdutoException("Estoque inválido");
         }
         if (produto.getPrd_preco() == 0){
-             throw new ExceptionsProduto("Preco inválido");
+             throw new ProdutoException("Preco inválido");
         }
         if ((produto.getPrd_nome() == null) || (produto.getPrd_nome().isEmpty())){
-             throw new ExceptionsProduto("Nome inválido");
+             throw new ProdutoException("Nome inválido");
         }       
     }
     
-    public void eUnico (Produto produto) throws ExceptionsProduto{
+    public void eUnico (Produto produto) throws ProdutoException, ConexaoException, DAOException{
        DAOProdutoImpl dao = new DAOProdutoImpl();
        try{ 
        if(dao.consultar(produto.getPrd_cod())!=null){
-            throw new ExceptionsProduto("Código de produto já cadastrado!");
+            throw new ProdutoException("Código de produto já cadastrado!");
         }
-       }catch(ConexaoProdutoException e){
-            throw new ExceptionsProduto("Erro no BD!");
-       }catch(DAOProdutoException e){
-            throw new ExceptionsProduto("Erro de Aplicação(SQL)!");
+       }catch(ConexaoException e){
+            throw new ProdutoException("Erro no BD!");
+       }catch(DAOException e){
+            throw new ProdutoException("Erro de Aplicação(SQL)!");
        }
     }
     public Produto consultar(String Prd_cod) {

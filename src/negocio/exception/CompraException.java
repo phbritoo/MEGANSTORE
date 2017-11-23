@@ -7,17 +7,16 @@ package negocio.exception;
 
 /**
  *
- * @author Gabriel
+ * @author paulo
  */
-public class ExceptionsProduto extends Exception{
-    
-    public ExceptionsProduto(String texto){
-        super(texto);
-    }
-    
-    public ExceptionsProduto(){
+public class CompraException extends Exception{
+
+    public CompraException() {
         
     }
-    
+
+    public CompraException(String texto) {
+        super(texto);
+    }
     
 }

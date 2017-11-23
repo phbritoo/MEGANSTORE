@@ -7,7 +7,7 @@ package gui;
 
 import javax.swing.JOptionPane;
 import negocio.basica.Vendedor;
-import negocio.exception.ExceptionsVendedor;
+import negocio.exception.VendedorException;
 import negocio.fachada.FachadaVendedor;
 
 /**
@@ -120,7 +120,7 @@ public class CadastroVendedor extends javax.swing.JFrame {
             f.cadastrarVendedor(vendedor);
         
         txtNome.setText("");
-        } catch (ExceptionsVendedor e){
+        } catch (VendedorException e){
             JOptionPane.showMessageDialog(this, "ERRO! " + e.getMessage());
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed

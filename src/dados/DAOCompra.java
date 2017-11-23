@@ -6,8 +6,8 @@
 package dados;
 
 import negocio.basica.Compra;
-import negocio.exception.ConexaoCompraException;
-import negocio.exception.DAOCompraException;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
 
 /**
  *
@@ -22,5 +22,5 @@ public interface DAOCompra {
      * @throws negocio.exception.DAOCompraException
      * @throws negocio.exception.ConexaoCompraException
      */
-    public void inserir (Compra compra) throws DAOCompraException, ConexaoCompraException;
+    public void inserir (Compra compra) throws DAOException, ConexaoException;
 }

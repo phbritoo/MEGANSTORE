@@ -11,9 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.basica.Cliente;
-import negocio.exception.ConexaoClienteException;
 import negocio.exception.ConexaoException;
-import negocio.exception.DAOClienteException;
+import negocio.exception.DAOException;
 import util.GerenciadorConexao;
 import util.GerenciadorConexaoImpl;
 
@@ -24,12 +23,12 @@ import util.GerenciadorConexaoImpl;
 public class DAOClienteImpl implements DAOCliente {
 
     @Override
-    public void inserir(Cliente cliente) throws DAOClienteException, ConexaoClienteException {
+    public void inserir(Cliente cliente) throws DAOException, ConexaoException {
         
     }
 
     @Override
-    public Cliente consultar(String nome) throws DAOClienteException, ConexaoClienteException {
+    public Cliente consultar(String nome) throws DAOException, ConexaoException {
          Cliente cliente = null;
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
         String sql = "SELECT Cli_nome, Cli_cpf FROM Cliente, Cli_tel WHERE nome=1";
@@ -44,7 +43,7 @@ public class DAOClienteImpl implements DAOCliente {
           cliente.setCli_tel(rs.getString("tel"));
         }
     }catch(SQLException e){
-         throw new DAOClienteException();
+         throw new DAOException();
     }   catch (ConexaoException ex) {
             Logger.getLogger(DAOClienteImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -52,12 +51,12 @@ public class DAOClienteImpl implements DAOCliente {
     }
 
     @Override
-    public void deletar(Cliente cliente) throws DAOClienteException, ConexaoClienteException {
+    public void deletar(Cliente cliente) throws DAOException, ConexaoException {
        
     }
 
     @Override
-    public void alterar(Cliente cliente) throws DAOClienteException, ConexaoClienteException {
+    public void alterar(Cliente cliente) throws DAOException, ConexaoException {
       
     }
     }

@@ -6,8 +6,8 @@
 package dados;
 
 import negocio.basica.Produto;
-import negocio.exception.ConexaoProdutoException;
-import negocio.exception.DAOProdutoException;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
 
 
 /**
@@ -22,13 +22,13 @@ public interface DAOProduto {
      * @throws DAOProdutoException
      * @throws ConexaoProdutoException
      */
-    public void inserir(Produto produto) throws DAOProdutoException, ConexaoProdutoException;
+    public void inserir(Produto produto) throws DAOException, ConexaoException;
  
-    public void deletar (Produto produto) throws DAOProdutoException, ConexaoProdutoException;
+    public void deletar (Produto produto) throws DAOException, ConexaoException;
     
-    public void alterar (Produto produto) throws DAOProdutoException, ConexaoProdutoException;
+    public void alterar (Produto produto) throws DAOException, ConexaoException;
    
-    public Produto consultar(Integer  codigo) throws DAOProdutoException, ConexaoProdutoException;
+    public Produto consultar(Integer  codigo) throws DAOException, ConexaoException;
     
     
     

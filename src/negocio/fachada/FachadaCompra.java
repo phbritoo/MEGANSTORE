@@ -1,7 +1,7 @@
 package negocio.fachada;
 
 import negocio.basica.Compra;
-import negocio.exception.ExceptionsCompra;
+import negocio.exception.CompraException;
 import negocio.regra.RegraCompra;
 
 /**
@@ -10,7 +10,7 @@ import negocio.regra.RegraCompra;
  */
 public class FachadaCompra {
 
-    public void cadastrar(Compra compra) throws ExceptionsCompra{
+    public void cadastrar(Compra compra) throws CompraException{
         RegraCompra rn = new RegraCompra();
         rn.validar(compra);
         rn.Incluir(compra);

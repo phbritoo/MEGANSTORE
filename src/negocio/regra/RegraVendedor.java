@@ -9,8 +9,8 @@ import dados.DAOVendedor;
 import dados.DAOVendedorImpl;
 import negocio.basica.Vendedor;
 import negocio.exception.ConexaoException;
-import negocio.exception.DAOVendedorException;
-import negocio.exception.ExceptionsVendedor;
+import negocio.exception.DAOException;
+import negocio.exception.VendedorException;
 
 /**
  *
@@ -20,31 +20,31 @@ public class RegraVendedor {
     /**
      * Valida o objeto Vendedor
      * @param vendedor Objeto que retorna apenas o nome do vendedor
-     * @throws ExceptionsVendedor 
+     * @throws VendedorException 
      */
-    public void validar (Vendedor vendedor) throws ExceptionsVendedor {
+    public void validar (Vendedor vendedor) throws VendedorException {
         
         if (vendedor==null){
-            throw new ExceptionsVendedor("Objeto inválido!");
+            throw new VendedorException("Objeto inválido!");
         }
         if ((vendedor.getVend_nome()==null)||(vendedor.getVend_nome().isEmpty())){
-            throw new ExceptionsVendedor("Nome inválido!");
+            throw new VendedorException("Nome inválido!");
         }
     }
     /**
      * Verifica se o nome já existe no banco de dados
      * @param vendedor Objeto contentdo o nome a ser pesquisado
      */
-    public void eUnico (Vendedor vendedor) throws ExceptionsVendedor{
+    public void eUnico (Vendedor vendedor) throws VendedorException{
        DAOVendedor dao = new DAOVendedorImpl();
        try{ 
        if(dao.consultar(vendedor.getVend_nome())!=null){
-            throw new ExceptionsVendedor("Esse funcionário já existe!");
+            throw new VendedorException("Esse funcionário já existe!");
         }
        }catch(ConexaoException e){
-            throw new ExceptionsVendedor("Erro no BD!");
-       }catch(DAOVendedorException e){
-            throw new ExceptionsVendedor("Erro de Aplicação(SQL)!");
+            throw new VendedorException("Erro no BD!");
+       }catch(DAOException e){
+            throw new VendedorException("Erro de Aplicação(SQL)!");
        }
            }
 
