@@ -5,6 +5,7 @@
  */
 package dados;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,17 +22,35 @@ import util.GerenciadorConexaoImpl;
  * @author William
  */
 public class DAOClienteImpl implements DAOCliente {
-
-    @Override
-    public void inserir(Cliente cliente) throws DAOException, ConexaoException {
-        
+    
+    private final GerenciadorConexao gc;
+    
+    public DAOClienteImpl(){
+       gc = GerenciadorConexaoImpl.getInstancia();
     }
+    
+    @Override
+
+    public void inserir(Cliente cliente) throws DAOException, ConexaoException {
+            Connection c = gc.conectar();
+            String sql = "INSERT INTO CLIENTE (CLI_NOME) VALUES (?)";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setString(1, cliente.getClienteNome());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            gc.desconectar(c);
+        } 
+    }
+    
 
     @Override
     public Cliente consultar(String nome) throws DAOException, ConexaoException {
          Cliente cliente = null;
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
-        String sql = "SELECT Cli_nome, Cli_cpf FROM Cliente, Cli_tel WHERE nome=1";
+        String sql = "SELECT CLI_NOME, CLI_CPF FROM Cliente, CLI_TEL WHERE nome=1";
         try{
         PreparedStatement pstm = ger.conectar().prepareStatement(sql);
         pstm.setString(1, nome);
@@ -52,12 +71,34 @@ public class DAOClienteImpl implements DAOCliente {
 
     @Override
     public void deletar(Cliente cliente) throws DAOException, ConexaoException {
-       
+        Connection c = gc.conectar();
+        String sql = "DELETE FROM CLIENTE WHERE CLI_CPF=?";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setInt(1, cliente.getClienteCpf());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            gc.desconectar(c);
+        } 
+    
     }
 
     @Override
     public void alterar(Cliente cliente) throws DAOException, ConexaoException {
-      
+          Connection c = gc.conectar();
+        String sql = "UPDATE VENDEDOR SET CLI_NOME=? WHERE CLI_CPF=?";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setString(1, cliente.getClienteNome());
+            pstm.setInt(2, cliente.getClienteCpf());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            gc.desconectar(c);
+        }
     }
     }
     
