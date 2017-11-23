@@ -57,7 +57,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menu_Colsultar">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cosultar"/>
+            <Property name="text" type="java.lang.String" value="Consultar"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menu_consultarCliente">
