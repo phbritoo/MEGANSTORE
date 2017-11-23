@@ -17,6 +17,12 @@ import negocio.exception.VendedorException;
  * @author gildo
  */
 public class RegraVendedor {
+    private final DAOVendedor DAO;
+    
+    public RegraVendedor(){
+        DAO = new DAOVendedorImpl();
+    }
+    
     /**
      * Valida o objeto Vendedor
      * @param vendedor Objeto que retorna apenas o nome do vendedor
@@ -37,21 +43,24 @@ public class RegraVendedor {
      * @throws negocio.exception.VendedorException
      */
     public void eUnico (Vendedor vendedor) throws VendedorException{
-       DAOVendedor dao = new DAOVendedorImpl();
-       try{ 
-       if(dao.consultar(vendedor.getVendedorNome())!=null){
-            throw new VendedorException("Esse funcionário já existe!");
+        try{
+            if(DAO.consultar(vendedor.getVendedorNome())!=null)
+                throw new VendedorException();
+        }catch(ConexaoException | DAOException e){
+                throw new VendedorException();
         }
-       }catch(ConexaoException e){
-            throw new VendedorException("Erro no BD!");
-       }catch(DAOException e){
-            throw new VendedorException("Erro de Aplicação(SQL)!");
-       }
            }
 
-           public Vendedor consultar(String nome) {
-               throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void inserir(Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
+            try{  
+               DAO.inserir(vendedor); 
+           } catch (ConexaoException ex){
+                throw new VendedorException("Erro no BD");
+           } catch (DAOException ex){
+                throw new VendedorException("Erro no SQL");
            }
+           
+    }
        
        
     
@@ -60,6 +69,7 @@ public class RegraVendedor {
      * @param vendedor Objeto com nome a ser salvo no BD
      */
     public void incluir(Vendedor vendedor) {
+        
     }
     
 }

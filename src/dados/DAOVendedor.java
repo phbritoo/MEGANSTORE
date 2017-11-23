@@ -18,14 +18,35 @@ public interface DAOVendedor {
     /**
      * Salva os dados no BD
      * @param vendedor objeto com o nome do vendedor
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
      */
     public void inserir(Vendedor vendedor) throws DAOException, ConexaoException;
     
     /**
      * Busca no BD um registro correspondente ao nome passado
-     * @param nome
-     * @return nome do vendedor
+     * @param vendedorNome
+     * @return o código do vendedor
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
      */
-    public Vendedor consultar(String nome) throws DAOException, ConexaoException;
+    public Vendedor consultar(String vendedorNome) throws DAOException, ConexaoException;
+    
+/**
+ * Altera no BD um registro de nome de vendedor
+     * @param vendedor
+ * @throws DAOException
+ * @throws ConexaoException 
+ */
+    public void alterar(Vendedor vendedor) throws DAOException, ConexaoException;
+    
+    
+    /**
+     * Exclui no BD um registro de nome de vendedor
+     * @param vendedor
+     * @throws DAOException
+     * @throws ConexaoException 
+     */
+    public void excluir(Vendedor vendedor) throws DAOException, ConexaoException;
     
 }

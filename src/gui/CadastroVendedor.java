@@ -5,8 +5,12 @@
  */
 package gui;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.basica.Vendedor;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
 import negocio.exception.VendedorException;
 import negocio.fachada.FachadaVendedor;
 
@@ -116,13 +120,18 @@ public class CadastroVendedor extends javax.swing.JFrame {
         vendedor.setVendedorNome(txtNome.getText());
         
         FachadaVendedor f = new FachadaVendedor();
-        try{
-            f.cadastrarVendedor(vendedor);
         
-        txtNome.setText("");
-        } catch (VendedorException e){
-            JOptionPane.showMessageDialog(this, "ERRO! " + e.getMessage());
+        try {
+            f.cadastrarVendedor(vendedor);
+            JOptionPane.showMessageDialog(this, "Vendedor Cadastrado com Sucesso!" );
+        } catch (VendedorException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, "ERRO! " + ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, "ERRO! " + ex.getMessage());
         }
+        
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

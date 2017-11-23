@@ -6,6 +6,8 @@
 package negocio.fachada;
 
 import negocio.basica.Vendedor;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
 import negocio.exception.VendedorException;
 import negocio.regra.RegraVendedor;
 
@@ -15,7 +17,14 @@ import negocio.regra.RegraVendedor;
  */
 public class FachadaVendedor {
     
-    public void cadastrarVendedor (Vendedor vendedor) throws VendedorException{
+    /**
+     * Faz as validações e grava um novo vendedor no BD
+     * @param vendedor
+     * @throws VendedorException 
+     * @throws negocio.exception.ConexaoException 
+     * @throws negocio.exception.DAOException 
+     */
+    public void cadastrarVendedor (Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
         RegraVendedor rn = new RegraVendedor();
         rn.validar(vendedor);
         rn.eUnico(vendedor);
