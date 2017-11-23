@@ -5,6 +5,8 @@
  */
 package dados;
 
+import static java.lang.System.gc;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,24 +27,34 @@ public class DAOProdutoImpl implements DAOProduto{
     
      @Override
     public void inserir(Produto produto) throws DAOException, ConexaoException {
-        
+        Connection c = gc.conectar();
+        String sql = "INSERT INTO VENDEDOR (produtoCodigo) VALUES (?)";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setString(1, vendedor.getVendedorNome());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            gc.desconectar(c);
+        } 
     }
 
     @Override
     public Produto consultar(Integer codigo) throws DAOException, ConexaoException {
         Produto produto = null;
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
-        String sql = "SELECT produtoCodigo FROM Produto, ProdutoNome FROM Nome, ProdutoEstoque WHERE nome=?";
+        String sql = "SELECT PRD_COD FROM Codigo, PRD_NOME FROM Nome, PRD_ESTOQUE FROM Estoque, PRD_PRECO FROM Preco";
         try{
         PreparedStatement pstm = ger.conectar().prepareStatement(sql);
         pstm.setInt(1, codigo);
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){
           produto = new Produto();
-          produto.setProdutoCodigo(rs.getInt("codigo"));
-          produto.setProdutoNome(rs.getString("nome"));
-          produto.setProdutoEstoque(rs.getInt("estoque"));
-          produto.setProdutoPreco(rs.getDouble("preco"));
+          produto.setProdutoCodigo(rs.getInt("PRD_COD"));
+          produto.setProdutoNome(rs.getString("PRD_NOME"));
+          produto.setProdutoEstoque(rs.getInt("PRD_ESTOQUE"));
+          produto.setProdutoPreco(rs.getDouble("PRD_PRECO"));
         }
     }catch(SQLException e){
          throw new DAOException();

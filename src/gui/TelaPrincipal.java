@@ -84,6 +84,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menu_vendas.setText("Vendas");
 
         menu_vendasEmitirPed.setText("Emitir Pedido");
+        menu_vendasEmitirPed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_vendasEmitirPedActionPerformed(evt);
+            }
+        });
         menu_vendas.add(menu_vendasEmitirPed);
 
         jMenuBar1.add(menu_vendas);
@@ -187,6 +192,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ConsultaProduto cp = new ConsultaProduto();
         cp.setVisible(true);
     }//GEN-LAST:event_menu_consultarProdutosActionPerformed
+
+    private void menu_vendasEmitirPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_vendasEmitirPedActionPerformed
+        // TODO add your handling code here:
+        CadastroCompra cp = new CadastroCompra();
+        cp.setVisible(true);
+    }//GEN-LAST:event_menu_vendasEmitirPedActionPerformed
 
     /**
      * @param args the command line arguments
