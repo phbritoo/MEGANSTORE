@@ -16,6 +16,20 @@ public class Produto {
     private double produtoPreco;
 
     /**
+     * @return the produtoCodigo
+     */
+    public Integer getProdutoCodigo() {
+        return produtoCodigo;
+    }
+
+    /**
+     * @param produtoCodigo the produtoCodigo to set
+     */
+    public void setProdutoCodigo(Integer produtoCodigo) {
+        this.produtoCodigo = produtoCodigo;
+    }
+
+    /**
      * @return the produtoNome
      */
     public String getProdutoNome() {
@@ -32,15 +46,15 @@ public class Produto {
     /**
      * @return the produtoEstoque
      */
-    public int getPrd_estoque() {
+    public Integer getProdutoEstoque() {
         return produtoEstoque;
     }
 
     /**
-     * @param prd_estoque the produtoEstoque to set
+     * @param produtoEstoque the produtoEstoque to set
      */
-    public void setPrd_estoque(int prd_estoque) {
-        this.produtoEstoque = prd_estoque;
+    public void setProdutoEstoque(Integer produtoEstoque) {
+        this.produtoEstoque = produtoEstoque;
     }
 
     /**
@@ -55,19 +69,9 @@ public class Produto {
      */
     public void setProdutoPreco(double produtoPreco) {
         this.produtoPreco = produtoPreco;
-    }   
-
-    /**
-     * @return the produtoCodigo
-     */
-    public int getPrd_cod() {
-        return produtoCodigo;
     }
 
-    /**
-     * @param prd_cod the produtoCodigo to set
-     */
-    public void setPrd_cod(int prd_cod) {
-        this.produtoCodigo = prd_cod;
-    }
+
+
+
 }

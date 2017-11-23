@@ -23,10 +23,10 @@ public class RegraProduto{
         if (produto == null){
             throw new ProdutoException("objeto produto não criado");
         }
-        if (produto.getPrd_cod() == 0){
+        if (produto.getProdutoCodigo() == 0){
              throw new ProdutoException("Código inválido");
         }        
-        if (produto.getPrd_estoque() == 0){
+        if (produto.getProdutoEstoque() == 0){
              throw new ProdutoException("Estoque inválido");
         }
         if (produto.getProdutoPreco() == 0){
@@ -38,9 +38,9 @@ public class RegraProduto{
     }
     
     public void eUnico (Produto produto) throws ProdutoException, ConexaoException, DAOException{
-       DAOProdutoImpl dao = new DAOProdutoImpl();
+       DAOProduto dao = new DAOProdutoImpl();
        try{ 
-       if(dao.consultar(produto.getPrd_cod())!=null){
+       if(dao.consultar(produto.getProdutoCodigo())!=null){
             throw new ProdutoException("Código de produto já cadastrado!");
         }
        }catch(ConexaoException e){

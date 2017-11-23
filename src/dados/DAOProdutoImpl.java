@@ -32,16 +32,16 @@ public class DAOProdutoImpl implements DAOProduto{
     public Produto consultar(Integer codigo) throws DAOException, ConexaoException {
         Produto produto = null;
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
-        String sql = "SELECT Cli_nome, Cli_cpf FROM Cliente, Cli_tel WHERE nome=1";
+        String sql = "SELECT produtoCodigo FROM Produto, ProdutoNome FROM Nome, ProdutoEstoque WHERE nome=?";
         try{
         PreparedStatement pstm = ger.conectar().prepareStatement(sql);
         pstm.setInt(1, codigo);
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){
           produto = new Produto();
-          produto.setPrd_cod(rs.getInt("codigo"));
+          produto.setProdutoCodigo(rs.getInt("codigo"));
           produto.setProdutoNome(rs.getString("nome"));
-          produto.setPrd_estoque(rs.getInt("estoque"));
+          produto.setProdutoEstoque(rs.getInt("estoque"));
           produto.setProdutoPreco(rs.getDouble("preco"));
         }
     }catch(SQLException e){
