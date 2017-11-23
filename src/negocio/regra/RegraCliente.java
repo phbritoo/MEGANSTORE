@@ -17,6 +17,10 @@ import negocio.exception.ConexaoException;
  * @author William
  */
 public class RegraCliente {
+        private final DAOCliente DAO;
+        public RegraCliente(){
+        DAO = new DAOClienteImpl();
+    }
     
     public void validar (Cliente cliente) throws ClienteException {
         
@@ -28,9 +32,9 @@ public class RegraCliente {
         }
     }
     public void eUnico (Cliente cliente) throws ClienteException, ConexaoException, DAOException{
-       DAOCliente dao = new DAOClienteImpl();
-       try{ 
-       if(dao.consultar(cliente.getClienteNome())!=null){
+       
+       try{
+       if(DAO.consultar(cliente.getClienteNome())!=null){
             throw new ClienteException("Esse Cliente já existe!");
         }
        }catch(ConexaoException e){
@@ -39,4 +43,17 @@ public class RegraCliente {
             throw new ClienteException("Erro de Aplicação(SQL)!");
        }
            }
+    
+     public void inserir(Cliente cliente) throws ClienteException, ConexaoException, DAOException{
+           
+         try{  
+               DAO.inserir(cliente); 
+           } catch (ConexaoException ex){
+                throw new ClienteException("Erro no BD");
+           } catch (DAOException ex){
+                throw new ClienteException("Erro no SQL");
+           }
+           
+    }
+    
 }
