@@ -237,7 +237,7 @@ public class CadastroCompra extends javax.swing.JFrame {
         compra.setNfData(SimpleDateFormat(txtData.getText()));
         compra.getCliente().setClienteCpf(Integer.parseInt (txtCpfCliente.getText()));
         compra.setNfTotal(Double.parseDouble (txtTotal.getText()));
-        compraProduto.setPrd_qtd(Integer.parseInt (txtQtd.getText()));
+        compraProduto.setProdutoQtd(Integer.parseInt (txtQtd.getText()));
         
         FachadaCompra fc = new  FachadaCompra();
          try {

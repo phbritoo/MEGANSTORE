@@ -6,25 +6,25 @@ package negocio.basica;
  * @author paulo
  */
 public class CompraProduto {
-        private int prd_qtd;
-        private double preco;
+        private int produtoQtd;
+        private double produtoPreco;
         private Compra compra;
         private Produto produto;
 
-    public int getPrd_qtd() {
-        return prd_qtd;
+    public int getProdutoQtd() {
+        return produtoQtd;
     }
 
-    public void setPrd_qtd(int prd_qtd) {
-        this.prd_qtd = prd_qtd;
+    public void setProdutoQtd(int produtoQtd) {
+        this.produtoQtd = produtoQtd;
     }
 
-    public double getPreco() {
-        return preco;
+    public double getProdutoPreco() {
+        return produtoPreco;
     }
 
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setProdutoPreco(double produtoPreco) {
+        this.produtoPreco = produtoPreco;
     }
 
     public Compra getCompra() {
