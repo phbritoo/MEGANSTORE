@@ -25,7 +25,7 @@ public class FachadaVendedor {
      * @throws negocio.exception.DAOException 
      */
     public void cadastrarVendedor (Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
-        RegraVendedor rn = new RegraVendedor();
+        RegraVendedor rn = new RegraVendedor() ;
         rn.validar(vendedor);
         rn.eUnico(vendedor);
         rn.incluir(vendedor);
