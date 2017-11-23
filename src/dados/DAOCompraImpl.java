@@ -11,4 +11,6 @@ package dados;
  */
 public class DAOCompraImpl {
     
+    
+    
 }
