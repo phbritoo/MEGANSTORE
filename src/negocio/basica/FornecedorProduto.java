@@ -8,32 +8,32 @@ package negocio.basica;
 public class FornecedorProduto {
 
     /**
-     * @return the forn_cnpj
+     * @return the fornecedorCnpj
      */
-    public Integer getForn_cnpj() {
-        return forn_cnpj;
+    public Integer getFornecedorCnpj() {
+        return fornecedorCnpj;
     }
 
     /**
-     * @param forn_cnpj the forn_cnpj to set
+     * @param fornecedorCnpj the fornecedorCnpj to set
      */
-    public void setForn_cnpj(Integer forn_cnpj) {
-        this.forn_cnpj = forn_cnpj;
+    public void setFornecedorCnpj(Integer fornecedorCnpj) {
+        this.fornecedorCnpj = fornecedorCnpj;
     }
 
     /**
-     * @return the prd_cod
+     * @return the produtoCodigo
      */
-    public Integer getPrd_cod() {
-        return prd_cod;
+    public Integer getProdutoCodigo() {
+        return produtoCodigo;
     }
 
     /**
-     * @param prd_cod the prd_cod to set
+     * @param produtoCodigo the produtoCodigo to set
      */
-    public void setPrd_cod(Integer prd_cod) {
-        this.prd_cod = prd_cod;
+    public void setProdutoCodigo(Integer produtoCodigo) {
+        this.produtoCodigo = produtoCodigo;
     }
-    private Integer forn_cnpj;
-    private Integer prd_cod;
+    private Integer fornecedorCnpj;
+    private Integer produtoCodigo;
 }
