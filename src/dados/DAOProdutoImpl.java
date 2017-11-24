@@ -21,17 +21,22 @@ import util.GerenciadorConexaoImpl;
 
 /**
  *
- * @author hp
+ * @author Gabriel
  */
 public class DAOProdutoImpl implements DAOProduto{
     
      @Override
     public void inserir(Produto produto) throws DAOException, ConexaoException {
+        GerenciadorConexao gc = GerenciadorConexaoImpl.getInstancia();
         Connection c = gc.conectar();
-        String sql = "INSERT INTO VENDEDOR (produtoCodigo) VALUES (?)";
+        String sql = "INSERT INTO PRODUTO (PRD_COD, PRD_NOME, PRD_ESTOQUE, PRD_PRECO) VALUES (?,?,?,?)";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
-            pstm.setString(1, vendedor.getVendedorNome());
+            pstm.setInt(1, produto.getProdutoCodigo());
+            pstm.setString(2, produto.getProdutoNome());
+            pstm.setInt(3, produto.getProdutoEstoque());
+            pstm.setDouble(4, produto.getProdutoPreco());
+            
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException(e);
@@ -44,7 +49,7 @@ public class DAOProdutoImpl implements DAOProduto{
     public Produto consultar(Integer codigo) throws DAOException, ConexaoException {
         Produto produto = null;
         GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
-        String sql = "SELECT PRD_COD FROM Codigo, PRD_NOME FROM Nome, PRD_ESTOQUE FROM Estoque, PRD_PRECO FROM Preco";
+        String sql = "SELECT PRD_COD FROM Codigo WHERE PRD_COD=?, PRD_NOME FROM Nome, PRD_ESTOQUE FROM Estoque, PRD_PRECO FROM Preco";
         try{
         PreparedStatement pstm = ger.conectar().prepareStatement(sql);
         pstm.setInt(1, codigo);
@@ -66,12 +71,40 @@ public class DAOProdutoImpl implements DAOProduto{
 
     @Override
     public void deletar(Produto produto) throws DAOException, ConexaoException {
-       
+       GerenciadorConexao gc = GerenciadorConexaoImpl.getInstancia();
+       Connection c = gc.conectar();
+        String sql = "DELETE FROM PRODUTO WHERE PRD_COD=?";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+             pstm.setInt(1, produto.getProdutoCodigo());
+            pstm.setString(2, produto.getProdutoNome());
+            pstm.setInt(3, produto.getProdutoEstoque());
+            pstm.setDouble(4, produto.getProdutoPreco());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            gc.desconectar(c);
+        } 
     }
 
     @Override
     public void alterar(Produto produto) throws DAOException, ConexaoException {
-      
+      GerenciadorConexao gc = GerenciadorConexaoImpl.getInstancia();
+      Connection c = gc.conectar();
+        String sql = "UPDATE PRODUTO SET PRD_COD=? WHERE PRD_COD=?";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setInt(1, produto.getProdutoCodigo());
+            pstm.setString(2, produto.getProdutoNome());
+            pstm.setInt(3, produto.getProdutoEstoque());
+            pstm.setDouble(4, produto.getProdutoPreco());
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            gc.desconectar(c);
+        } 
     }
        
 }

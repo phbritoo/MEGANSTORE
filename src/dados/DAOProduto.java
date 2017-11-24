@@ -19,8 +19,8 @@ public interface DAOProduto {
     /**
      *
      * @param produto
-     * @throws DAOProdutoException
-     * @throws ConexaoProdutoException
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
      */
     public void inserir(Produto produto) throws DAOException, ConexaoException;
  
