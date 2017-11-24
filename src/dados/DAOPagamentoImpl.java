@@ -5,7 +5,7 @@
  */
 package dados;
 
-import java.sql.Connection;
+import java.sql.Connection ;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import negocio.basica.Pagamento;
