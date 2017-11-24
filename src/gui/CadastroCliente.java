@@ -5,6 +5,13 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
+import negocio.basica.Cliente;
+import negocio.exception.ClienteException;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
+import negocio.fachada.FachadaCliente;
+
 /**
  *
  * @author aluno
@@ -31,9 +38,9 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        cc_entrada1 = new javax.swing.JTextField();
-        cc_entrada2 = new javax.swing.JTextField();
-        cc_entrada3 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
+        txtTel = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         but_sair = new javax.swing.JButton();
@@ -49,6 +56,11 @@ public class CadastroCliente extends javax.swing.JFrame {
         jLabel4.setText("Cadastro Cliente");
 
         jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         but_sair.setText("Sair");
         but_sair.addActionListener(new java.awt.event.ActionListener() {
@@ -69,9 +81,9 @@ public class CadastroCliente extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(cc_entrada1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                            .addComponent(cc_entrada2)
-                            .addComponent(cc_entrada3)))
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                            .addComponent(txtCpf)
+                            .addComponent(txtTel)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(jLabel4))
@@ -90,15 +102,15 @@ public class CadastroCliente extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addGap(4, 4, 4)
-                .addComponent(cc_entrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel2)
                 .addGap(5, 5, 5)
-                .addComponent(cc_entrada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cc_entrada3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -113,6 +125,27 @@ public class CadastroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();  
     }//GEN-LAST:event_but_sairActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+         Cliente cliente = new Cliente();
+        cliente.setClienteNome(txtNome.getText());
+        cliente.setClienteTel(txtTel.getText());
+       
+    
+        FachadaCliente f = new FachadaCliente();
+        
+        try {
+            f.cadastrarCliente(cliente);
+            JOptionPane.showMessageDialog(this, "Cliente Cadastrado com Sucesso!" );
+        } catch (ClienteException ex) {
+            JOptionPane.showMessageDialog(this, "Erro Regra" + ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, "ERRO Conexão! " + ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, "ERRO DAO! " + ex.getMessage());
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,13 +184,13 @@ public class CadastroCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton but_sair;
-    private javax.swing.JTextField cc_entrada1;
-    private javax.swing.JTextField cc_entrada2;
-    private javax.swing.JTextField cc_entrada3;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTel;
     // End of variables declaration//GEN-END:variables
 }
