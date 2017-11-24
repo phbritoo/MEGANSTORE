@@ -51,7 +51,14 @@ public class RegraVendedor {
         }
            }
 
-    public void inserir(Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
+    /**
+     *
+     * @param vendedor
+     * @throws VendedorException
+     * @throws ConexaoException
+     * @throws DAOException
+     */
+    public void incluir(Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
             try{  
                DAO.inserir(vendedor); 
            } catch (ConexaoException ex){
@@ -62,14 +69,5 @@ public class RegraVendedor {
            
     }
        
-       
-    
-    /**
-     * Salva os dados no Banco de Dados
-     * @param vendedor Objeto com nome a ser salvo no BD
-     */
-    public void incluir(Vendedor vendedor) {
-        
-    }
     
 }

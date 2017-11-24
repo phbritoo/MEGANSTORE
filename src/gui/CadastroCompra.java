@@ -17,6 +17,7 @@ import negocio.fachada.FachadaCompra;
  */
 public class CadastroCompra extends javax.swing.JFrame {
 
+
     /**
      * Creates new form FazerCompra
      */
