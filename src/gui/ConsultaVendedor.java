@@ -38,7 +38,9 @@ public class ConsultaVendedor extends javax.swing.JFrame {
         btnRemover = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Consultar Vendedor");
+        setResizable(false);
 
         jLabel1.setText("Consulta Vendedor");
 
@@ -123,6 +125,7 @@ public class ConsultaVendedor extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

@@ -22,7 +22,7 @@ public interface DAOProduto {
      * @throws negocio.exception.DAOException
      * @throws negocio.exception.ConexaoException
      */
-    public void inserir(Produto produto) throws DAOException, ConexaoException;
+    public void incluir(Produto produto) throws DAOException, ConexaoException;
  
     public void deletar (Produto produto) throws DAOException, ConexaoException;
     

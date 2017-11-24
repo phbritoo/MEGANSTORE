@@ -26,7 +26,7 @@ import util.GerenciadorConexaoImpl;
 public class DAOProdutoImpl implements DAOProduto{
     
      @Override
-    public void inserir(Produto produto) throws DAOException, ConexaoException {
+    public void incluir(Produto produto) throws DAOException, ConexaoException {
         GerenciadorConexao gc = GerenciadorConexaoImpl.getInstancia();
         Connection c = gc.conectar();
         String sql = "INSERT INTO PRODUTO (PRD_COD, PRD_NOME, PRD_ESTOQUE, PRD_PRECO) VALUES (?,?,?,?)";

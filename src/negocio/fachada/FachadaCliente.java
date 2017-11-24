@@ -21,7 +21,7 @@ public class FachadaCliente {
         RegraCliente rn = new RegraCliente();
         rn.validar(cliente);
         rn.eUnico(cliente);
-        rn.inserir(cliente);
+        rn.incluir(cliente);
         
     }
     
