@@ -44,7 +44,7 @@ public class RegraCliente {
        }
            }
     
-     public void inserir(Cliente cliente) throws ClienteException, ConexaoException, DAOException{
+     public void incluir(Cliente cliente) throws ClienteException, ConexaoException, DAOException{
            
          try{  
                DAO.inserir(cliente); 
