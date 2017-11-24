@@ -19,11 +19,15 @@ import util.GerenciadorConexaoImpl;
  * @author heloi
  */
 public class DAOPagamentoImpl implements DAOPagamento{
+    private final GerenciadorConexao GC;
+    
+    public DAOPagamentoImpl(){
+         GC = GerenciadorConexaoImpl.getInstancia();
+    }
     
     @Override
     public void inserir (Pagamento pagamento)throws ConexaoException, DAOException{
-        GerenciadorConexao gc = GerenciadorConexaoImpl.getInstancia();
-        Connection con = gc.conectar();
+        Connection con = GC.conectar();
         String sql = "INSERT INTO PAGAMENTO (CARD_PARCELAS, CARD_VALOR, CARD_NUM, CARD_VALIDADE, CARD_TITULAR) "
                 + "                VALUES (?,?,?,?,?)";
         try {
@@ -37,7 +41,7 @@ public class DAOPagamentoImpl implements DAOPagamento{
         }catch (SQLException errosql){
             throw new DAOException (errosql.getMessage());
         }finally {
-            gc.desconectar(con);
+            GC.desconectar(con);
         }
     }
     

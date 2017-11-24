@@ -5,9 +5,13 @@
  */
 package negocio.regra;
 
+import dados.DAOPagamento;
+import dados.DAOPagamentoImpl;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import negocio.basica.Pagamento;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
 import negocio.exception.PagamentoException;
 
 /**
@@ -15,6 +19,12 @@ import negocio.exception.PagamentoException;
  * @author paulo
  */
 public class RegraPagamento {
+    //public final DAOPagamento DAO;
+    DAOPagamento dao = new DAOPagamentoImpl();
+    /*public RegraPagamento(){
+        DAO = new DAOPagamentoImpl();
+    }*/
+    
     /**
      * Valida o objeto Pagamento passado
      * @param pagamento. Objeto com todos os dados
@@ -83,9 +93,15 @@ public class RegraPagamento {
     /**
      * Salva os dados no BD
      * @param pagamento. Objeto com os dados a serem salvos
+     * @throws negocio.exception.PagamentoException
+     * @throws negocio.exception.DAOException
      */
-    public void incluir(Pagamento pagamento) {
-        
+    public void incluir(Pagamento pagamento) throws PagamentoException, DAOException {
+        try{
+            dao.inserir(pagamento);
+        }catch (ConexaoException | DAOException ce) {
+            throw new PagamentoException(ce.getMessage());
+        }
     }
     /**
      * Salva os dados no BD

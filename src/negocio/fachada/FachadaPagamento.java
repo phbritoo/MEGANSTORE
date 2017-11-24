@@ -6,6 +6,7 @@
 package negocio.fachada;
 
 import negocio.basica.Pagamento;
+import negocio.exception.DAOException;
 import negocio.exception.PagamentoException;
 import negocio.regra.RegraPagamento;
 
@@ -16,7 +17,7 @@ import negocio.regra.RegraPagamento;
 public class FachadaPagamento {
     RegraPagamento rn = new RegraPagamento();
     
-    public void cadastrar (Pagamento pagamento) throws PagamentoException{
+    public void cadastrar (Pagamento pagamento) throws PagamentoException, DAOException{
         rn.validar(pagamento);
         rn.incluir(pagamento);
                

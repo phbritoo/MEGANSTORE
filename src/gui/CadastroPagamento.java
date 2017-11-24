@@ -7,6 +7,7 @@ package gui;
 
 import javax.swing.JOptionPane;
 import negocio.basica.Pagamento;
+import negocio.exception.DAOException;
 import negocio.exception.PagamentoException;
 import negocio.fachada.FachadaPagamento;
 
@@ -205,7 +206,26 @@ public class CadastroPagamento extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTitularActionPerformed
 
     private void txtParcelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParcelasActionPerformed
-
+         // Capturar os dados:
+        Pagamento pagamento = new Pagamento();
+        pagamento.setCardParcelas( Integer.parseInt(txtParcelas.getText()) );
+        pagamento.setCardValor( Double.parseDouble(txtValor.getText()) );
+        
+        /*Integer parcelas = Integer.parseInt(txtParcelas.getText());
+        Double valorTotal = Double.parseDouble(txtValor.getText());
+        */
+        FachadaPagamento fp = new FachadaPagamento();
+       try {
+            /*txtTitular.setText("");
+            txtNum.setText("");
+            txtValidade.setText("");
+            txtParcelas.setText("");
+            txtValor.setText(""); */
+            Double parcela = fp.cadastrar(pagamento.getCardParcelas(), pagamento.getCardValor());
+            lblValorParcela.setText(String.valueOf(parcela));
+        }catch(PagamentoException ep){
+            JOptionPane.showMessageDialog(this,ep.getMessage());
+        }
     }//GEN-LAST:event_txtParcelasActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -229,34 +249,36 @@ public class CadastroPagamento extends javax.swing.JFrame {
             txtValidade.setText("");
             txtParcelas.setText("");
             txtValor.setText("");
-        }catch(PagamentoException ep){
+            JOptionPane.showMessageDialog(this,"Compra efetuda com sucesso");
+        }catch(PagamentoException | DAOException ep){
             JOptionPane.showMessageDialog(this,ep.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtParcelasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtParcelasMouseExited
-        // Capturar os dados:
+        /* Capturar os dados:
         Pagamento pagamento = new Pagamento();
         pagamento.setCardParcelas( Integer.parseInt(txtParcelas.getText()) );
         pagamento.setCardValor( Double.parseDouble(txtValor.getText()) );
         
-        /*Integer parcelas = Integer.parseInt(txtParcelas.getText());
+        Integer parcelas = Integer.parseInt(txtParcelas.getText());
         Double valorTotal = Double.parseDouble(txtValor.getText());
-        */
+        
         FachadaPagamento fp = new FachadaPagamento();
-        try {
-            /*     txtTitular.setText("");
+       try {
+            txtTitular.setText("");
             txtNum.setText("");
             txtValidade.setText("");
             txtParcelas.setText("");
-            txtValor.setText(""); */
+            txtValor.setText(""); 
             Double parcela = fp.cadastrar(pagamento.getCardParcelas(), pagamento.getCardValor());
             lblValorParcela.setText(String.valueOf(parcela));
         }catch(PagamentoException ep){
             JOptionPane.showMessageDialog(this,ep.getMessage());
         }
+        */
     }//GEN-LAST:event_txtParcelasMouseExited
-
+    
     /**
      * @param args the command line arguments
      */
