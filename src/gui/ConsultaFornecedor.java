@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.basica.Fornecedor;
+import negocio.basica.Fornecedor;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
 import negocio.exception.FornecedorException;
+import negocio.exception.FornecedorException;
+import negocio.fachada.FachadaFornecedor;
 import negocio.fachada.FachadaFornecedor;
 
 /**
@@ -61,6 +64,7 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblFornecedor = new javax.swing.JTable();
         txtCnpj = new javax.swing.JFormattedTextField();
+        btnLimpar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consulta de Fornecedor");
@@ -142,6 +146,13 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,6 +175,8 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
                                 .addComponent(jLabel3)
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -201,7 +214,9 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(jLabel1)
                         .addGap(86, 86, 86)
-                        .addComponent(btnPesquisar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPesquisar)
+                            .addComponent(btnLimpar))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -263,7 +278,38 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
+        try {
+            if (tblFornecedor.getSelectedRow() != -1) {
+                Fornecedor fornecedor = new Fornecedor();
+                FachadaFornecedor f = new FachadaFornecedor();
+                fornecedor.setFornecedorNome(txtNome.getText());
+                fornecedor.setFornecedorTel(txtTelefone.getText());
+                
+                fornecedor.setFornecedorCnpj(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+                f.alterar(fornecedor);
+                readJTable();
+                txtNome.setText("");
+                JOptionPane.showMessageDialog(this, "Alteração realizada com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um fornecedor para alterar");
+                }    
+            } catch (FornecedorException ex) {
+                 JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (ConexaoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (DAOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        
+        
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // Limpar campos de texto
+        txtCnpj.setText("");
+        txtNome.setText("");
+        txtTelefone.setText("");
+    }//GEN-LAST:event_btnLimparActionPerformed
     
     /**
      *
@@ -340,6 +386,7 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterar;
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
