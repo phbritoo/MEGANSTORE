@@ -31,7 +31,7 @@
               <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -45,18 +45,6 @@
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtTelefone" min="-2" pref="120" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtCnpj" min="-2" pref="120" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtNome" min="-2" pref="200" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnCadastrar" alignment="1" min="-2" pref="154" max="-2" attributes="0"/>
@@ -65,6 +53,18 @@
                               <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtNome" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtCnpj" min="-2" pref="125" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtTelefone" min="-2" pref="125" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="116" max="32767" attributes="0"/>

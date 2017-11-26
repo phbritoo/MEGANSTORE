@@ -6,7 +6,6 @@
 package gui;
 
 import java.util.ArrayList;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,9 +30,7 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
         
         FachadaVendedor f = new FachadaVendedor();
         try {
-            ArrayList<Vendedor> listarVendedor; 
-            listarVendedor = f.listarTodos();
-            readJTable(listarVendedor);
+            readJTable();
         }catch (VendedorException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (ConexaoException ex) {
@@ -56,11 +53,11 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
         txtNome = new javax.swing.JTextField();
-        btnRemover = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblVendedor = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Vendedor");
@@ -84,10 +81,10 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
             }
         });
 
-        btnRemover.setText("Excluir");
-        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRemoverActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
@@ -127,10 +124,10 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblVendedor);
 
-        jButton1.setText("Alterar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
 
@@ -148,9 +145,9 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(165, 165, 165))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnAlterar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnExcluir)
                                 .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,8 +160,8 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(210, 210, 210)
+                .addComponent(btnSair)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -181,11 +178,11 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(btnRemover))
-                .addGap(13, 13, 13)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSair)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
@@ -213,6 +210,7 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
                 listarVendedor = f.listarTodos();
             } else {
                 listarVendedor = f.listarPoNome(vendedor.getVendedorNome());
+                txtNome.setText("");
             }
                 readJTable(listarVendedor);
             JOptionPane.showMessageDialog(this, "Pesquisa realizada com sucesso" );
@@ -225,7 +223,7 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
         }       
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
-    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
 
         try {
             if (tblVendedor.getSelectedRow() != -1) {
@@ -247,9 +245,9 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
         } catch (DAOException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-    }//GEN-LAST:event_btnRemoverActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         try {
             if (tblVendedor.getSelectedRow() != -1) {
                 Vendedor vendedor = new Vendedor();
@@ -271,14 +269,14 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
             } catch (DAOException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void tblVendedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblVendedorKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_tblVendedorKeyReleased
 
     private void tblVendedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVendedorMouseClicked
-        // TODO add your handling code here:
+        // Preencher txtNome com o dado selecionado na tabela
         if (tblVendedor.getSelectedRow() != -1) {
             txtNome.setText(tblVendedor.getValueAt(tblVendedor.getSelectedRow(), 1).toString());
         }
@@ -357,10 +355,10 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;

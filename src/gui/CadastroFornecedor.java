@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.basica.Fornecedor;
+import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
 import negocio.exception.FornecedorException;
 import negocio.fachada.FachadaFornecedor;
@@ -94,7 +95,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(88, 88, 88))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel4))
@@ -105,21 +106,21 @@ public class CadastroFornecedor extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(113, 113, 113)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnSair)
-                                .addGap(52, 52, 52)))))
+                                .addGap(52, 52, 52))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtNome))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -156,11 +157,18 @@ public class CadastroFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        // Manter apenas números de 0 a 9:
+        String cnpjConvert = txtCnpj.getText().replaceAll("[^0-9]", "");
+        String telefoneConvert = txtTelefone.getText().replaceAll("[^0-9]", "");
+        if (cnpjConvert.length() != 14){
+           txtCnpj.setText("");
+           JOptionPane.showMessageDialog(this, "CNPJ inválido");
+        }
         // capturar o CNPJ, nome e telefone do novo fornecedorn a ser cadastrado no banco:
         Fornecedor fornecedor = new Fornecedor();
-        fornecedor.setFornecedorCnpj(txtCnpj.getText());
+        fornecedor.setFornecedorCnpj(cnpjConvert);
         fornecedor.setFornecedorNome(txtNome.getText());
-        fornecedor.setFornecedorTel(txtTelefone.getText());
+        fornecedor.setFornecedorTel(telefoneConvert);
         
         FachadaFornecedor f = new FachadaFornecedor();
         
@@ -171,8 +179,11 @@ public class CadastroFornecedor extends javax.swing.JFrame {
             txtTelefone.setText("");
             JOptionPane.showMessageDialog(this, "Fornecedor cadastrado com sucesso");
         } catch (FornecedorException ex) {
+            txtCnpj.setText("");
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
