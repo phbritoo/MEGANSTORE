@@ -18,10 +18,12 @@ import negocio.exception.ProdutoException;
  * @author Gabriel
  */
 public class RegraProduto{
-     private final DAOProduto DAO;
-        public RegraProduto(){
+     
+        private final DAOProduto DAO;
+        
+    public RegraProduto(){
         DAO = new DAOProdutoImpl();
-        }
+    }
     
     public void validar(Produto produto) throws ProdutoException{
         

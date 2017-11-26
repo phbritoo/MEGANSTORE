@@ -51,13 +51,13 @@ public class DAOClienteImpl implements DAOCliente {
     
 
     @Override
-    public Cliente consultar(String nome) throws DAOException, ConexaoException {
+    public Cliente consultar(String clienteNome) throws DAOException, ConexaoException {
          Cliente cliente = null;
-        GerenciadorConexao ger = GerenciadorConexaoImpl.getInstancia();
+        Connection c = gc.conectar();
         String sql = "SELECT CLI_NOME, CLI_CPF FROM Cliente, CLI_TEL WHERE nome=1";
         try{
-        PreparedStatement pstm = ger.conectar().prepareStatement(sql);
-        pstm.setString(1, nome);
+        PreparedStatement pstm = gc.conectar().prepareStatement(sql);
+        pstm.setString(1, clienteNome);
         ResultSet rs = pstm.executeQuery();
         if(rs.next()){
           cliente = new Cliente();

@@ -173,9 +173,9 @@ public class DAOProdutoImpl implements DAOProduto{
             ResultSet rs = pstm.executeQuery(sql);
             while(rs.next()){
                 produto = new Produto();
-                produto.setProdutoNome(rs.getString("PRD_NOME"));
                 produto.setProdutoCodigo(rs.getInt("PRD_COD"));
-                produto.setProdutoPreco(rs.getInt("PRD_ESTOQUEATUAL"));
+                produto.setProdutoNome(rs.getString("PRD_NOME"));               
+                produto.setProdutoPreco(rs.getInt("PRD_ESTOQUE"));
                 produto.setProdutoPreco(rs.getDouble("PRD_PRECO"));
                 lista.add(produto);
             }

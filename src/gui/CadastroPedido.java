@@ -31,7 +31,6 @@ public class CadastroPedido extends javax.swing.JFrame {
      public CadastroPedido() {
         initComponents();
        
-    
     }
 
     /**
@@ -308,15 +307,15 @@ public class CadastroPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         FachadaProduto fp = new FachadaProduto();
         try {
-            for(Produto p: fp.listarTodos()){
-                boxProduto.addItem(p);
-            }   
+        for(Produto p: fp.listarTodos()){
+        boxProduto.addItem(p);
+        }
         } catch (ProdutoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (DAOException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
+        JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }//GEN-LAST:event_btnSelectProdutoActionPerformed
 
