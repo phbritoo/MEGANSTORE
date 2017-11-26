@@ -7,11 +7,11 @@ package negocio.regra;
 
 import dados.DAOCliente;
 import dados.DAOClienteImpl;
+import java.util.ArrayList;
 import negocio.basica.Cliente;
 import negocio.exception.DAOException;
 import negocio.exception.ClienteException;
 import negocio.exception.ConexaoException;
-
 /**
  *
  * @author William
@@ -54,6 +54,33 @@ public class RegraCliente {
                 throw new ClienteException("Erro no SQL");
            }
            
+    }
+     
+      /**
+     * Lista todos os vendedores cadastrados 
+     * @return 
+     * @throws negocio.exception.ClienteException
+     * @throws negocio.exception.ConexaoException
+     * @throws negocio.exception.DAOException
+     */
+    public ArrayList<Cliente> listarTodos() throws ClienteException, ConexaoException, DAOException {
+        try {
+            return DAO.listarTodos();
+        }catch(ConexaoException ex){
+            throw new ClienteException("Erro no BD");
+        }catch (DAOException ex) {
+            throw new ClienteException("Erro no SQL");
+        }
+    }
+    
+    public ArrayList<Cliente> listarPorNome(String clienteNome) throws ClienteException, ConexaoException, DAOException {
+        try {
+            return DAO.listarPorNome(clienteNome);
+        }catch(ConexaoException ex){
+            throw new ClienteException("Erro no BD");
+        }catch (DAOException ex) {
+            throw new ClienteException(ex.getMessage());
+        }
     }
     
 }

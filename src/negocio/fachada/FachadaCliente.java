@@ -5,6 +5,7 @@
  */
 package negocio.fachada;
 
+import java.util.ArrayList;
 import negocio.basica.Cliente;
 import negocio.exception.ClienteException;
 import negocio.exception.ConexaoException;
@@ -25,4 +26,20 @@ public class FachadaCliente {
         
     }
     
+     /**
+     * Pesquisa um ou mais vendedor através do nome
+     * @return lista com todos os vendedores cadastrados
+     * @throws negocio.exception.ClienteException
+     * @throws negocio.exception.ConexaoException
+     * @throws negocio.exception.DAOException
+     */
+    public ArrayList<Cliente> listarTodos () throws ClienteException, ConexaoException, DAOException{
+        RegraCliente rc = new RegraCliente();
+        return rc.listarTodos();
+    }
+    
+    public ArrayList<Cliente> listarPorNome (String clienteNome) throws ClienteException, ConexaoException, DAOException{
+        RegraCliente rc = new RegraCliente();
+        return rc.listarPorNome(clienteNome);
+        }
 }

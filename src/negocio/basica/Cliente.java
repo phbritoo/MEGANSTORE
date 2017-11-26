@@ -4,15 +4,15 @@ package negocio.basica;
 
 public class Cliente {
 
-    private Integer clienteCpf;
+    private String clienteCpf;
     private String clienteTel;
     private String clienteNome;
 
-    public Integer getClienteCpf() {
+    public String getClienteCpf() {
         return clienteCpf;
     }
 
-    public void setClienteCpf(Integer cpf) {
+    public void setClienteCpf(String cpf) {
         this.clienteCpf = cpf;
     }
 
@@ -30,6 +30,11 @@ public class Cliente {
 
     public void setClienteNome(String nome) {
         this.clienteNome = nome;
+    }
+    
+    @Override
+    public String toString(){
+        return getClienteNome();
     }
 
 }    

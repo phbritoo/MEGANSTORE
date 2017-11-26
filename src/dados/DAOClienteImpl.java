@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import negocio.basica.Cliente;
@@ -33,10 +35,12 @@ public class DAOClienteImpl implements DAOCliente {
 
     public void inserir(Cliente cliente) throws DAOException, ConexaoException {
             Connection c = gc.conectar();
-            String sql = "INSERT INTO CLIENTE (CLI_NOME) VALUES (?)";
+            String sql = "INSERT INTO CLIENTE (CLI_CPF, CLI_TEL, CLI_NOME) VALUES (?,?,?)";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
-            pstm.setString(1, cliente.getClienteNome());
+            pstm.setString(1, cliente.getClienteCpf());
+            pstm.setString(2, cliente.getClienteTel());
+            pstm.setString(3, cliente.getClienteNome());
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException(e);
@@ -58,7 +62,7 @@ public class DAOClienteImpl implements DAOCliente {
         if(rs.next()){
           cliente = new Cliente();
           cliente.setClienteNome(rs.getString("nome") );
-          cliente.setClienteCpf(rs.getInt("cpf"));
+          cliente.setClienteCpf(rs.getString("cpf"));
           cliente.setClienteTel(rs.getString("tel"));
         }
     }catch(SQLException e){
@@ -75,7 +79,7 @@ public class DAOClienteImpl implements DAOCliente {
         String sql = "DELETE FROM CLIENTE WHERE CLI_CPF=?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
-            pstm.setInt(1, cliente.getClienteCpf());
+            pstm.setString(1, cliente.getClienteCpf());
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException(e);
@@ -92,8 +96,58 @@ public class DAOClienteImpl implements DAOCliente {
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setString(1, cliente.getClienteNome());
-            pstm.setInt(2, cliente.getClienteCpf());
+            pstm.setString(2, cliente.getClienteCpf());
             pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            gc.desconectar(c);
+            }
+        }
+    
+    @Override
+    public ArrayList<Cliente> listarPorNome(String vendedorNome) throws DAOException, ConexaoException {
+        Connection c = gc.conectar();
+        ArrayList<Cliente> lista = new ArrayList();
+        Cliente cliente;
+        try{
+            PreparedStatement pstm = c.prepareStatement("SELECT * FROM CLIENTE WHERE Vend_Nome LIKE ?");
+            pstm.setString(1, "%"+ vendedorNome +"%");
+            ResultSet rs = pstm.executeQuery();
+            while(rs.next()){
+                cliente = new Cliente();
+                cliente.setClienteNome(rs.getString("Cli_Nome"));
+                lista.add(cliente);
+            }
+            if (lista.isEmpty()){
+                throw new DAOException("Não existem dados para a pesquisa");
+            }else {
+                return lista;
+            }
+        }catch(SQLException e){
+            throw new DAOException(e);
+        }finally{
+            gc.desconectar(c);
+        }
+    }
+    
+     @Override
+    public ArrayList<Cliente>listarTodos() throws DAOException, ConexaoException{
+        Connection c = gc.conectar();
+        String sql = "SELECT * FROM CLIENTE";
+        ArrayList<Cliente> lista = new ArrayList();
+        Cliente cliente;
+        try{
+            Statement pstm = c.createStatement();
+            ResultSet rs = pstm.executeQuery(sql);
+            while(rs.next()){
+                cliente = new Cliente();
+                cliente.setClienteNome(rs.getString("Cli_Nome"));
+                cliente.setClienteCpf(rs.getString("Cli_Cpf"));
+                cliente.setClienteTel(rs.getString("Cli_Tel"));
+                lista.add(cliente);
+            }
+            return lista;
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{

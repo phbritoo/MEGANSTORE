@@ -133,6 +133,7 @@ public class CadastroCliente extends javax.swing.JFrame {
          Cliente cliente = new Cliente();
         cliente.setClienteNome(txtNome.getText());
         cliente.setClienteTel(txtTel.getText());
+        cliente.setClienteCpf(txtCpf.getText());
        
     
         FachadaCliente f = new FachadaCliente();
