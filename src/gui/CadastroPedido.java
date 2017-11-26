@@ -277,7 +277,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         FachadaCliente fc = new FachadaCliente();
         try {
             for(Cliente c: fc.listarTodos()){
-                boxCliente.addItem(fc);
+                boxCliente.addItem(c);
             }   
         } catch (ClienteException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
