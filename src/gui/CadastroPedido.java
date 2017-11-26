@@ -65,7 +65,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnFinalizar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,10 +121,10 @@ public class CadastroPedido extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("jLabel8");
 
-        jButton2.setText("Finalizar Pedido");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizar.setText("Finalizar Pedido");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnFinalizarActionPerformed(evt);
             }
         });
 
@@ -177,7 +177,7 @@ public class CadastroPedido extends javax.swing.JFrame {
                                 .addGap(83, 83, 83)
                                 .addComponent(jButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)
+                                .addComponent(btnFinalizar)
                                 .addGap(100, 100, 100)))
                         .addContainerGap(19, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -218,7 +218,7 @@ public class CadastroPedido extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(btnFinalizar))
                 .addGap(20, 20, 20))
         );
 
@@ -229,9 +229,11 @@ public class CadastroPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        CadastroPagamento cp = new CadastroPagamento();
+        cp.setVisible(true);
+    }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -284,8 +286,8 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> boxCliente;
     private javax.swing.JComboBox<String> boxProduto;
     private javax.swing.JComboBox<Object> boxVendedor;
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
