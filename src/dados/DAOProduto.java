@@ -5,6 +5,7 @@
  */
 package dados;
 
+import java.util.ArrayList;
 import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -30,6 +31,10 @@ public interface DAOProduto {
    
     public Produto consultar(Integer  codigo) throws DAOException, ConexaoException;
     
+    public Produto consultar(String nome) throws DAOException, ConexaoException;
     
+    public ArrayList<Produto>listarTodos() throws DAOException, ConexaoException;
+    
+    public ArrayList<Produto> listarPorNome(String produtoNome) throws DAOException, ConexaoException;
     
 }

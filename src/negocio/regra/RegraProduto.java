@@ -7,6 +7,7 @@ package negocio.regra;
 
 import dados.DAOProduto;
 import dados.DAOProdutoImpl;
+import java.util.ArrayList;
 import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -17,6 +18,10 @@ import negocio.exception.ProdutoException;
  * @author Gabriel
  */
 public class RegraProduto{
+     private final DAOProduto DAO;
+        public RegraProduto(){
+        DAO = new DAOProdutoImpl();
+        }
     
     public void validar(Produto produto) throws ProdutoException{
         
@@ -54,5 +59,25 @@ public class RegraProduto{
            }
     
      public void incluir(Produto produto) {
+    }
+     
+    public ArrayList<Produto> listarTodos() throws ProdutoException, ConexaoException, DAOException {
+        try {
+            return DAO.listarTodos();
+        }catch(ConexaoException ex){
+            throw new ProdutoException("Erro no BD");
+        }catch (DAOException ex) {
+            throw new ProdutoException("Erro no SQL");
+        }
+    }
+    
+    public ArrayList<Produto> listarPorNome(String produtoNome) throws ProdutoException, ConexaoException, DAOException {
+        try {
+            return DAO.listarPorNome(produtoNome);
+        }catch(ConexaoException ex){
+            throw new ProdutoException("Erro no BD");
+        }catch (DAOException ex) {
+            throw new ProdutoException(ex.getMessage());
+        }
     }
 }               

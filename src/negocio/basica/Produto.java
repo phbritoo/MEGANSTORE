@@ -71,7 +71,10 @@ public class Produto {
         this.produtoPreco = produtoPreco;
     }
 
-
+@Override
+    public String toString(){
+        return getProdutoNome();
+    }
 
 
 }

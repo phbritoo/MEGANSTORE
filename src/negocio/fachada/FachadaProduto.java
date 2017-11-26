@@ -5,6 +5,7 @@
  */
 package negocio.fachada;
 
+import java.util.ArrayList;
 import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -23,4 +24,14 @@ public class FachadaProduto {
         rn.eUnico(produto);
         rn.incluir(produto);
     }           
+
+    public ArrayList<Produto> listarTodos () throws ProdutoException, ConexaoException, DAOException{
+        RegraProduto rp = new RegraProduto();
+        return rp.listarTodos();
+    }
+    
+    public ArrayList<Produto> listarPorNome (String produtoNome) throws ProdutoException, ConexaoException, DAOException{
+        RegraProduto rp = new RegraProduto();
+        return rp.listarPorNome(produtoNome);
+        }
 }
