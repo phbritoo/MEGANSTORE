@@ -232,8 +232,7 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
                 vendedor.setVendedorCodigo((int) tblVendedor.getValueAt(tblVendedor.getSelectedRow(), 0));
                 f.excluir(vendedor);
                 readJTable();
-                //JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso");
-               JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso");
+                JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso");
                 txtNome.setText("");
             } else {
                 JOptionPane.showMessageDialog(null, "Selecione um vendedor para excluir");

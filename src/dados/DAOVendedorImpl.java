@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import negocio.basica.Vendedor;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
-import negocio.exception.VendedorException;
 import util.GerenciadorConexao;
 import util.GerenciadorConexaoImpl;
 
@@ -97,7 +96,6 @@ public class DAOVendedorImpl implements DAOVendedor{
     @Override
     public ArrayList<Vendedor> listar(String vendedorNome) throws DAOException, ConexaoException {
         Connection c = gc.conectar();
-        //String sql = "SELECT * FROM vendedor WHERE Vend_Nome LIKE ?";
         ArrayList<Vendedor> lista = new ArrayList();
         Vendedor vendedor;
         try{
