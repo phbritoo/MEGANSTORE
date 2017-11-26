@@ -125,7 +125,7 @@ public class CadastroVendedor extends javax.swing.JFrame {
         try {
             f.cadastrar(vendedor);
             txtNome.setText("");
-            JOptionPane.showMessageDialog(this, "Vendedor Cadastrado com Sucesso!" );
+            JOptionPane.showMessageDialog(this, "Vendedor cadastrado com sucesso" );
         } catch (VendedorException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (ConexaoException ex) {
