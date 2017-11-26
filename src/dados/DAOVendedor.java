@@ -22,11 +22,11 @@ public interface DAOVendedor {
      * @throws negocio.exception.DAOException
      * @throws negocio.exception.ConexaoException
      */
-    public void inserir(Vendedor vendedor) throws DAOException, ConexaoException;
+    public void incluir(Vendedor vendedor) throws DAOException, ConexaoException;
     
     /**
      * Busca no BD um registro correspondente ao nome passado
-     * @param vendedorNome
+     * @param vendedorNome Objeto com o nome a ser pesquisado
      * @return o código do vendedor
      * @throws negocio.exception.DAOException
      * @throws negocio.exception.ConexaoException
@@ -35,7 +35,7 @@ public interface DAOVendedor {
     
     /**
     * Altera no BD um registro o nome do vendedor selecionado
-     * @param vendedor
+     * @param vendedor Objeto contendo ID e nome a ser alterado
     * @throws DAOException
     * @throws ConexaoException 
     */
@@ -43,7 +43,7 @@ public interface DAOVendedor {
     
     /**
      * Exclui no BD o vendedor selecionado
-     * @param vendedor
+     * @param vendedor Objeto contendo ID a ser excluído
      * @throws DAOException
      * @throws ConexaoException 
      */
@@ -51,16 +51,16 @@ public interface DAOVendedor {
     
     /**
      * Lista um ou mais vendedores atráves do nome
-     * @param vendedorNome
-     * @return 
+     * @param vendedorNome nome ou parte do nome a ser pesquisado
+     * @return ArrayList contendo um ou mais vendedores
      * @throws negocio.exception.DAOException
      * @throws negocio.exception.ConexaoException
      */
-    public ArrayList<Vendedor>listar(String vendedorNome) throws DAOException, ConexaoException;          
+    public ArrayList<Vendedor>listarPorNome(String vendedorNome) throws DAOException, ConexaoException;          
     
     /**
      * Lista todos os vendedores cadastrados
-     * @return
+     * @return ArrayList com todos os vendedores cadastrados
      * @throws DAOException
      * @throws ConexaoException
      */

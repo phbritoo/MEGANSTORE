@@ -37,6 +37,7 @@ public class RegraVendedor {
             throw new VendedorException("Nome inválido!");
         }
     }
+    
     /**
      * Verifica se o nome já existe no banco de dados
      * @param vendedor Objeto contentdo o nome a ser pesquisado
@@ -49,39 +50,38 @@ public class RegraVendedor {
         }catch (ConexaoException ex){
             throw new VendedorException("Erro no BD");
         } catch (DAOException ex){
-            throw new VendedorException("Erro no SQL");
+            throw new VendedorException("Erro de Aplicação(SQL)");
         }
     }
 
     /**
      * Inclui novo vendedor no BD
-     * @param vendedor
+     * @param vendedor Objeto com nome a ser incluido
      * @throws VendedorException
      * @throws ConexaoException
      * @throws DAOException
      */
     public void incluir(Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
         try{  
-            DAO.inserir(vendedor); 
+            DAO.incluir(vendedor); 
         } catch (ConexaoException ex){
             throw new VendedorException("Erro no BD");
         } catch (DAOException ex){
             throw new VendedorException("Erro no SQL");
         }
-           
     }
     
     /**
      * Lista um ou mais vendedor através de um nome
-     * @param vendedorNome
-     * @return 
+     * @param vendedorNome nome ou parte do nome a ser listado
+     * @return ArrayList com um ou mais vendedores
      * @throws negocio.exception.VendedorException
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException
      */
-    public ArrayList<Vendedor> listar(String vendedorNome) throws VendedorException, ConexaoException, DAOException {
+    public ArrayList<Vendedor> listarPorNome(String vendedorNome) throws VendedorException, ConexaoException, DAOException {
         try {
-            return DAO.listar(vendedorNome);
+            return DAO.listarPorNome(vendedorNome);
         }catch(ConexaoException ex){
             throw new VendedorException("Erro no BD");
         }catch (DAOException ex) {
@@ -105,9 +105,10 @@ public class RegraVendedor {
             throw new VendedorException("Erro no SQL");
         }
     }
+    
     /**
      * Exclui vendedor selecionado
-     * @param vendedor
+     * @param vendedor Objeto com ID do vendedor a ser excluído
      * @throws negocio.exception.VendedorException
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException
@@ -120,11 +121,11 @@ public class RegraVendedor {
         } catch (DAOException ex){
             throw new VendedorException("Erro no SQL");
         }
-    
     }
+    
     /**
      * Altera nome do vendedor selecionado
-     * @param vendedor
+     * @param vendedor Objeto com ID e nome do vendedor a sere alterado
      * @throws negocio.exception.VendedorException
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException
@@ -138,4 +139,5 @@ public class RegraVendedor {
             throw new VendedorException("Erro no SQL");
         }
     }
+    
 }

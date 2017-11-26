@@ -20,7 +20,7 @@ public class FachadaVendedor {
     
     /**
      * Faz as validações e grava um novo vendedor no BD
-     * @param vendedor
+     * @param vendedor a ser cadastrado
      * @throws VendedorException 
      * @throws negocio.exception.ConexaoException 
      * @throws negocio.exception.DAOException 
@@ -31,9 +31,10 @@ public class FachadaVendedor {
         rn.eUnico(vendedor);
         rn.incluir(vendedor);
     }
+    
     /**
      * Altera o nome do vendedor no BD
-     * @param vendedor
+     * @param vendedor a ser alterado
      * @throws VendedorException 
      * @throws negocio.exception.ConexaoException 
      * @throws negocio.exception.DAOException 
@@ -42,9 +43,10 @@ public class FachadaVendedor {
         RegraVendedor rn = new RegraVendedor() ;
         rn.alterar(vendedor);
     }
+    
     /**
      * Exclui vendedor do BD
-     * @param vendedor
+     * @param vendedor a ser excluído
      * @throws VendedorException 
      * @throws negocio.exception.ConexaoException 
      * @throws negocio.exception.DAOException 
@@ -56,7 +58,7 @@ public class FachadaVendedor {
     
     /**
      * Pesquisa um ou mais vendedor através do nome
-     * @param vendedorNome
+     * @param vendedorNome primeiro nome ou parte do nome a ser pesquisado
      * @return lista de vendedor de acordo com a entrada
      * @throws VendedorException
      * @throws negocio.exception.ConexaoException
@@ -64,8 +66,9 @@ public class FachadaVendedor {
      */
     public ArrayList<Vendedor> listarPoNome (String vendedorNome) throws VendedorException, ConexaoException, DAOException{
         RegraVendedor rn = new RegraVendedor();
-        return rn.listar(vendedorNome);
+        return rn.listarPorNome(vendedorNome);
     }
+    
     /**
      * Pesquisa um ou mais vendedor através do nome
      * @return lista com todos os vendedores cadastrados

@@ -18,15 +18,15 @@ import util.GerenciadorConexaoImpl;
  * @author Gildo
  */
 public class DAOVendedorImpl implements DAOVendedor{
-    private final GerenciadorConexao gc;
+    private final GerenciadorConexao GC;
     
     public DAOVendedorImpl(){
-       gc = GerenciadorConexaoImpl.getInstancia();
+       GC = GerenciadorConexaoImpl.getInstancia();
     }
     
     @Override
-    public void inserir(Vendedor vendedor) throws DAOException, ConexaoException{
-        Connection c = gc.conectar();
+    public void incluir(Vendedor vendedor) throws DAOException, ConexaoException{
+        Connection c = GC.conectar();
         String sql = "INSERT INTO VENDEDOR (VEND_NOME) VALUES (?)";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
@@ -35,14 +35,14 @@ public class DAOVendedorImpl implements DAOVendedor{
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         } 
     }
     
     @Override
     public void alterar(Vendedor vendedor) throws DAOException, ConexaoException{
-        Connection c = gc.conectar();
-        String sql = "UPDATE VENDEDOR SET VEND_NOME=? WHERE VEND_COD=?";
+        Connection c = GC.conectar();
+        String sql = "UPDATE VENDEDOR SET VEND_NOME = ? WHERE VEND_COD = ?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setString(1, vendedor.getVendedorNome());
@@ -51,14 +51,14 @@ public class DAOVendedorImpl implements DAOVendedor{
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         } 
     }
     
       @Override
     public void excluir(Vendedor vendedor) throws DAOException, ConexaoException{
-        Connection c = gc.conectar();
-        String sql = "DELETE FROM VENDEDOR WHERE VEND_COD=?";
+        Connection c = GC.conectar();
+        String sql = "DELETE FROM VENDEDOR WHERE VEND_COD = ?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setInt(1, vendedor.getVendedorCodigo());
@@ -66,36 +66,35 @@ public class DAOVendedorImpl implements DAOVendedor{
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         } 
     }
 
     @Override
     public Vendedor consultar(String vendedorNome) throws DAOException, ConexaoException{
-        Connection c = gc.conectar();
-        String sql = "SELECT Vend_Nome, Vend_Cod FROM Vendedor WHERE Vend_Nome=?";
+        Connection c = GC.conectar();
+        String sql = "SELECT VEND_NOME, VEND_COD FROM VENDEDOR WHERE VEND_NOME = ?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setString(1, vendedorNome);
             ResultSet rs = pstm.executeQuery();
             if(rs.next()){
                 Vendedor vendedor = new Vendedor();
-                vendedor.setVendedorNome(rs.getString("Vend_Nome") );
-                vendedor.setVendedorCodigo(rs.getInt("Vend_Cod"));
+                vendedor.setVendedorNome(rs.getString("VEND_NOME") );
+                vendedor.setVendedorCodigo(rs.getInt("VEND_COD"));
                 return vendedor;
-        }
-        return null;
-    }catch(SQLException e){
-         throw new DAOException(e.getMessage());
-    }finally{
-          gc.desconectar(c);
-        }
-          
+            }
+            return null;
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }finally{
+            GC.desconectar(c);
+        }   
     }
     
     @Override
-    public ArrayList<Vendedor> listar(String vendedorNome) throws DAOException, ConexaoException {
-        Connection c = gc.conectar();
+    public ArrayList<Vendedor> listarPorNome(String vendedorNome) throws DAOException, ConexaoException {
+        Connection c = GC.conectar();
         ArrayList<Vendedor> lista = new ArrayList();
         Vendedor vendedor;
         try{
@@ -116,14 +115,14 @@ public class DAOVendedorImpl implements DAOVendedor{
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         }
     }
     
     @Override
     public ArrayList<Vendedor>listarTodos() throws DAOException, ConexaoException{
-        Connection c = gc.conectar();
-        String sql = "SELECT Vend_Cod, Vend_Nome FROM vendedor";
+        Connection c = GC.conectar();
+        String sql = "SELECT * FROM VENDEDOR";
         ArrayList<Vendedor> lista = new ArrayList();
         Vendedor vendedor;
         try{
@@ -139,7 +138,7 @@ public class DAOVendedorImpl implements DAOVendedor{
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         }
     }
     
