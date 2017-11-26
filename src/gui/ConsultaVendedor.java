@@ -5,18 +5,42 @@
  */
 package gui;
 
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import negocio.basica.Vendedor;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
+import negocio.exception.VendedorException;
+import negocio.fachada.FachadaVendedor;
+
 /**
  *
  * @author Djalma
  */
-public class ConsultaVendedor extends javax.swing.JFrame {
+public final class ConsultaVendedor extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConsultaVendedor
+     * iniciar a tela com todos os vendedores listados
      */
     public ConsultaVendedor() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        FachadaVendedor f = new FachadaVendedor();
+        try {
+            ArrayList<Vendedor> listarVendedor; 
+            listarVendedor = f.listarTodos();
+            readJTable(listarVendedor);
+        }catch (VendedorException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
 
     /**
@@ -31,39 +55,41 @@ public class ConsultaVendedor extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnPesquisar = new javax.swing.JButton();
-        lblNome = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listVendedor = new javax.swing.JList();
+        txtNome = new javax.swing.JTextField();
         btnRemover = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblVendedor = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Consultar Vendedor");
         setResizable(false);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel1.setText("Consulta Vendedor");
 
         jLabel2.setText("Nome:");
 
-        btnPesquisar.setText("PESQUISAR");
-
-        lblNome.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblNomeActionPerformed(evt);
+                btnPesquisarActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Lista Vendedor:");
-
-        listVendedor.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(listVendedor);
 
-        btnRemover.setText("REMOVER");
+        btnRemover.setText("Excluir");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -72,56 +98,91 @@ public class ConsultaVendedor extends javax.swing.JFrame {
             }
         });
 
+        tblVendedor.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Código", "Nome"
+            }
+        ));
+        tblVendedor.setPreferredSize(new java.awt.Dimension(150, 96));
+        tblVendedor.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblVendedorMouseClicked(evt);
+            }
+        });
+        tblVendedor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tblVendedorKeyReleased(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblVendedor);
+
+        jButton1.setText("Alterar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 158, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(165, 165, 165))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblNome))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(jLabel1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(37, 37, 37))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(btnPesquisar))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPesquisar)
-                    .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnRemover)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnSair)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(btnRemover))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSair)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,10 +194,130 @@ public class ConsultaVendedor extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
-    private void lblNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblNomeActionPerformed
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lblNomeActionPerformed
+    }//GEN-LAST:event_txtNomeActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // Capturar os dados:
+        Vendedor vendedor = new Vendedor();
+        vendedor.setVendedorNome(txtNome.getText());
+        
+        FachadaVendedor f = new FachadaVendedor();
+        try {
+            ArrayList<Vendedor> listarVendedor;
+            if (vendedor.getVendedorNome().isEmpty()){
+                listarVendedor = f.listarTodos();
+            } else {
+                listarVendedor = f.listarPoNome(vendedor.getVendedorNome());
+            }
+                readJTable(listarVendedor);
+            JOptionPane.showMessageDialog(this, "Pesquisa realizada com sucesso" );
+        }catch (VendedorException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }       
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+
+        try {
+            if (tblVendedor.getSelectedRow() != -1) {
+                Vendedor vendedor = new Vendedor();
+                FachadaVendedor f = new FachadaVendedor();
+                
+                vendedor.setVendedorCodigo((int) tblVendedor.getValueAt(tblVendedor.getSelectedRow(), 0));
+                f.excluir(vendedor);
+                readJTable();
+                //JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso");
+               JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso");
+                txtNome.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um vendedor para excluir");
+            }
+        }catch (VendedorException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            if (tblVendedor.getSelectedRow() != -1) {
+                Vendedor vendedor = new Vendedor();
+                FachadaVendedor f = new FachadaVendedor();
+                vendedor.setVendedorNome(txtNome.getText());
+                
+                vendedor.setVendedorCodigo((int) tblVendedor.getValueAt(tblVendedor.getSelectedRow(), 0));
+                f.alterar(vendedor);
+                readJTable();
+                txtNome.setText("");
+                JOptionPane.showMessageDialog(this, "Alteração realizada com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um vendedor para alterar");
+                }    
+            } catch (VendedorException ex) {
+                 JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (ConexaoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (DAOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblVendedorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tblVendedorKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblVendedorKeyReleased
+
+    private void tblVendedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVendedorMouseClicked
+        // TODO add your handling code here:
+        if (tblVendedor.getSelectedRow() != -1) {
+            txtNome.setText(tblVendedor.getValueAt(tblVendedor.getSelectedRow(), 1).toString());
+        }
+        
+    }//GEN-LAST:event_tblVendedorMouseClicked
+
+    /**
+     *
+     * @param listaVendedor
+     */
+    public void readJTable(ArrayList<Vendedor> listaVendedor) {
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblVendedor.getModel();
+        modelo.setNumRows(0);
+        
+        for (Vendedor vendedor : listaVendedor) {
+
+            modelo.addRow(new Object[]{
+                vendedor.getVendedorCodigo(),
+                vendedor.getVendedorNome()
+            });
+        }
+    }
+    
+    public void readJTable() throws VendedorException, ConexaoException, DAOException {
+        DefaultTableModel modelo = (DefaultTableModel) tblVendedor.getModel();
+        modelo.setNumRows(0);
+        
+        FachadaVendedor f = new FachadaVendedor();
+        
+        ArrayList<Vendedor> listaVendedor;
+            listaVendedor = f.listarTodos();
+        for (Vendedor vendedor : listaVendedor) {
+
+            modelo.addRow(new Object[]{
+                vendedor.getVendedorCodigo(),
+                vendedor.getVendedorNome()
+            });
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -172,15 +353,16 @@ public class ConsultaVendedor extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSair;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField lblNome;
-    private javax.swing.JList listVendedor;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tblVendedor;
+    private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
 }

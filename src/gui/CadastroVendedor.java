@@ -123,14 +123,15 @@ public class CadastroVendedor extends javax.swing.JFrame {
         FachadaVendedor f = new FachadaVendedor();
         
         try {
-            f.cadastrarVendedor(vendedor);
+            f.cadastrar(vendedor);
+            txtNome.setText("");
             JOptionPane.showMessageDialog(this, "Vendedor Cadastrado com Sucesso!" );
         } catch (VendedorException ex) {
-            JOptionPane.showMessageDialog(this, "Erro Regra" + ex.getMessage());
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (ConexaoException ex) {
-            JOptionPane.showMessageDialog(this, "ERRO Conexão! " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (DAOException ex) {
-            JOptionPane.showMessageDialog(this, "ERRO DAO! " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed

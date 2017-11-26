@@ -5,6 +5,7 @@
  */
 package negocio.fachada;
 
+import java.util.ArrayList;
 import negocio.basica.Vendedor;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -24,11 +25,56 @@ public class FachadaVendedor {
      * @throws negocio.exception.ConexaoException 
      * @throws negocio.exception.DAOException 
      */
-    public void cadastrarVendedor (Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
+    public void cadastrar (Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
         RegraVendedor rn = new RegraVendedor() ;
         rn.validar(vendedor);
         rn.eUnico(vendedor);
         rn.incluir(vendedor);
     }
+    /**
+     * Altera o nome do vendedor no BD
+     * @param vendedor
+     * @throws VendedorException 
+     * @throws negocio.exception.ConexaoException 
+     * @throws negocio.exception.DAOException 
+     */
+    public void alterar (Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
+        RegraVendedor rn = new RegraVendedor() ;
+        rn.alterar(vendedor);
+    }
+    /**
+     * Exclui vendedor do BD
+     * @param vendedor
+     * @throws VendedorException 
+     * @throws negocio.exception.ConexaoException 
+     * @throws negocio.exception.DAOException 
+     */
+    public void excluir (Vendedor vendedor) throws VendedorException, ConexaoException, DAOException{
+        RegraVendedor rn = new RegraVendedor() ;
+        rn.excluir(vendedor);
+    }
     
+    /**
+     * Pesquisa um ou mais vendedor através do nome
+     * @param vendedorNome
+     * @return lista de vendedor de acordo com a entrada
+     * @throws VendedorException
+     * @throws negocio.exception.ConexaoException
+     * @throws negocio.exception.DAOException
+     */
+    public ArrayList<Vendedor> listarPoNome (String vendedorNome) throws VendedorException, ConexaoException, DAOException{
+        RegraVendedor rn = new RegraVendedor();
+        return rn.listar(vendedorNome);
+    }
+    /**
+     * Pesquisa um ou mais vendedor através do nome
+     * @return lista com todos os vendedores cadastrados
+     * @throws VendedorException
+     * @throws negocio.exception.ConexaoException
+     * @throws negocio.exception.DAOException
+     */
+    public ArrayList<Vendedor> listarTodos () throws VendedorException, ConexaoException, DAOException{
+        RegraVendedor rn = new RegraVendedor();
+        return rn.listarTodos();
+    }
 }

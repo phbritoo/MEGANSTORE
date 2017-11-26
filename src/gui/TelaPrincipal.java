@@ -5,6 +5,9 @@
  */
 package gui;
 
+import java.util.ArrayList;
+import negocio.basica.Vendedor;
+
 /**
  *
  * @author aluno
@@ -278,4 +281,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menu_vendas;
     private javax.swing.JMenuItem menu_vendasEmitirPed;
     // End of variables declaration//GEN-END:variables
+
+    private void readJTableVendedor(ArrayList<Vendedor> listaVendedor) {
+    }
 }

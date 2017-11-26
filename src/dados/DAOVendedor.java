@@ -5,6 +5,7 @@
  */
 package dados;
 
+import java.util.ArrayList;
 import negocio.basica.Vendedor;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -32,21 +33,37 @@ public interface DAOVendedor {
      */
     public Vendedor consultar(String vendedorNome) throws DAOException, ConexaoException;
     
-/**
- * Altera no BD um registro de nome de vendedor
+    /**
+    * Altera no BD um registro o nome do vendedor selecionado
      * @param vendedor
- * @throws DAOException
- * @throws ConexaoException 
- */
+    * @throws DAOException
+    * @throws ConexaoException 
+    */
     public void alterar(Vendedor vendedor) throws DAOException, ConexaoException;
     
-    
     /**
-     * Exclui no BD um registro de nome de vendedor
+     * Exclui no BD o vendedor selecionado
      * @param vendedor
      * @throws DAOException
      * @throws ConexaoException 
      */
     public void excluir(Vendedor vendedor) throws DAOException, ConexaoException;
+    
+    /**
+     * Lista um ou mais vendedores atráves do nome
+     * @param vendedorNome
+     * @return 
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */
+    public ArrayList<Vendedor>listar(String vendedorNome) throws DAOException, ConexaoException;          
+    
+    /**
+     * Lista todos os vendedores cadastrados
+     * @return
+     * @throws DAOException
+     * @throws ConexaoException
+     */
+    public ArrayList<Vendedor>listarTodos() throws DAOException, ConexaoException;      
     
 }

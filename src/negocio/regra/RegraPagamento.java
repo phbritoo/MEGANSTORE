@@ -70,7 +70,7 @@ public class RegraPagamento {
         }
         if ((pagamento.getCardTitular()==null)||(pagamento.getCardNum().isEmpty())){
             throw new PagamentoException("Nome do titular inválido!");
-        }// else if (CONSISTIR NOME COM PELO MENOS DUAS PALAVRAS);
+        }
     }
 
     /**
@@ -90,6 +90,18 @@ public class RegraPagamento {
             throw new PagamentoException("Valor total inválido!");
         } 
     }
+    /**
+     * 
+     * @param nome
+     * @throws PagamentoException
+     */
+    public void verificarNome(String nome) throws PagamentoException {
+	String[] palavras = nome.split(" ");
+        // Integer tam = palavras.length - 1;
+        if (palavras.length < 2) {
+            JOptionPane.showMessageDialog(null,"erro teste");
+        }        
+    } 
     /**
      * Salva os dados no BD
      * @param pagamento. Objeto com os dados a serem salvos

@@ -19,14 +19,10 @@ public class FachadaPagamento {
     
     public void cadastrar (Pagamento pagamento) throws PagamentoException, DAOException{
         rn.validar(pagamento);
+       // rn.verificarNome(pagamento.getCardTitular());
         rn.incluir(pagamento);
                
     }
-    /*public void cadastrar (Integer pacelas, Double Valor) throws PagamentoException{
-        rn.validar(pacelas, Valor);
-        rn.parcelar(pacelas, Valor);
-              
-    }*/
 
     /**
      *
