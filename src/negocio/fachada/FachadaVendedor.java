@@ -64,7 +64,7 @@ public class FachadaVendedor {
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException
      */
-    public ArrayList<Vendedor> listarPoNome (String vendedorNome) throws VendedorException, ConexaoException, DAOException{
+    public ArrayList<Vendedor> listarPorNome (String vendedorNome) throws VendedorException, ConexaoException, DAOException{
         RegraVendedor rn = new RegraVendedor();
         return rn.listarPorNome(vendedorNome);
     }

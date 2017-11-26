@@ -209,7 +209,7 @@ public final class ConsultaVendedor extends javax.swing.JFrame {
             if (vendedor.getVendedorNome().isEmpty()){
                 listarVendedor = f.listarTodos();
             } else {
-                listarVendedor = f.listarPoNome(vendedor.getVendedorNome());
+                listarVendedor = f.listarPorNome(vendedor.getVendedorNome());
                 txtNome.setText("");
             }
                 readJTable(listarVendedor);

@@ -33,6 +33,11 @@ public class Vendedor {
     public void setVendedorNome(String vendedorNome) {
         this.vendedorNome = vendedorNome.trim();
     }
+    
+    @Override
+    public String toString(){
+        return getVendedorNome();
+    }
     private Integer vendedorCodigo;
     private String vendedorNome;
 }

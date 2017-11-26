@@ -6,7 +6,13 @@
 package gui;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import negocio.basica.Vendedor;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
+import negocio.exception.VendedorException;
 import negocio.fachada.FachadaVendedor;
 
 /**
@@ -20,6 +26,19 @@ public class CadastroPedido extends javax.swing.JFrame {
      */
     public CadastroPedido() {
         initComponents();
+    FachadaVendedor f = new FachadaVendedor();
+        try {
+            for(Vendedor v: f.listarTodos()){
+                boxVendedor.addItem(v);
+            }   
+        } catch (VendedorException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    
     }
 
     /**
@@ -58,7 +77,6 @@ public class CadastroPedido extends javax.swing.JFrame {
 
         jLabel3.setText("Cliente:");
 
-        boxVendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         boxVendedor.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 boxVendedorComponentShown(evt);
@@ -200,8 +218,7 @@ public class CadastroPedido extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton3)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton2)))
+                    .addComponent(jButton2))
                 .addGap(20, 20, 20))
         );
 
@@ -222,8 +239,8 @@ public class CadastroPedido extends javax.swing.JFrame {
 
     private void boxVendedorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_boxVendedorComponentShown
         // TODO add your handling code here:
-        FachadaVendedor f = new FachadaVendedor();
-        List<Vendedor> vendedores = f.listar();
+        /*FachadaVendedor f = new FachadaVendedor();
+        List<Vendedor> vendedores = f.listarPorNome();*/
         
     }//GEN-LAST:event_boxVendedorComponentShown
 
@@ -266,7 +283,7 @@ public class CadastroPedido extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> boxCliente;
     private javax.swing.JComboBox<String> boxProduto;
-    private javax.swing.JComboBox<String> boxVendedor;
+    private javax.swing.JComboBox<Object> boxVendedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

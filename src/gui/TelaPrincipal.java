@@ -225,7 +225,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void menu_vendasEmitirPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_vendasEmitirPedActionPerformed
         // TODO add your handling code here:
-        CadastroCompra cp = new CadastroCompra();
+        CadastroPedido cp = new CadastroPedido();
         cp.setVisible(true);
     }//GEN-LAST:event_menu_vendasEmitirPedActionPerformed
 
