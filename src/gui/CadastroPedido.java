@@ -86,6 +86,8 @@ public class CadastroPedido extends javax.swing.JFrame {
 
         jLabel4.setText("Lista de Produtos:");
 
+        jspQtd.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
+
         btnAdicionar.setText("Adicionar ao Carrinho");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
