@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import negocio.basica.Fornecedor;
-import negocio.basica.Fornecedor;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
 import negocio.exception.FornecedorException;
-import negocio.exception.FornecedorException;
-import negocio.fachada.FachadaFornecedor;
 import negocio.fachada.FachadaFornecedor;
 
 /**
@@ -30,7 +27,6 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        FachadaFornecedor f = new FachadaFornecedor();
         try {
             readJTable();
         }catch (FornecedorException ex) {
@@ -92,6 +88,11 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -209,21 +210,20 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPesquisar)
+                            .addComponent(btnLimpar)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addComponent(jLabel1)
-                        .addGap(86, 86, 86)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnPesquisar)
-                            .addComponent(btnLimpar))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExcluir)
                     .addComponent(btnAlterar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSair)
                 .addGap(24, 24, 24))
         );
@@ -273,22 +273,30 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
             txtCnpj.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
             txtNome.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 1).toString());
             txtTelefone.setText(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 2).toString());
+            txtCnpj.setEnabled(false);
         }
     }//GEN-LAST:event_tblFornecedorMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // TODO add your handling code here:
+        // Manter apenas números de 0 a 9:
+        String telefoneConvert = txtTelefone.getText().replaceAll("[^0-9]", "");
+        
+        // Alterar nome e/ou telefone de um fornecedor
         try {
             if (tblFornecedor.getSelectedRow() != -1) {
                 Fornecedor fornecedor = new Fornecedor();
                 FachadaFornecedor f = new FachadaFornecedor();
                 fornecedor.setFornecedorNome(txtNome.getText());
-                fornecedor.setFornecedorTel(txtTelefone.getText());
+                fornecedor.setFornecedorTel(telefoneConvert);
                 
                 fornecedor.setFornecedorCnpj(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+                
                 f.alterar(fornecedor);
                 readJTable();
+                txtCnpj.setText("");
+                txtCnpj.setEnabled(true);
                 txtNome.setText("");
+                txtTelefone.setText("");
                 JOptionPane.showMessageDialog(this, "Alteração realizada com sucesso");
             } else {
                 JOptionPane.showMessageDialog(null, "Selecione um fornecedor para alterar");
@@ -300,8 +308,6 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
             } catch (DAOException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
-        
-        
     }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -309,7 +315,37 @@ public class ConsultaFornecedor extends javax.swing.JFrame {
         txtCnpj.setText("");
         txtNome.setText("");
         txtTelefone.setText("");
+        txtCnpj.setEnabled(true);
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // Excluir um fornecedor do BD
+        try{
+            if(tblFornecedor.getSelectedRow() != -1){
+                Fornecedor fornecedor = new Fornecedor();
+                FachadaFornecedor f = new FachadaFornecedor();
+                
+                fornecedor.setFornecedorCnpj(tblFornecedor.getValueAt(tblFornecedor.getSelectedRow(), 0).toString());
+                
+                f.excluir(fornecedor);
+                readJTable();
+                txtCnpj.setText("");
+                txtCnpj.setEnabled(true);
+                txtNome.setText("");
+                txtTelefone.setText("");
+                JOptionPane.showMessageDialog(this, "Exclusão realizada com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um fornecedor para excluir");
+                }    
+            } catch (FornecedorException ex) {
+                 JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (ConexaoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (DAOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
     
     /**
      *

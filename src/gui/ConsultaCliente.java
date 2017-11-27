@@ -5,6 +5,15 @@
  */
 package gui;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import negocio.basica.Cliente;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
+import negocio.exception.ClienteException;
+import negocio.fachada.FachadaCliente;
+
 /**
  *
  * @author aluno
@@ -17,6 +26,16 @@ public class ConsultaCliente extends javax.swing.JFrame {
     public ConsultaCliente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        try {
+            readJTable();
+        }catch (ClienteException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
 
     /**
@@ -32,15 +51,17 @@ public class ConsultaCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        csc_entrada1 = new javax.swing.JTextField();
-        csc_entrada2 = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        csc_listbox1 = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        btnPesquisar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        txtCpf = new javax.swing.JFormattedTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        jLabel5 = new javax.swing.JLabel();
+        btnLimpar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCliente = new javax.swing.JTable();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -48,26 +69,33 @@ public class ConsultaCliente extends javax.swing.JFrame {
         setTitle("Consulta de Cliente");
         setResizable(false);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Consulta Cliente");
 
-        jLabel2.setText("Nome Cliente:");
+        jLabel2.setText("Nome:");
 
-        jLabel3.setText("CPF Cliente:");
+        jLabel3.setText("CPF:");
 
-        csc_listbox1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(csc_listbox1);
 
-        jButton1.setText("Pesquisar");
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Alterar");
-
-        jButton3.setText("Remover");
-
-        jLabel4.setText("Lista Cliente:");
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Sair");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -76,6 +104,55 @@ public class ConsultaCliente extends javax.swing.JFrame {
             }
         });
 
+        try {
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jLabel5.setText("Telefone:");
+
+        btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
+
+        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nome", "CPF", "Telefone"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClienteMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblCliente);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,26 +160,37 @@ public class ConsultaCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(csc_entrada1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                                    .addComponent(csc_entrada2)
-                                    .addComponent(jScrollPane1))
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnAlterar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnExcluir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnLimpar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnPesquisar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(229, 229, 229)
+                        .addComponent(jButton4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
                         .addComponent(jLabel1)))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,26 +200,26 @@ public class ConsultaCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(csc_entrada1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel3))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
+                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(csc_entrada2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpar)
+                    .addComponent(btnPesquisar))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnAlterar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton4)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,6 +231,151 @@ public class ConsultaCliente extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // Limpar campos de texto
+        txtNome.setText("");
+        txtCpf.setEnabled(true);
+        txtCpf.setText("");
+        txtTelefone.setText("");
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // Manter apenas números de 0 a 9:
+        String cpfConvert = txtCpf.getText().replaceAll("[^0-9]", "");
+        String telefoneConvert = txtTelefone.getText().replaceAll("[^0-9]", "");
+        // Capturar os dados:
+        Cliente cliente = new Cliente();
+        cliente.setClienteNome(txtNome.getText());
+        
+        FachadaCliente f = new FachadaCliente();
+        try {
+            ArrayList<Cliente> listarCliente;
+            if (cliente.getClienteNome().isEmpty()){
+                listarCliente = f.listarTodos();
+            } else {
+                listarCliente = f.listarPorNome(cliente.getClienteNome());
+                txtCpf.setText("");
+                txtNome.setText("");
+                txtTelefone.setText("");
+            }
+                readJTable(listarCliente);
+            JOptionPane.showMessageDialog(this, "Pesquisa realizada com sucesso" );
+        }catch (ClienteException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } 
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // Manter apenas números de 0 a 9:
+        String telefoneConvert = txtTelefone.getText().replaceAll("[^0-9]", "");
+        
+        // Alterar nome e/ou telefone de um cliente
+        try {
+            if (tblCliente.getSelectedRow() != -1) {
+                Cliente cliente = new Cliente();
+                FachadaCliente f = new FachadaCliente();
+                cliente.setClienteNome(txtNome.getText());
+                cliente.setClienteTel(telefoneConvert);
+                
+                cliente.setClienteCpf(tblCliente.getValueAt(tblCliente.getSelectedRow(), 1).toString());
+                
+                f.alterar(cliente);
+                readJTable();
+                txtCpf.setText("");
+                txtCpf.setEnabled(true);
+                txtNome.setText("");
+                txtTelefone.setText("");
+                JOptionPane.showMessageDialog(this, "Alteração realizada com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um cliente para alterar");
+                }    
+            } catch (ClienteException ex) {
+                 JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (ConexaoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (DAOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
+        // Preencher campos de texto com o dado selecionado na tabela
+        if (tblCliente.getSelectedRow() != -1) {
+            txtNome.setText(tblCliente.getValueAt(tblCliente.getSelectedRow(), 0).toString());
+            txtCpf.setText(tblCliente.getValueAt(tblCliente.getSelectedRow(), 1).toString());
+            txtTelefone.setText(tblCliente.getValueAt(tblCliente.getSelectedRow(), 2).toString());
+            txtCpf.setEnabled(false);
+        }
+    }//GEN-LAST:event_tblClienteMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // Excluir um cliente do BD
+        try{
+            if(tblCliente.getSelectedRow() != -1){
+                Cliente cliente = new Cliente();
+                FachadaCliente f = new FachadaCliente();
+                
+                cliente.setClienteCpf(tblCliente.getValueAt(tblCliente.getSelectedRow(), 1).toString());
+                
+                f.excluir(cliente);
+                readJTable();
+                txtCpf.setText("");
+                txtCpf.setEnabled(true);
+                txtNome.setText("");
+                txtTelefone.setText("");
+                JOptionPane.showMessageDialog(this, "Exclusão realizada com sucesso");
+            } else {
+                JOptionPane.showMessageDialog(null, "Selecione um cliente para excluir");
+                }    
+            } catch (ClienteException ex) {
+                 JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (ConexaoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (DAOException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+    
+    /**
+     *
+     * @param listaCliente
+     */
+    public void readJTable(ArrayList<Cliente> listaCliente) {
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
+        modelo.setNumRows(0);
+        
+        for (Cliente cliente : listaCliente) {
+
+            modelo.addRow(new Object[]{
+                cliente.getClienteNome(), 
+                cliente.getClienteCpf(),
+                cliente.getClienteTel()
+            });
+        }
+    }
+    
+    public void readJTable() throws ClienteException, ConexaoException, DAOException {
+        DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
+        modelo.setNumRows(0);
+        
+        FachadaCliente f = new FachadaCliente();
+        
+        ArrayList<Cliente> listaCliente;
+            listaCliente = f.listarTodos();
+        for (Cliente cliente : listaCliente) {
+
+            modelo.addRow(new Object[]{
+                cliente.getClienteNome(),
+                cliente.getClienteCpf(),
+                cliente.getClienteTel()
+            });
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -179,18 +412,20 @@ public class ConsultaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField csc_entrada1;
-    private javax.swing.JTextField csc_entrada2;
-    private javax.swing.JList csc_listbox1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTable tblCliente;
+    private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

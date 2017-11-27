@@ -57,6 +57,7 @@ public class DAOFornecedorImpl implements DAOFornecedor{
             GC.desconectar(c);
         } 
     }
+    
     @Override
     public void excluir(Fornecedor fornecedor) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
@@ -76,22 +77,22 @@ public class DAOFornecedorImpl implements DAOFornecedor{
     public Fornecedor consultar(String cnpj) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
         String sql = "SELECT FORN_CNPJ, FORN_NOME, FORN_TEL FROM FORNECEDOR WHERE FORN_CNPJ = ?";
-    try{
-        PreparedStatement pstm = c.prepareStatement(sql);
-        pstm.setString(1, cnpj);
-        ResultSet rs = pstm.executeQuery();
-        if(rs.next()){
-          Fornecedor fornecedor = new Fornecedor();
-          fornecedor.setFornecedorCnpj(rs.getString("FORN_CNPJ") );
-          fornecedor.setFornecedorNome(rs.getString("FORN_NOME"));
-          return fornecedor;
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setString(1, cnpj);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                Fornecedor fornecedor = new Fornecedor();
+                fornecedor.setFornecedorCnpj(rs.getString("FORN_CNPJ") );
+                fornecedor.setFornecedorNome(rs.getString("FORN_NOME"));
+                return fornecedor;
+            }
+            return null;
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }finally{
+            GC.desconectar(c);
         }
-        return null;
-    }catch(SQLException e){
-         throw new DAOException(e.getMessage());
-    }finally{
-        GC.desconectar(c);
-    }
     
     }
     

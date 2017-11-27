@@ -70,7 +70,7 @@ public class RegraFornecedor {
     
     /**
      * Salva os dados no Banco de Dados
-     * @param fornecedor Objeto com CNPJ, noe e telefone a ser salvo no BD
+     * @param fornecedor Objeto com CNPJ, nome e telefone a ser salvo no BD
      * @throws negocio.exception.FornecedorException
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException

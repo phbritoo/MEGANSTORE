@@ -11,8 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import negocio.basica.Cliente;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -25,17 +23,16 @@ import util.GerenciadorConexaoImpl;
  */
 public class DAOClienteImpl implements DAOCliente {
     
-    private final GerenciadorConexao gc;
+    private final GerenciadorConexao GC;
     
     public DAOClienteImpl(){
-       gc = GerenciadorConexaoImpl.getInstancia();
+       GC = GerenciadorConexaoImpl.getInstancia();
     }
     
     @Override
-
-    public void inserir(Cliente cliente) throws DAOException, ConexaoException {
-            Connection c = gc.conectar();
-            String sql = "INSERT INTO CLIENTE (CLI_CPF, CLI_TEL, CLI_NOME) VALUES (?,?,?)";
+    public void incluir(Cliente cliente) throws DAOException, ConexaoException {
+        Connection c = GC.conectar();
+        String sql = "INSERT INTO CLIENTE (CLI_CPF, CLI_TEL, CLI_NOME) VALUES (?,?,?)";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setString(1, cliente.getClienteCpf());
@@ -45,38 +42,36 @@ public class DAOClienteImpl implements DAOCliente {
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         } 
     }
     
-
     @Override
-    public Cliente consultar(String clienteNome) throws DAOException, ConexaoException {
-         Cliente cliente = null;
-        Connection c = gc.conectar();
-        String sql = "SELECT CLI_NOME, CLI_CPF FROM Cliente, CLI_TEL WHERE nome=1";
+    public Cliente consultar(String cpf) throws DAOException, ConexaoException {
+        Connection c = GC.conectar();
+        String sql = "SELECT CLI_CPF, CLI_NOME, CLI_TEL FROM CLIENTE WHERE CLI_CPF = ?";
         try{
-        PreparedStatement pstm = gc.conectar().prepareStatement(sql);
-        pstm.setString(1, clienteNome);
-        ResultSet rs = pstm.executeQuery();
-        if(rs.next()){
-          cliente = new Cliente();
-          cliente.setClienteNome(rs.getString("nome") );
-          cliente.setClienteCpf(rs.getString("cpf"));
-          cliente.setClienteTel(rs.getString("tel"));
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setString(1, cpf);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                Cliente cliente = new Cliente();
+                cliente.setClienteNome(rs.getString("CLI_NOME"));
+                cliente.setClienteCpf(rs.getString("CLI_CPF"));
+                cliente.setClienteTel(rs.getString("CLI_TEL"));
+                return cliente;
+            }
+            return null;
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }finally{
+            GC.desconectar(c);
         }
-    }catch(SQLException e){
-         throw new DAOException();
-    }   catch (ConexaoException ex) {
-            Logger.getLogger(DAOClienteImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return cliente;  
     }
-
     @Override
-    public void deletar(Cliente cliente) throws DAOException, ConexaoException {
-        Connection c = gc.conectar();
-        String sql = "DELETE FROM CLIENTE WHERE CLI_CPF=?";
+    public void excluir(Cliente cliente) throws DAOException, ConexaoException {
+        Connection c = GC.conectar();
+        String sql = "DELETE FROM CLIENTE WHERE CLI_CPF = ?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setString(1, cliente.getClienteCpf());
@@ -84,39 +79,42 @@ public class DAOClienteImpl implements DAOCliente {
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         } 
     
     }
 
     @Override
     public void alterar(Cliente cliente) throws DAOException, ConexaoException {
-          Connection c = gc.conectar();
-        String sql = "UPDATE VENDEDOR SET CLI_NOME=? WHERE CLI_CPF=?";
+        Connection c = GC.conectar();
+        String sql = "UPDATE CLIENTE SET CLI_NOME = ?, CLI_TEL = ? WHERE CLI_CPF = ?";
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setString(1, cliente.getClienteNome());
-            pstm.setString(2, cliente.getClienteCpf());
+            pstm.setString(2, cliente.getClienteTel());
+            pstm.setString(3, cliente.getClienteCpf());
             pstm.executeUpdate();
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
             }
-        }
+    }
     
     @Override
-    public ArrayList<Cliente> listarPorNome(String vendedorNome) throws DAOException, ConexaoException {
-        Connection c = gc.conectar();
+    public ArrayList<Cliente> listarPorNome(String clienteNome) throws DAOException, ConexaoException {
+        Connection c = GC.conectar();
         ArrayList<Cliente> lista = new ArrayList();
         Cliente cliente;
         try{
-            PreparedStatement pstm = c.prepareStatement("SELECT * FROM CLIENTE WHERE Vend_Nome LIKE ?");
-            pstm.setString(1, "%"+ vendedorNome +"%");
+            PreparedStatement pstm = c.prepareStatement("SELECT * FROM CLIENTE WHERE CLI_NOME LIKE ?");
+            pstm.setString(1, "%"+ clienteNome +"%");
             ResultSet rs = pstm.executeQuery();
             while(rs.next()){
                 cliente = new Cliente();
-                cliente.setClienteNome(rs.getString("Cli_Nome"));
+                cliente.setClienteCpf(rs.getString("CLI_CPF"));
+                cliente.setClienteNome(rs.getString("CLI_NOME"));
+                cliente.setClienteTel(rs.getString("CLI_TEL"));
                 lista.add(cliente);
             }
             if (lista.isEmpty()){
@@ -127,13 +125,13 @@ public class DAOClienteImpl implements DAOCliente {
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         }
     }
     
      @Override
     public ArrayList<Cliente>listarTodos() throws DAOException, ConexaoException{
-        Connection c = gc.conectar();
+        Connection c = GC.conectar();
         String sql = "SELECT * FROM CLIENTE";
         ArrayList<Cliente> lista = new ArrayList();
         Cliente cliente;
@@ -142,19 +140,19 @@ public class DAOClienteImpl implements DAOCliente {
             ResultSet rs = pstm.executeQuery(sql);
             while(rs.next()){
                 cliente = new Cliente();
-                cliente.setClienteNome(rs.getString("Cli_Nome"));
-                cliente.setClienteCpf(rs.getString("Cli_Cpf"));
-                cliente.setClienteTel(rs.getString("Cli_Tel"));
+                cliente.setClienteNome(rs.getString("CLI_NOME"));
+                cliente.setClienteCpf(rs.getString("CLI_CPF"));
+                cliente.setClienteTel(rs.getString("CLI_TEL"));
                 lista.add(cliente);
             }
             return lista;
         }catch(SQLException e){
             throw new DAOException(e);
         }finally{
-            gc.desconectar(c);
+            GC.desconectar(c);
         }
     }
-    }
+}
     
     
     

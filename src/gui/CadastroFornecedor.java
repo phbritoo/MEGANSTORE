@@ -164,7 +164,7 @@ public class CadastroFornecedor extends javax.swing.JFrame {
            txtCnpj.setText("");
            JOptionPane.showMessageDialog(this, "CNPJ inválido");
         }
-        // capturar o CNPJ, nome e telefone do novo fornecedorn a ser cadastrado no banco:
+        // capturar o CNPJ, nome e telefone do novo fornecedor a ser cadastrado no banco:
         Fornecedor fornecedor = new Fornecedor();
         fornecedor.setFornecedorCnpj(cnpjConvert);
         fornecedor.setFornecedorNome(txtNome.getText());

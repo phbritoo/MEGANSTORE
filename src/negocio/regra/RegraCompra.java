@@ -22,7 +22,7 @@ public class RegraCompra {
      * @throws negocio.exception.CompraException
      * @throws CompraException
      */
-    public void validar(Compra compra) throws CompraException{
+ /*   public void validar(Compra compra) throws CompraException{
         if(compra == null){
             throw new CompraException("Objeto Invalido");
         }
@@ -36,11 +36,11 @@ public class RegraCompra {
                throw new CompraException("Data Invalida");
         }
        
-        
     }
 
     public void Incluir(Compra compra) {
         
     }
+        */
     
 }
