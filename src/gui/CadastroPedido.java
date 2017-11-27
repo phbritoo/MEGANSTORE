@@ -64,7 +64,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         btnSelectCliente = new javax.swing.JButton();
         btnSelectProduto = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Cadastro de Pedido");
@@ -100,7 +100,7 @@ public class CadastroPedido extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código Produto", "Descrição", "Quantidade", "Preço"
+                "Código Produto", "Descrição", "Preço Unitário", "Quantidade"
             }
         ));
         jScrollPane1.setViewportView(jTProdutos);
@@ -253,6 +253,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
@@ -264,7 +265,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         produtoNome = (boxProduto.getSelectedItem().toString());
         produto = p.consultar(produtoNome);
         DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
-        Object[] dados = {produto.getProdutoCodigo(),boxProduto.getSelectedItem(),jspQtd.getValue(),produto.getProdutoPreco()};
+        Object[] dados = {produto.getProdutoCodigo(),boxProduto.getSelectedItem(),produto.getProdutoPreco(),jspQtd.getValue()};
         dtmProdutos.addRow(dados);
         }catch (ProdutoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());

@@ -73,7 +73,7 @@ public class Produto {
 
 @Override
     public String toString(){
-        return (getProdutoNome()+" R$"+(getProdutoPreco()));
+        return (getProdutoNome());
     }
 
 
