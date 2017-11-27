@@ -97,4 +97,14 @@ public class RegraProduto{
             throw new ProdutoException(ex.getMessage());
         }
     }
+    
+    public Produto consultar (String nomeProduto) throws ProdutoException, ConexaoException, DAOException {
+        try{
+           return DAO.consultar(nomeProduto);
+        }catch(ConexaoException ex){
+            throw new ProdutoException("Erro no BD");
+        }catch (DAOException ex) {
+            throw new ProdutoException(ex.getMessage());
+        }
+    }
 }               

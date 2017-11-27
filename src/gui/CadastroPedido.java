@@ -258,13 +258,13 @@ public class CadastroPedido extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
         FachadaProduto p = new FachadaProduto();
-        try{
-        String nomeProduto;
-        Double precoProduto;
-        nomeProduto = (boxProduto.getSelectedItem().toString());
-        precoProduto = p.consultarPreco(nomeProduto);
+        String produtoNome;
+        Produto produto; 
+        try{       
+        produtoNome = (boxProduto.getSelectedItem().toString());
+        produto = p.consultar(produtoNome);
         DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
-        Object[] dados = {boxProduto.getSelectedItem(),jspQtd.getValue(),precoProduto};
+        Object[] dados = {produto.getProdutoCodigo(),boxProduto.getSelectedItem(),jspQtd.getValue(),produto.getProdutoPreco()};
         dtmProdutos.addRow(dados);
         }catch (ProdutoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
