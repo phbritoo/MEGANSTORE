@@ -100,29 +100,28 @@ public class DAOProdutoImpl implements DAOProduto{
         return produto;  
     }
     
-          @Override
-    public Produto consultarPreco(String produtoNome) throws DAOException, ConexaoException {
-        Produto produto = null;
-        Connection c = gc.conectar();
+      @Override
+    public Double consultarPreco(String nomeProduto) throws DAOException, ConexaoException {
+         Connection c = gc.conectar();
         String sql = "SELECT PRD_PRECO FROM PRODUTO WHERE PRD_NOME=?";
+        Produto produto = new Produto();
+        Double precoProduto = null;
         try{
-        PreparedStatement pstm = gc.conectar().prepareStatement(sql);
-        pstm.setString(1, produtoNome);
-        ResultSet rs = pstm.executeQuery();
-        if(rs.next()){
-          produto = new Produto();
-          produto.setProdutoCodigo(rs.getInt("PRD_COD"));
-          produto.setProdutoNome(rs.getString("PRD_NOME"));
-          produto.setProdutoEstoque(rs.getInt("PRD_ESTOQUE"));
-          produto.setProdutoPreco(rs.getDouble("PRD_PRECO"));
-        }
+            PreparedStatement pstm = gc.conectar().prepareStatement(sql);
+            pstm.setString(1, nomeProduto);
+            ResultSet rs = pstm.executeQuery();
+           
+                
+                precoProduto = (rs.getDouble("PRD_PRECO"));
+        
     }catch(SQLException e){
          throw new DAOException();
     }    catch (ConexaoException ex) {   
              Logger.getLogger(DAOProdutoImpl.class.getName()).log(Level.SEVERE, null, ex);
          }   
-        return produto;  
+        return precoProduto;  
     }
+     
 
     @Override
     public void deletar(Produto produto) throws DAOException, ConexaoException {

@@ -56,10 +56,7 @@ public class RegraProduto{
             throw new ProdutoException("Erro de Aplicação(SQL)!");
        }
     }
-    public Produto consultar(String Prd_cod) {
-               throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-           }
-    
+      
      public void incluir(Produto produto) {
     }
      
@@ -76,6 +73,24 @@ public class RegraProduto{
     public ArrayList<Produto> listarPorNome(String produtoNome) throws ProdutoException, ConexaoException, DAOException {
         try {
             return DAO.listarPorNome(produtoNome);
+        }catch(ConexaoException ex){
+            throw new ProdutoException("Erro no BD");
+        }catch (DAOException ex) {
+            throw new ProdutoException(ex.getMessage());
+        }
+    }
+    
+    /**
+     *
+     * @param nomeProduto
+     * @return
+     * @throws ProdutoException
+     * @throws ConexaoException
+     * @throws DAOException
+     */
+    public Double consultarPreco(String nomeProduto) throws ProdutoException, ConexaoException, DAOException {
+    try {
+            return DAO.consultarPreco(nomeProduto);
         }catch(ConexaoException ex){
             throw new ProdutoException("Erro no BD");
         }catch (DAOException ex) {

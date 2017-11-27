@@ -33,7 +33,7 @@ public interface DAOProduto {
     
     public Produto consultar(String nome) throws DAOException, ConexaoException;
     
-    public Produto consultarPreco (String produtoNome) throws DAOException, ConexaoException;
+    public Double consultarPreco(String nomeProduto) throws DAOException, ConexaoException;
     
     public ArrayList<Produto>listarTodos() throws DAOException, ConexaoException;
     

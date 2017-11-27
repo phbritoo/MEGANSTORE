@@ -34,4 +34,9 @@ public class FachadaProduto {
         RegraProduto rp = new RegraProduto();
         return rp.listarPorNome(produtoNome);
         }
+    
+    public Double consultarPreco (String nomeProduto) throws ProdutoException, ConexaoException, DAOException{
+    RegraProduto rp = new RegraProduto();
+    return rp.consultarPreco(nomeProduto);
+    }
 }
