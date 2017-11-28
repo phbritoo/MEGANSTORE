@@ -10,15 +10,15 @@ public class FornecedorProduto {
     /**
      * @return the fornecedorCnpj
      */
-    public Integer getFornecedorCnpj() {
+    public String getFornecedorCnpj() {
         return fornecedorCnpj;
     }
 
     /**
      * @param fornecedorCnpj the fornecedorCnpj to set
      */
-    public void setFornecedorCnpj(Integer fornecedorCnpj) {
-        this.fornecedorCnpj = fornecedorCnpj;
+    public void setFornecedorCnpj(String fornecedorCnpj) {
+        this.fornecedorCnpj = fornecedorCnpj.trim();
     }
 
     /**
@@ -34,6 +34,6 @@ public class FornecedorProduto {
     public void setProdutoCodigo(Integer produtoCodigo) {
         this.produtoCodigo = produtoCodigo;
     }
-    private Integer fornecedorCnpj;
+    private String fornecedorCnpj;
     private Integer produtoCodigo;
 }
