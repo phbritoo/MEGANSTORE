@@ -100,9 +100,17 @@ public class CadastroPedido extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código Produto", "Descrição", "Preço Unitário", "Quantidade"
+                "Código Produto", "Descrição", "Preço Unitário", "Quantidade", "Total Produto"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTProdutos);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
