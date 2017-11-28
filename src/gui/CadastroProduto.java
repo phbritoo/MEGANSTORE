@@ -5,8 +5,13 @@
  */
 package gui;
 
+import javax.swing.JOptionPane;
 import negocio.basica.FornecedorProduto;
 import negocio.basica.Produto;
+import negocio.exception.ProdutoException;
+import negocio.exception.ConexaoException;
+import negocio.exception.DAOException;
+import negocio.fachada.FachadaProduto;
 
 /**
  *
@@ -155,11 +160,25 @@ public class CadastroProduto extends javax.swing.JFrame {
         Produto produto = new Produto();
         FornecedorProduto fornecedorProduto = new FornecedorProduto();
         
-        fornecedorProduto.setFornecedorCnpj(txtCnpjFornecedor.getText());
         produto.setProdutoNome(txtNome.getText());
+        fornecedorProduto.setFornecedorCnpj(txtCnpjFornecedor.getText());
         produto.setProdutoPreco(Double.parseDouble(precoConvert));
         produto.setProdutoEstoque(Integer.parseInt(txtEstoqueAtual.getText()));
-
+        
+        FachadaProduto f = new FachadaProduto();
+        try{
+            f.cadastrar(produto);
+            txtNome.setText("");
+            txtEstoqueAtual.setText("");
+            txtPreco.setText("");
+            JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!" );
+        } catch (ProdutoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ConexaoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (DAOException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**

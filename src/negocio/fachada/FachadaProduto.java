@@ -6,6 +6,7 @@
 package negocio.fachada;
 
 import java.util.ArrayList;
+import negocio.basica.FornecedorProduto;
 import negocio.basica.Produto;
 import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
@@ -28,11 +29,24 @@ public class FachadaProduto {
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException 
      */
-    public void cadastrarProduto(Produto produto)throws ProdutoException, ConexaoException, DAOException{
+    public void cadastrar(Produto produto)throws ProdutoException, ConexaoException, DAOException{
         RegraProduto rn = new RegraProduto();
         rn.validar(produto);
         rn.eUnico(produto);
         rn.incluir(produto);
+    }           
+    
+    /**
+     * Associa o produto cadastrado ao seu fornecedor 
+     * @param produto a ser cadastrado
+     * @throws negocio.exception.ProdutoException
+     * @throws negocio.exception.ConexaoException
+     * @throws negocio.exception.DAOException 
+     */
+    public void associar(Produto produto, FornecedorProduto fornecedorProduto)throws ProdutoException, ConexaoException, DAOException{
+        RegraProduto rn = new RegraProduto();
+     //   rn.ultimo(produto);
+    //   rn.incluirFornecdorProduto(produto);
     }           
     
     /**
@@ -86,7 +100,8 @@ public class FachadaProduto {
     
     /**
      * Consulta o preço de um determinado produto através do nome
-     * @param produto a ser pesquisado
+     * @param nomeProduto a ser pesquisado
+     * @return preço do produto
      * @throws ProdutoException 
      * @throws negocio.exception.ConexaoException 
      * @throws negocio.exception.DAOException 
@@ -98,7 +113,8 @@ public class FachadaProduto {
     
     /**
      * Consulta um determinado produto através do nome
-     * @param produto Objeto com nome do produto a ser pesquisado
+     * @param nomeProduto nome do produto a ser pesquisado
+     * @return Objeto produto
      * @throws ProdutoException 
      * @throws negocio.exception.ConexaoException 
      * @throws negocio.exception.DAOException 
