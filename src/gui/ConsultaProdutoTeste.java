@@ -18,7 +18,7 @@ import negocio.fachada.FachadaProduto;
  *
  * @author aluno
  */
-public final class ConsultaProdutoTeste extends javax.swing.JFrame {
+public class ConsultaProdutoTeste extends javax.swing.JFrame {
 
     /**
      * Creates new form ConsultaProduto
@@ -113,12 +113,7 @@ public final class ConsultaProdutoTeste extends javax.swing.JFrame {
 
         tblProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Código", "Produto", "Estoque Atual", "Preço Unitário"
@@ -280,7 +275,7 @@ public final class ConsultaProdutoTeste extends javax.swing.JFrame {
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
 
-        
+        String prdPreco = (tblProduto.getValueAt(tblProduto.getSelectedRow(), 3).toString());
         // Alterar Nome e/ou preco de um produto
         try {
             if (tblProduto.getSelectedRow() != -1) {
@@ -312,7 +307,10 @@ public final class ConsultaProdutoTeste extends javax.swing.JFrame {
     private void tblProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMouseClicked
         // Preencher campos de texto com o dado selecionado na tabela
         if (tblProduto.getSelectedRow() != -1) {
+            txtCodigo.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 0).toString());
             txtNomeProduto.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 1).toString());
+            txtEstoque.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
+            txtPreco.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 3).toString());
         }
     }//GEN-LAST:event_tblProdutoMouseClicked
 
@@ -323,11 +321,14 @@ public final class ConsultaProdutoTeste extends javax.swing.JFrame {
                 Produto produto = new Produto();
                 FachadaProduto fp = new FachadaProduto();
                 
-                produto.setProdutoCodigo((Integer) tblProduto.getValueAt(tblProduto.getSelectedRow(), 1));
+                produto.setProdutoCodigo((Integer)tblProduto.getValueAt(tblProduto.getSelectedRow(), 0));
                 
                 fp.excluir(produto);
                 readJTable();
                 txtNomeProduto.setText("");
+                txtCodigo.setText("");
+                txtPreco.setText("");
+                txtEstoque.setText("");
                 JOptionPane.showMessageDialog(this, "Exclusão realizada com sucesso");
             } else {
                 JOptionPane.showMessageDialog(null, "Selecione um produto para excluir");
