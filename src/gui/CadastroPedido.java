@@ -435,6 +435,6 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTProdutos;
     private javax.swing.JTextField jTextqtd;
-    private javax.swing.JLabel lblTotalCompra;
+    public javax.swing.JLabel lblTotalCompra;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,7 +16,7 @@ import negocio.fachada.FachadaPagamento;
  * @author Gildo
  */
 public class CadastroPagamento extends javax.swing.JFrame {
-
+   
     /**
      * Creates new form CadastroPagamento
      */
