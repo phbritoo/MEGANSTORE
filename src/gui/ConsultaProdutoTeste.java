@@ -244,6 +244,9 @@ public final class ConsultaProdutoTeste extends javax.swing.JFrame {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // Limpar campos de texto
         txtNomeProduto.setText("");
+        txtCodigo.setText("");
+        txtPreco.setText("");
+        txtEstoque.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -260,6 +263,9 @@ public final class ConsultaProdutoTeste extends javax.swing.JFrame {
             } else {
                 listarProduto = fp.listarPorNome(produto.getProdutoNome());
                 txtNomeProduto.setText("");
+                txtCodigo.setText("");
+                txtPreco.setText("");
+                txtEstoque.setText("");
             }
                 readJTable(listarProduto);
             JOptionPane.showMessageDialog(this, "Pesquisa realizada com sucesso" );
@@ -275,18 +281,21 @@ public final class ConsultaProdutoTeste extends javax.swing.JFrame {
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
 
         
-        // Alterar nome e/ou telefone de um produto
+        // Alterar Nome e/ou preco de um produto
         try {
             if (tblProduto.getSelectedRow() != -1) {
                 Produto produto = new Produto();
                 FachadaProduto fp = new FachadaProduto();
                 produto.setProdutoNome(txtNomeProduto.getText());
                 
-                produto.setProdutoEstoque((Integer) tblProduto.getValueAt(tblProduto.getSelectedRow(), 1));
+                produto.setProdutoPreco((double) tblProduto.getValueAt(tblProduto.getSelectedRow(), 3));
                 
                 fp.alterar(produto);
                 readJTable();
                 txtNomeProduto.setText("");
+                txtCodigo.setText("");
+                txtPreco.setText("");
+                txtEstoque.setText("");
                 JOptionPane.showMessageDialog(this, "Alteração realizada com sucesso");
             } else {
                 JOptionPane.showMessageDialog(null, "Selecione um produto para alterar");
