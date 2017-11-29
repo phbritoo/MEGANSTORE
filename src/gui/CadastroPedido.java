@@ -46,11 +46,10 @@ public class CadastroPedido extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        boxVendedor = new javax.swing.JComboBox<>();
-        boxCliente = new javax.swing.JComboBox<>();
+        boxVendedor = new javax.swing.JComboBox<Object>();
+        boxCliente = new javax.swing.JComboBox<Object>();
         jLabel4 = new javax.swing.JLabel();
-        boxProduto = new javax.swing.JComboBox<>();
-        jspQtd = new javax.swing.JSpinner();
+        boxProduto = new javax.swing.JComboBox<Object>();
         btnAdicionar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTProdutos = new javax.swing.JTable();
@@ -63,6 +62,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         btnSelectVendedor = new javax.swing.JButton();
         btnSelectCliente = new javax.swing.JButton();
         btnSelectProduto = new javax.swing.JButton();
+        jTextqtd = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -85,8 +85,6 @@ public class CadastroPedido extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Lista de Produtos:");
-
-        jspQtd.setModel(new javax.swing.SpinnerNumberModel(1, 1, 99, 1));
 
         btnAdicionar.setText("Adicionar ao Carrinho");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +158,8 @@ public class CadastroPedido extends javax.swing.JFrame {
             }
         });
 
+        jTextqtd.setText("jTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -194,9 +194,9 @@ public class CadastroPedido extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(boxProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(29, 29, 29)
-                        .addComponent(jspQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(13, 13, 13)
+                        .addComponent(jTextqtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAdicionar)
                         .addGap(8, 8, 8)))
                 .addContainerGap())
@@ -240,8 +240,8 @@ public class CadastroPedido extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(boxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspQtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdicionar))
+                    .addComponent(btnAdicionar)
+                    .addComponent(jTextqtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSelectProduto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
@@ -273,7 +273,16 @@ public class CadastroPedido extends javax.swing.JFrame {
         produtoNome = (boxProduto.getSelectedItem().toString());
         produto = p.consultar(produtoNome);
         DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
-        Object[] dados = {produto.getProdutoCodigo(),boxProduto.getSelectedItem(),produto.getProdutoPreco(),jspQtd.getValue()};
+        
+        double quantidade = 0;
+        quantidade = Double.parseDouble(jTextqtd.getText());
+        
+        Object[] dados = {produto.getProdutoCodigo(),
+            boxProduto.getSelectedItem(),
+            produto.getProdutoPreco(),
+            jTextqtd.getText(),
+            quantidade * produto.getProdutoPreco()        
+        };
         dtmProdutos.addRow(dados);
         }catch (ProdutoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -409,7 +418,7 @@ public class CadastroPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTProdutos;
-    private javax.swing.JSpinner jspQtd;
+    private javax.swing.JTextField jTextqtd;
     private javax.swing.JLabel lblTotalCompra;
     // End of variables declaration//GEN-END:variables
 }
