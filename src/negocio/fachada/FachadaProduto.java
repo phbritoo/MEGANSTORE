@@ -8,12 +8,9 @@ package negocio.fachada;
 import java.util.ArrayList;
 import negocio.basica.FornecedorProduto;
 import negocio.basica.Produto;
-import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
 import negocio.exception.ProdutoException;
-import negocio.exception.ProdutoException;
-import negocio.regra.RegraProduto;
 import negocio.regra.RegraProduto;
 
 /**
@@ -34,19 +31,31 @@ public class FachadaProduto {
         rn.validar(produto);
         rn.eUnico(produto);
         rn.incluir(produto);
-    }           
+    }  
     
     /**
-     * Associa o produto cadastrado ao seu fornecedor 
+     * Consulta chave do último registro
+     * @return Chave do produto cadastrado
+     * @throws negocio.exception.ProdutoException
+     * @throws negocio.exception.ConexaoException
+     * @throws negocio.exception.DAOException 
+     */
+    public Integer obterChave()throws ProdutoException, ConexaoException, DAOException{
+        RegraProduto rn = new RegraProduto();
+        return rn.obterChave(); 
+    }
+    
+    /**
+     * Associa o produto ao seu fornecedor
      * @param produto a ser cadastrado
+     * @param fornecedorProduto
      * @throws negocio.exception.ProdutoException
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException 
      */
     public void associar(Produto produto, FornecedorProduto fornecedorProduto)throws ProdutoException, ConexaoException, DAOException{
         RegraProduto rn = new RegraProduto();
-     //   rn.ultimo(produto);
-    //   rn.incluirFornecdorProduto(produto);
+        rn.incluirFornecedorProduto(fornecedorProduto.getFornecedorCnpj(), produto.getProdutoCodigo());
     }           
     
     /**

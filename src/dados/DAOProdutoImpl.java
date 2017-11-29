@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import negocio.basica.FornecedorProduto;
 import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -54,8 +55,8 @@ public class DAOProdutoImpl implements DAOProduto{
         Produto produto = null;
         Connection c = GC.conectar();
         String sql = "SELECT * FROM PRODUTO WHERE PRD_COD = ?";
-        try{
-            PreparedStatement pstm = GC.conectar().prepareStatement(sql);
+        try{            
+            PreparedStatement pstm = c.prepareStatement(sql);
             pstm.setInt(1, codigo);
             ResultSet rs = pstm.executeQuery();
             if(rs.next()){
@@ -80,27 +81,27 @@ public class DAOProdutoImpl implements DAOProduto{
         Connection c = GC.conectar();
         String sql = "SELECT * FROM PRODUTO WHERE PRD_NOME = ?";
         try{
-        PreparedStatement pstm = GC.conectar().prepareStatement(sql);
-        pstm.setString(1, nome);
-        ResultSet rs = pstm.executeQuery();
-        if(rs.next()){
-          produto = new Produto();
-          produto.setProdutoCodigo(rs.getInt("PRD_COD"));
-          produto.setProdutoNome(rs.getString("PRD_NOME"));
-          produto.setProdutoEstoque(rs.getInt("PRD_ESTOQUE"));
-          produto.setProdutoPreco(rs.getDouble("PRD_PRECO"));
-        }
-    }catch(SQLException e){
-         throw new DAOException();
-    }    catch (ConexaoException ex) {   
-             Logger.getLogger(DAOProdutoImpl.class.getName()).log(Level.SEVERE, null, ex);
-         }   
+            PreparedStatement pstm = GC.conectar().prepareStatement(sql);
+            pstm.setString(1, nome);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                produto = new Produto();
+                produto.setProdutoCodigo(rs.getInt("PRD_COD"));
+                produto.setProdutoNome(rs.getString("PRD_NOME"));
+                produto.setProdutoEstoque(rs.getInt("PRD_ESTOQUE"));
+                produto.setProdutoPreco(rs.getDouble("PRD_PRECO"));
+            }
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }finally{
+            GC.desconectar(c);
+        } 
         return produto;  
     }
     
-      @Override
+    @Override
     public Double consultarPreco(String nomeProduto) throws DAOException, ConexaoException {
-         Connection c = GC.conectar();
+        Connection c = GC.conectar();
         String sql = "SELECT PRD_PRECO FROM PRODUTO WHERE PRD_NOME=?";
         Produto produto = new Produto();
         Double precoProduto = null;
@@ -112,11 +113,11 @@ public class DAOProdutoImpl implements DAOProduto{
                 
                 precoProduto = (rs.getDouble("PRD_PRECO"));
         
-    }catch(SQLException e){
-         throw new DAOException();
-    }    catch (ConexaoException ex) {   
-             Logger.getLogger(DAOProdutoImpl.class.getName()).log(Level.SEVERE, null, ex);
-         }   
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }finally{
+            GC.desconectar(c);
+        } 
         return precoProduto;  
     }
      
@@ -206,6 +207,64 @@ public class DAOProdutoImpl implements DAOProduto{
         }finally{
             GC.desconectar(c);
         }
+    }
+    
+    @Override
+    public Integer obterChave() throws DAOException, ConexaoException {
+        Produto produto;
+        Connection c = GC.conectar();
+        int cont = 0;
+        String sql = "SELECT PRD_COD FROM PRODUTO ORDER BY PRD_COD";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+          while(rs.next()){
+               if (cont < rs.getInt("PRD_COD"))
+                   cont = rs.getInt("PRD_COD");
+                
+          /*produto.setProdutoNome(rs.getString("PRD_NOME"));
+          produto.setProdutoEstoque(rs.getInt("PRD_ESTOQUE"));
+          produto.setProdutoPreco(rs.getDouble("PRD_PRECO"));
+                int cont = 0;
+try{
+setSql("SELECT * FROM Est WHERE est=?");
+ps = conn.prepareStatement(getSql());
+ps.setString(1, getEst());
+rs = ps.executeQuery();
+while(rs.next()){
+if(cont < rs.getInt("colunast"))
+cont = rs.getInt("colunast");
+}
+}
+catch(SQLException ex){
+ex.printStackTrace();
+}*/
+            }
+                produto = new Produto();
+               produto.setProdutoCodigo(cont);
+        return produto.getProdutoCodigo();
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }finally{
+            GC.desconectar(c);
+        } 
+    
+    }
+    
+    @Override
+    public void incluirFornecedorProduto(String cnpj, Integer codProduto) throws DAOException, ConexaoException {
+        Connection c = GC.conectar();
+        String sql = "INSERT INTO FORNECEDOR_PRODUTO (FORN_CNPJ, PRD_COD) VALUES (?, ?)";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setString(1, cnpj);
+            pstm.setInt(2, codProduto);
+            pstm.executeUpdate();
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }finally{
+            GC.desconectar(c);
+        } 
     }
        
 }

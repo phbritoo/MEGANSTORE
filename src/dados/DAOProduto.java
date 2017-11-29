@@ -71,4 +71,20 @@ public interface DAOProduto {
      */
     public ArrayList<Produto> listarPorNome(String produtoNome) throws DAOException, ConexaoException;
     
+    /**
+     * Consulta chave do último registro inserido 
+     * @return ultima chave inserida no BD 
+     * @throws negocio.exception.DAOException 
+     * @throws negocio.exception.ConexaoException 
+     */
+        public Integer obterChave() throws DAOException, ConexaoException;
+    
+    /**
+     * Inclui associação entre produto e fornecedor
+     * @param cnpj do fornecedor do produto
+     * @param codProduto do produto do fornecedor 
+     * @throws negocio.exception.DAOException 
+     * @throws negocio.exception.ConexaoException 
+     */
+    public void incluirFornecedorProduto(String cnpj, Integer codProduto) throws DAOException, ConexaoException;
 }

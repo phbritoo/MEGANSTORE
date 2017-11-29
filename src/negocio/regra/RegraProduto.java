@@ -58,7 +58,7 @@ public class RegraProduto{
     public void eUnico (Produto produto) throws ProdutoException, ConexaoException, DAOException{
        DAOProduto dao = new DAOProdutoImpl();
        try{ 
-       if(dao.consultar(produto.getProdutoCodigo())!=null){
+       if(dao.consultar(produto.getProdutoNome())!=null){
             throw new ProdutoException("Código de produto já cadastrado!");
         }
        }catch(ConexaoException e){
@@ -180,5 +180,43 @@ public class RegraProduto{
         }catch (DAOException ex){
             throw new ProdutoException("Erro no SQL");
         }
+    }
+    
+    /**
+     * Consulta chave do último registro inserido 
+     * @return ultima chave inserida no BD
+     * @throws negocio.exception.ProdutoException 
+     */
+    public Integer /*Integer*/ obterChave() throws ProdutoException{
+        try{  
+           Produto produto = new Produto();
+         //  produto.setProdutoCodigo(DAO.obterChave());
+         // Integer chaveProduto = DAO.obterChave();
+       // return chaveProduto;         // Integer chaveProduto = DAO.obterChave();
+
+       return (DAO.obterChave());
+        }catch (ConexaoException ex){
+            throw new ProdutoException("Erro no BD");
+        }catch (DAOException ex){
+            throw new ProdutoException("Erro no SQL");
+        }
+        
+    }
+    
+    /**
+     * Inclui associação entre produto e fornecedor
+     * @param cnpj do fornecedor do produto
+     * @param codProduto do produto do fornecedor
+     * @throws negocio.exception.ProdutoException 
+     */
+    public void incluirFornecedorProduto(String cnpj, Integer codProduto) throws ProdutoException{
+        try{  
+           DAO.incluirFornecedorProduto(cnpj,codProduto); 
+        }catch (ConexaoException ex){
+            throw new ProdutoException("Erro no BD");
+        }catch (DAOException ex){
+            throw new ProdutoException("Erro no SQL");
+        }
+        
     }
 }               

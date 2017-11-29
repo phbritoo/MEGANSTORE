@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.util.HashSet;
 import javax.swing.JOptionPane;
 import negocio.basica.FornecedorProduto;
 import negocio.basica.Produto;
@@ -45,8 +46,8 @@ public class CadastroProduto extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtEstoqueAtual = new javax.swing.JTextField();
         btnSair = new javax.swing.JButton();
-        txtPreco = new javax.swing.JFormattedTextField();
         txtCnpjFornecedor = new javax.swing.JFormattedTextField();
+        txtPreco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Produto");
@@ -77,8 +78,6 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
 
-        txtPreco.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤#,##0.00"))));
-
         try {
             txtCnpjFornecedor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
         } catch (java.text.ParseException ex) {
@@ -106,13 +105,14 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEstoqueAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5)
-                    .addComponent(txtCnpjFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCnpjFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtPreco, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtEstoqueAtual, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -155,22 +155,27 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // Manter apenas números de 0 a 9:
         String precoConvert = txtPreco.getText().replaceAll("[^0-9]", "");
+        String cnpjConvert = txtCnpjFornecedor.getText().replaceAll("[^0-9]", "");
         
         // capturar os dados do novo produto a ser cadastrado no banco:
         Produto produto = new Produto();
         FornecedorProduto fornecedorProduto = new FornecedorProduto();
         
         produto.setProdutoNome(txtNome.getText());
-        fornecedorProduto.setFornecedorCnpj(txtCnpjFornecedor.getText());
+        fornecedorProduto.setFornecedorCnpj(cnpjConvert);
         produto.setProdutoPreco(Double.parseDouble(precoConvert));
         produto.setProdutoEstoque(Integer.parseInt(txtEstoqueAtual.getText()));
         
         FachadaProduto f = new FachadaProduto();
         try{
             f.cadastrar(produto);
+            f.obterChave();
+            produto.setProdutoCodigo(f.obterChave());
+            f.associar(produto, fornecedorProduto); 
             txtNome.setText("");
             txtEstoqueAtual.setText("");
             txtPreco.setText("");
+            txtCnpjFornecedor.setText("");
             JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!" );
         } catch (ProdutoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -225,6 +230,6 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtCnpjFornecedor;
     private javax.swing.JTextField txtEstoqueAtual;
     private javax.swing.JTextField txtNome;
-    private javax.swing.JFormattedTextField txtPreco;
+    private javax.swing.JTextField txtPreco;
     // End of variables declaration//GEN-END:variables
 }
