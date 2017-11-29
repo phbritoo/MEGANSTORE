@@ -5,6 +5,7 @@
  */
 package gui;
 
+import static java.lang.Double.parseDouble;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -222,8 +223,8 @@ public class CadastroPedido extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addComponent(lblTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,12 +253,12 @@ public class CadastroPedido extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(lblTotalCompra))
-                .addGap(27, 27, 27)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar)
                     .addComponent(btnFinalizar))
@@ -272,7 +273,8 @@ public class CadastroPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         FachadaProduto p = new FachadaProduto();
         String produtoNome;
-        Produto produto; 
+        Produto produto;
+        String total;
         try{       
         produtoNome = (boxProduto.getSelectedItem().toString());
         produto = p.consultar(produtoNome);
@@ -288,6 +290,12 @@ public class CadastroPedido extends javax.swing.JFrame {
             quantidade * produto.getProdutoPreco()        
         };
         dtmProdutos.addRow(dados);
+        double count=0;
+        for (int i=0; i<=jTProdutos.getRowCount()-1;i++) {
+        count+=Double.parseDouble(jTProdutos.getValueAt(i, 4).toString());
+        }
+        
+        lblTotalCompra.setText(String.valueOf(count));
         }catch (ProdutoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (ConexaoException ex) {
@@ -398,7 +406,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+     
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
