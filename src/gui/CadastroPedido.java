@@ -374,11 +374,21 @@ public class CadastroPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextqtdActionPerformed
 
+
     private void btnExcluirCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCompraActionPerformed
         // Ainda em desenvolvimento:
-        int linha = jTProdutos.getSelectedRow();
-        int codigo = (int) jTProdutos.getValueAt(linha, 0);
-        jTProdutos.removeRowSelectionInterval(linha, linha);
+        DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();
+        Double valord = 0.00;
+        String valors = null;
+        if (jTProdutos.getSelectedRow() >= 0){
+            valord =  ((Double.parseDouble(lblTotalCompra.getText())-((Double) jTProdutos.getValueAt(jTProdutos.getSelectedRow(),4))));
+            valors = valord.toString();
+            dtmProdutos.removeRow(jTProdutos.getSelectedRow());
+            jTProdutos.setModel(dtmProdutos);            
+        }else{
+            JOptionPane.showMessageDialog(null, "Favor selecionar uma linha");
+        }
+        lblTotalCompra.setText(valors);
     }//GEN-LAST:event_btnExcluirCompraActionPerformed
 
     /**
