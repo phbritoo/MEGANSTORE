@@ -366,7 +366,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
     
     /**
-     * faz select no BD e traz automaticamente os dados de todos os cliente cadastrados
+     * faz select no BD e traz os dados de todos os cliente cadastrados
      * @param listaCliente
      */
     public void readJTable(ArrayList<Cliente> listaCliente) {
@@ -385,7 +385,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
     }
     
     /**
-     * 
+     * faz select no BD e traz os dados de todos os cliente cadastrados
      * @throws ClienteException
      * @throws ConexaoException
      * @throws DAOException 

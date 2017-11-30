@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Interface de acesso a dados
+ * relacionado a classe Produto
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package dados;
 
@@ -13,7 +14,7 @@ import negocio.exception.DAOException;
 
 /**
  *
- * @author Gabriel
+ * @author Gabriel Carvalho
  */
 public interface DAOProduto {
     
@@ -44,14 +45,28 @@ public interface DAOProduto {
     /**
      * Busca no BD um registro correspondente ao CNPJ passado
      * @param codigo
-     * @return o código do produto
+     * @return 
      * @throws negocio.exception.DAOException
      * @throws negocio.exception.ConexaoException
      */
     public Produto consultar(Integer codigo) throws DAOException, ConexaoException;
     
+    /**
+     * Busca no BD um registro correspondente ao Nome passado
+     * @param nome
+     * @return 
+     * @throws DAOException
+     * @throws ConexaoException 
+     */
     public Produto consultar(String nome) throws DAOException, ConexaoException;
     
+    /**
+     * Busca no BD um registro correspondente ao Preço passado
+     * @param nomeProduto
+     * @return 
+     * @throws DAOException
+     * @throws ConexaoException 
+     */
     public Double consultarPreco(String nomeProduto) throws DAOException, ConexaoException;
     
     /**

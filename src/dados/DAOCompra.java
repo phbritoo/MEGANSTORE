@@ -25,5 +25,12 @@ public interface DAOCompra {
      */
     public void incluir (Compra compra) throws DAOException, ConexaoException;
     
+    /**
+     * Consulta os dados a partir do código da compra
+     * @param nfCodigo
+     * @return
+     * @throws DAOException
+     * @throws ConexaoException 
+     */
     public Compra consultar(Integer nfCodigo) throws DAOException, ConexaoException;
 }

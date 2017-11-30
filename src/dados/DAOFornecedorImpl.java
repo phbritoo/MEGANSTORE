@@ -1,4 +1,9 @@
-
+/*
+ * Classe de acesso a dados
+ * relacionado a classe Fornecedor
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
+ */
 package dados;
 
 import java.sql.Connection;
@@ -24,6 +29,12 @@ public class DAOFornecedorImpl implements DAOFornecedor{
        GC = GerenciadorConexaoImpl.getInstancia();
     }
     
+    /**
+     * Salva os dados no BD
+     * @param fornecedor objeto com CNPJ, nome e telefone do fornecedor
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */
     @Override
     public void incluir(Fornecedor fornecedor) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
@@ -41,6 +52,12 @@ public class DAOFornecedorImpl implements DAOFornecedor{
         } 
     }
     
+    /**
+    * Altera no BD um registro o nome do fornecedor selecionado
+     * @param fornecedor Objeto contendo ID e dados a serem alterados
+    * @throws DAOException
+    * @throws ConexaoException 
+    */
     @Override
     public void alterar(Fornecedor fornecedor) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
@@ -58,6 +75,12 @@ public class DAOFornecedorImpl implements DAOFornecedor{
         } 
     }
     
+    /**
+     * Exclui no BD o fornecedor selecionado
+     * @param fornecedor Objeto contendo ID a ser excluído
+     * @throws DAOException
+     * @throws ConexaoException 
+     */
     @Override
     public void excluir(Fornecedor fornecedor) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
@@ -73,6 +96,13 @@ public class DAOFornecedorImpl implements DAOFornecedor{
         } 
     }
     
+    /**
+     * Busca no BD um registro correspondente ao CNPJ passado
+     * @param fornecedorNome Objeto com CNPJ a ser pesquisado
+     * @return o código do fornecedor
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */
     @Override
     public Fornecedor consultar(String cnpj) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
@@ -96,6 +126,13 @@ public class DAOFornecedorImpl implements DAOFornecedor{
     
     }
     
+    /**
+     * Lista um ou mais fornecedores atráves do nome
+     * @param fornecedorNome nome ou parte do nome a ser pesquisado
+     * @return ArrayList contendo um ou mais fornedores
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */
     @Override
     public ArrayList<Fornecedor> listarPorNome(String fornecedorNome) throws DAOException, ConexaoException {
         Connection c = GC.conectar();
@@ -122,7 +159,13 @@ public class DAOFornecedorImpl implements DAOFornecedor{
             GC.desconectar(c);
         }
     }
-        
+    
+    /**
+     * Lista todos os fornecedores cadastrados
+     * @return ArrayList com todos os fornedores cadastrados
+     * @throws DAOException
+     * @throws ConexaoException
+     */    
     @Override
     public ArrayList<Fornecedor>listarTodos() throws DAOException, ConexaoException{
         Connection c = GC.conectar();

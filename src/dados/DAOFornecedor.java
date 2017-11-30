@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Interface de acesso a dados
+ * relacionado a classe Fornecedor
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package dados;
 
@@ -12,11 +13,11 @@ import negocio.exception.DAOException;
 
 /**
  *
- * @author Djalma
+ * @author Djalma Arandas
  */
 public interface DAOFornecedor {
     
-   /**
+    /**
      * Salva os dados no BD
      * @param fornecedor objeto com CNPJ, nome e telefone do fornecedor
      * @throws negocio.exception.DAOException

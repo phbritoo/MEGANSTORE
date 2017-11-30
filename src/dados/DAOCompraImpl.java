@@ -29,6 +29,12 @@ public class DAOCompraImpl implements DAOCompra {
        GC = GerenciadorConexaoImpl.getInstancia();
     }
     
+     /**
+     * Salva os dados relacionados a compra no BD
+     * @param compra Objeto com os dados
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */ 
     @Override
     public void incluir(Compra compra) throws DAOException, ConexaoException {
         Connection c = GC.conectar();
@@ -48,6 +54,13 @@ public class DAOCompraImpl implements DAOCompra {
         } 
     }
     
+    /**
+     * Consulta os dados a partir do código da compra
+     * @param nfCodigo
+     * @return
+     * @throws DAOException
+     * @throws ConexaoException 
+     */
     @Override
     public Compra consultar(Integer nfCodigo) throws DAOException, ConexaoException {
         Connection c = GC.conectar();

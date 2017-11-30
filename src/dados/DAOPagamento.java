@@ -1,18 +1,18 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Interface de acesso a dados
+ * relacionado a classe Pagamento
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package dados;
 
 import negocio.basica.Pagamento;
 import negocio.exception.ConexaoException;
-import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
 
 /**
- *
- * @author heloi
+ * @author Heloísa Galvão
+ * Revisado por Gildo Neto
  */
 public interface DAOPagamento {
     

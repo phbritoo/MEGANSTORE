@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe de acesso a dados
+ * relacionado a classe Pagamento
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package dados;
 
@@ -15,8 +16,8 @@ import util.GerenciadorConexao;
 import util.GerenciadorConexaoImpl;
 
 /**
- *
- * @author heloi
+ * @author Heloísa Galvão
+ * Revisado por Gildo Neto
  */
 public class DAOPagamentoImpl implements DAOPagamento{
     private final GerenciadorConexao GC;
@@ -25,11 +26,16 @@ public class DAOPagamentoImpl implements DAOPagamento{
          GC = GerenciadorConexaoImpl.getInstancia();
     }
     
+    /**
+     * Salva os dados no BD
+     * @param pagamento Objeto com os dados
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */
     @Override
     public void inserir (Pagamento pagamento)throws ConexaoException, DAOException{
         Connection con = GC.conectar();
-        String sql = "INSERT INTO PAGAMENTO (CARD_PARCELAS, CARD_VALOR, CARD_NUM, CARD_VALIDADE, CARD_TITULAR) "
-                + "                VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO PAGAMENTO (CARD_PARCELAS, CARD_VALOR, CARD_NUM, CARD_VALIDADE, CARD_TITULAR) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement pstm = con.prepareStatement(sql);
             pstm.setInt(1, pagamento.getCardParcelas());
