@@ -330,4 +330,8 @@ public class CadastroPagamento extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtValidade;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
+    public void recebendo (String recebe){
+    lblValor.setText(recebe);
+    }
+    
 }

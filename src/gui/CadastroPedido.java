@@ -25,7 +25,7 @@ import java.text.DecimalFormat;
  * @author Gildo
  */
 public class CadastroPedido extends javax.swing.JFrame {
-
+    CadastroPagamento passavalor;
     /**
      * Creates new form CadastroPedido
      */
@@ -307,8 +307,17 @@ public class CadastroPedido extends javax.swing.JFrame {
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
-        CadastroPagamento cp = new CadastroPagamento();
-        cp.setVisible(true);
+       /* CadastroPagamento cp = new CadastroPagamento();
+        cp.setVisible(true);*/
+        
+        if (passavalor == null){
+            passavalor = new CadastroPagamento();
+            passavalor.setVisible(true);
+            passavalor.recebendo(lblTotalCompra.getText());
+        }else{
+            passavalor.setVisible(true);
+            passavalor.setState(CadastroPagamento.NORMAL);
+        }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
