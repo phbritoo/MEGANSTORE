@@ -63,7 +63,7 @@ public class ConsultaProduto extends javax.swing.JFrame {
         txtPreco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Consulta de Fornecedor");
+        setTitle("Consulta de Produto");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
@@ -173,8 +173,7 @@ public class ConsultaProduto extends javax.swing.JFrame {
                                 .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel5)
-                                .addGap(35, 35, 35)))
+                                .addComponent(jLabel5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
