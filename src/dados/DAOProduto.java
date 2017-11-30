@@ -13,8 +13,8 @@ import negocio.exception.DAOException;
 
 
 /**
- *
  * @author Gabriel Carvalho
+ * Revisado por Gildo Neto
  */
 public interface DAOProduto {
     
