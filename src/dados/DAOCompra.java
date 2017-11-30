@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Interface de acesso a dados
+ * relacionado a classe Compra
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package dados;
 
@@ -10,17 +11,17 @@ import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
 
 /**
- *
- * @author paulo
+ * @author Paulo Brito
+ * revisado por Gildo Neto
  */
 public interface DAOCompra {
     
      
     /**
-     * Salva os dados no BD
+     * Salva os dados relacionados a compra no BD
      * @param compra Objeto com os dados
-     * @throws negocio.exception.DAOCompraException
-     * @throws negocio.exception.ConexaoCompraException
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
      */
-    public void inserir (Compra compra) throws DAOException, ConexaoException;
+    public void incluir (Compra compra) throws DAOException, ConexaoException;
 }
