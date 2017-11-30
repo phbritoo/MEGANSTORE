@@ -1,6 +1,8 @@
 
 package negocio.basica;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author paulo
@@ -8,6 +10,7 @@ package negocio.basica;
 public class CompraProduto {
         private int produtoQtd;
         private double produtoPreco;
+        private ArrayList<CompraProduto> listaCompraProduto;
         private Compra compra;
         private Produto produto;
 
@@ -41,6 +44,20 @@ public class CompraProduto {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
+    }
+
+    /**
+     * @return the listaCompraProduto
+     */
+    public ArrayList<CompraProduto> getListaCompraProduto() {
+        return listaCompraProduto;
+    }
+
+    /**
+     * @param listaCompraProduto the listaCompraProduto to set
+     */
+    public void setListaCompraProduto(ArrayList<CompraProduto> listaCompraProduto) {
+        this.listaCompraProduto = listaCompraProduto;
     }
         
 }
