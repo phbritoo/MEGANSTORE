@@ -24,4 +24,6 @@ public interface DAOCompra {
      * @throws negocio.exception.ConexaoException
      */
     public void incluir (Compra compra) throws DAOException, ConexaoException;
+    
+    public Compra consultar(Integer nfCodigo) throws DAOException, ConexaoException;
 }

@@ -9,6 +9,7 @@ package dados;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import negocio.basica.Compra;
 import negocio.exception.ConexaoException;
@@ -45,6 +46,32 @@ public class DAOCompraImpl implements DAOCompra {
         }finally{
             GC.desconectar(c);
         } 
-    }   
+    }
+    
+    @Override
+    public Compra consultar(Integer nfCodigo) throws DAOException, ConexaoException {
+        Connection c = GC.conectar();
+        String sql = "SELECT NF_COD, NF_TOTAL, NF_DATA, VEND_COD, CLI_CPF FROM COMPRA WHERE NF_COD = ?";
+        try{
+            PreparedStatement pstm = c.prepareStatement(sql);
+            pstm.setInt(1, nfCodigo);
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                Compra compra = new Compra();
+                compra.setNfCodigo(rs.getInt("NF_COD"));
+                compra.setNfTotal(rs.getDouble("NF_TOTAL"));
+                compra.setNfData(rs.getDate("NF_DATA"));
+                //incompleto
+               /* compra.setVendedor().setVendedorCodigo(rs.getInt("VEND_COD"));
+                compra.setCliente().setClienteCpf(rs.getString("CLI_CPF"));*/
+                return compra;
+            }
+            return null;
+        }catch(SQLException e){
+            throw new DAOException(e.getMessage());
+        }finally{
+            GC.desconectar(c);
+        }
+    }
     
 }
