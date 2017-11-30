@@ -1,23 +1,21 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Classe para retornar exceções
+ * referente a classe Cliente
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package negocio.fachada;
 
 import java.util.ArrayList;
 import negocio.basica.Cliente;
-import negocio.basica.Cliente;
-import negocio.exception.ClienteException;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
 import negocio.exception.ClienteException;
 import negocio.regra.RegraCliente;
-import negocio.regra.RegraCliente;
 
 /**
- *
- * @author William
+ * @author William Santos
+ * revisado por Heloísa Galvão e Gildo Neto
  */
 public class FachadaCliente {
     

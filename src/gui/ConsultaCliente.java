@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela de consulta, alteração e exclusão de Clientes no BD
+ * reponsável por manter os dados relacionados a esta classe
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package gui;
 
@@ -15,13 +16,13 @@ import negocio.exception.ClienteException;
 import negocio.fachada.FachadaCliente;
 
 /**
- *
- * @author aluno
+ * @author Heloísa Galvão
+ * revisado por Gildo Neto
  */
 public class ConsultaCliente extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConsultaCliente
+     * Cria um novo formulário ConsultaCliente
      */
     public ConsultaCliente() {
         initComponents();
@@ -55,7 +56,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
         btnPesquisar = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         txtCpf = new javax.swing.JFormattedTextField();
         txtTelefone = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -97,10 +98,10 @@ public class ConsultaCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Sair");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -186,7 +187,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(229, 229, 229)
-                        .addComponent(jButton4))
+                        .addComponent(btnSair))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(185, 185, 185)
                         .addComponent(jLabel1)))
@@ -218,7 +219,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
                     .addComponent(btnExcluir)
                     .addComponent(btnAlterar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4)
+                .addComponent(btnSair)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -226,11 +227,19 @@ public class ConsultaCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    /**
+     * botão sai/fecha o formulário
+     * @param evt 
+     */
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btnSairActionPerformed
 
+    /**
+     * botão limpa todos os campos do formulário
+     * @param evt 
+     */
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // Limpar campos de texto
         txtNome.setText("");
@@ -239,6 +248,10 @@ public class ConsultaCliente extends javax.swing.JFrame {
         txtTelefone.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    /**
+     * botão pesquisa e retorna do BD os objetos do tipo Cliente
+     * @param evt 
+     */
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // Manter apenas números de 0 a 9:
         String cpfConvert = txtCpf.getText().replaceAll("[^0-9]", "");
@@ -269,6 +282,10 @@ public class ConsultaCliente extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
+    /**
+     * botão altera nome ou telefone do Cliente
+     * @param evt 
+     */
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // Manter apenas números de 0 a 9:
         String telefoneConvert = txtTelefone.getText().replaceAll("[^0-9]", "");
@@ -302,6 +319,10 @@ public class ConsultaCliente extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    /**
+     * mouse event para preencher o formulário com os dados da linha clicada
+     * @param evt 
+     */
     private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
         // Preencher campos de texto com o dado selecionado na tabela
         if (tblCliente.getSelectedRow() != -1) {
@@ -312,6 +333,10 @@ public class ConsultaCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblClienteMouseClicked
 
+    /**
+     * botão exclui objeto do tipo Cliente no BD
+     * @param evt 
+     */
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // Excluir um cliente do BD
         try{
@@ -341,7 +366,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
     
     /**
-     *
+     * faz select no BD e traz automaticamente os dados de todos os cliente cadastrados
      * @param listaCliente
      */
     public void readJTable(ArrayList<Cliente> listaCliente) {
@@ -359,6 +384,12 @@ public class ConsultaCliente extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * 
+     * @throws ClienteException
+     * @throws ConexaoException
+     * @throws DAOException 
+     */
     public void readJTable() throws ClienteException, ConexaoException, DAOException {
         DefaultTableModel modelo = (DefaultTableModel) tblCliente.getModel();
         modelo.setNumRows(0);
@@ -416,7 +447,7 @@ public class ConsultaCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

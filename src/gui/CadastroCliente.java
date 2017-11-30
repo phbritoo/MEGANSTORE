@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela de cadastro de Cliente responsável por
+ * obter dados para a futura inserção no BD
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package gui;
 
@@ -13,13 +14,13 @@ import negocio.exception.DAOException;
 import negocio.fachada.FachadaCliente;
 
 /**
- *
- * @author aluno
+ * @author William Santos
+ * revisado por Gildo Neto e Heloísa Galvão
  */
 public class CadastroCliente extends javax.swing.JFrame {
 
     /**
-     * Creates new form CadastroCliente
+     * Cria um novo formulário CadastroCliente
      */
     public CadastroCliente() {
         initComponents();
@@ -143,11 +144,19 @@ public class CadastroCliente extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * botão para sair/fechar o formulário
+     * @param evt 
+     */
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
         this.dispose();  
     }//GEN-LAST:event_btnSairActionPerformed
 
+    /**
+     * botão para cadastrar um novo cliente no BD
+     * @param evt 
+     */
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // Manter apenas números de 0 a 9:
         String cpjConvert = txtCpf.getText().replaceAll("[^0-9]", "");

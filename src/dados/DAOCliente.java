@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Interface de acesso a dados
+ * relacionado a classe Cliente
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package dados;
 
@@ -12,7 +13,7 @@ import negocio.exception.DAOException;
 
 /**
  *
- * @author William
+ * @author William Santos
  */
 public interface DAOCliente {
 
@@ -26,7 +27,7 @@ public interface DAOCliente {
  
     /**
      * Exclui no BD o cliente selecionado
-     * @param cliente Objeto contendo ID a ser excluído
+     * @param cliente Objeto contendo CPF a ser excluído
      * @throws DAOException
      * @throws ConexaoException 
      */
@@ -34,14 +35,14 @@ public interface DAOCliente {
     
     /**
     * Altera no BD um registro do cliente selecionado
-     * @param cliente Objeto contendo ID e dados a serem alterados
+    * @param cliente Objeto contendo nome e telefone a serem alterados
     * @throws DAOException
     * @throws ConexaoException 
     */
     public void alterar (Cliente cliente) throws DAOException, ConexaoException;
    
     /**
-     * Busca no BD um registro correspondente ao CPF passado
+     * Busca no BD um cliente correspondente ao CPF passado
      * @param cpf Objeto com CPF a ser pesquisado
      * @return o código do cliente
      * @throws negocio.exception.DAOException
@@ -57,8 +58,8 @@ public interface DAOCliente {
      */
     public ArrayList<Cliente>listarTodos() throws DAOException, ConexaoException;
     
-      /**
-     * Lista um ou mais clientees atráves do nome
+     /**
+     * Lista um ou mais clientes atráves do nome
      * @param clienteNome
      * @return ArrayList contendo um ou mais clientes
      * @throws negocio.exception.DAOException

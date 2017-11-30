@@ -9,14 +9,12 @@ import dados.DAOCliente;
 import dados.DAOClienteImpl;
 import java.util.ArrayList;
 import negocio.basica.Cliente;
-import negocio.basica.Cliente;
 import negocio.exception.DAOException;
-import negocio.exception.ClienteException;
 import negocio.exception.ConexaoException;
 import negocio.exception.ClienteException;
 /**
- *
- * @author William
+ * @author William Santos
+ * revisado por Heloísa Galvão e Gildo Neto
  */
 public class RegraCliente {
     private final DAOCliente DAO;

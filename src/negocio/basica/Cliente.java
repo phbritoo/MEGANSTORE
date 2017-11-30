@@ -1,4 +1,9 @@
-  
+/*
+ * Classe básica Cliente com seus
+ * atributos mais gets e sets
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
+ */  
 package negocio.basica;
 
 
@@ -32,6 +37,10 @@ public class Cliente {
         this.clienteNome = nome;
     }
     
+    /**
+     * método da super classe String que
+     * @return o nome do cliente para ser inserido na jTable
+     */
     @Override
     public String toString(){
         return getClienteNome();
