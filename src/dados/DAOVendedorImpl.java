@@ -1,4 +1,9 @@
-
+/*
+ * Classe de acesso a dados
+ * relacionado a classe Vendedor
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
+ */
 package dados;
 
 import java.sql.Connection;
@@ -24,6 +29,12 @@ public class DAOVendedorImpl implements DAOVendedor{
        GC = GerenciadorConexaoImpl.getInstancia();
     }
     
+    /**
+     * Salva os vendedores no BD
+     * @param vendedor objeto com o nome do vendedor
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */
     @Override
     public void incluir(Vendedor vendedor) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
@@ -39,6 +50,12 @@ public class DAOVendedorImpl implements DAOVendedor{
         } 
     }
     
+    /**
+    * Altera no BD um registro o nome do vendedor selecionado
+     * @param vendedor Objeto contendo ID e nome a ser alterado
+    * @throws DAOException
+    * @throws ConexaoException 
+    */
     @Override
     public void alterar(Vendedor vendedor) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
@@ -55,7 +72,13 @@ public class DAOVendedorImpl implements DAOVendedor{
         } 
     }
     
-      @Override
+    /**
+     * Exclui no BD o vendedor selecionado
+     * @param vendedor Objeto contendo ID a ser excluído
+     * @throws DAOException
+     * @throws ConexaoException 
+     */
+    @Override
     public void excluir(Vendedor vendedor) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
         String sql = "DELETE FROM VENDEDOR WHERE VEND_COD = ?";
@@ -69,7 +92,14 @@ public class DAOVendedorImpl implements DAOVendedor{
             GC.desconectar(c);
         } 
     }
-
+    
+    /**
+     * Busca no BD um registro correspondente ao nome passado
+     * @param vendedorNome Objeto com o nome a ser pesquisado
+     * @return o código do vendedor
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */
     @Override
     public Vendedor consultar(String vendedorNome) throws DAOException, ConexaoException{
         Connection c = GC.conectar();
@@ -92,6 +122,13 @@ public class DAOVendedorImpl implements DAOVendedor{
         }   
     }
     
+    /**
+     * Lista um ou mais vendedores atráves do nome
+     * @param vendedorNome nome ou parte do nome a ser pesquisado
+     * @return ArrayList contendo um ou mais vendedores
+     * @throws negocio.exception.DAOException
+     * @throws negocio.exception.ConexaoException
+     */
     @Override
     public ArrayList<Vendedor> listarPorNome(String vendedorNome) throws DAOException, ConexaoException {
         Connection c = GC.conectar();
@@ -119,6 +156,12 @@ public class DAOVendedorImpl implements DAOVendedor{
         }
     }
     
+    /**
+     * Lista todos os vendedores cadastrados
+     * @return ArrayList com todos os vendedores cadastrados
+     * @throws DAOException
+     * @throws ConexaoException
+     */
     @Override
     public ArrayList<Vendedor>listarTodos() throws DAOException, ConexaoException{
         Connection c = GC.conectar();
