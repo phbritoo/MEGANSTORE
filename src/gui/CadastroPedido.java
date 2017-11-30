@@ -327,6 +327,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         FachadaProduto fp = new FachadaProduto();
         try {
+        boxProduto.removeAllItems();
         for(Produto p: fp.listarTodos()){
         boxProduto.addItem(p);
         }
@@ -340,6 +341,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         
         FachadaCliente fc = new FachadaCliente();
         try {
+            boxCliente.removeAllItems();
             for(Cliente c: fc.listarTodos()){
                 boxCliente.addItem(c);
             }   
@@ -353,6 +355,7 @@ public class CadastroPedido extends javax.swing.JFrame {
         
         FachadaVendedor fv = new FachadaVendedor();
         try {
+            boxVendedor.removeAllItems();
             for(Vendedor v: fv.listarTodos()){
                 boxVendedor.addItem(v);
             }   
