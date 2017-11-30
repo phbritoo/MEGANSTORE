@@ -11,9 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import negocio.basica.FornecedorProduto;
 import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
@@ -156,12 +153,12 @@ public class DAOProdutoImpl implements DAOProduto{
     }
     
     @Override
-    public ArrayList<Produto> listarPorNome(String produtoNome) throws DAOException, ConexaoException {
+    public ArrayList<Produto> listarPoNome(String produtoNome) throws DAOException, ConexaoException {
         Connection c = GC.conectar();
         ArrayList<Produto> lista = new ArrayList();
         Produto produto;
         try{
-            PreparedStatement pstm = c.prepareStatement("SELECT * FROM PRODUTO WHERE PRD_NOME LIKE ?");
+            PreparedStatement pstm = c.prepareStatement("SELECT * FROM PRODUTO WHERE PRD_NOME LIKE ?"); 
             pstm.setString(1, "%"+ produtoNome +"%");
             ResultSet rs = pstm.executeQuery();
             while(rs.next()){
@@ -197,7 +194,7 @@ public class DAOProdutoImpl implements DAOProduto{
                 produto = new Produto();
                 produto.setProdutoCodigo(rs.getInt("PRD_COD"));
                 produto.setProdutoNome(rs.getString("PRD_NOME"));               
-                produto.setProdutoPreco(rs.getInt("PRD_ESTOQUE"));
+                produto.setProdutoEstoque(rs.getInt("PRD_ESTOQUE"));
                 produto.setProdutoPreco(rs.getDouble("PRD_PRECO"));
                 lista.add(produto);
             }
@@ -218,31 +215,13 @@ public class DAOProdutoImpl implements DAOProduto{
         try{
             PreparedStatement pstm = c.prepareStatement(sql);
             ResultSet rs = pstm.executeQuery();
-          while(rs.next()){
-               if (cont < rs.getInt("PRD_COD"))
-                   cont = rs.getInt("PRD_COD");
-                
-          /*produto.setProdutoNome(rs.getString("PRD_NOME"));
-          produto.setProdutoEstoque(rs.getInt("PRD_ESTOQUE"));
-          produto.setProdutoPreco(rs.getDouble("PRD_PRECO"));
-                int cont = 0;
-try{
-setSql("SELECT * FROM Est WHERE est=?");
-ps = conn.prepareStatement(getSql());
-ps.setString(1, getEst());
-rs = ps.executeQuery();
-while(rs.next()){
-if(cont < rs.getInt("colunast"))
-cont = rs.getInt("colunast");
-}
-}
-catch(SQLException ex){
-ex.printStackTrace();
-}*/
-            }
-                produto = new Produto();
-               produto.setProdutoCodigo(cont);
-        return produto.getProdutoCodigo();
+            while(rs.next()){
+                if (cont < rs.getInt("PRD_COD"))
+                    cont = rs.getInt("PRD_COD");
+                }
+            produto = new Produto();
+            produto.setProdutoCodigo(cont);
+            return produto.getProdutoCodigo();
         }catch(SQLException e){
             throw new DAOException(e.getMessage());
         }finally{

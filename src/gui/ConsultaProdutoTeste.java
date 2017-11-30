@@ -254,9 +254,9 @@ public class ConsultaProdutoTeste extends javax.swing.JFrame {
         try {
             ArrayList<Produto> listarProduto;
             if (produto.getProdutoNome().isEmpty()){
-                listarProduto = fp.listarTodos();
+                listarProduto = fp.listarTodos(); 
             } else {
-                listarProduto = fp.listarPorNome(produto.getProdutoNome());
+                listarProduto = fp.listarPoNome(produto.getProdutoNome());
                 txtNomeProduto.setText("");
                 txtCodigo.setText("");
                 txtPreco.setText("");

@@ -8,11 +8,11 @@ package gui;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import negocio.basica.Fornecedor;
+import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
-import negocio.exception.FornecedorException;
-import negocio.fachada.FachadaFornecedor;
+import negocio.exception.ProdutoException;
+import negocio.fachada.FachadaProduto;
 
 /**
  *
@@ -21,7 +21,7 @@ import negocio.fachada.FachadaFornecedor;
 public class ConsultaProduto extends javax.swing.JFrame {
 
     /**
-     * Creates new form ConsultaFornecedor
+     * Creates new form ConsultaProduto
      */
     public ConsultaProduto() {
         initComponents();
@@ -29,7 +29,7 @@ public class ConsultaProduto extends javax.swing.JFrame {
         
         try {
             readJTable();
-        }catch (FornecedorException ex) {
+        }catch (ProdutoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -48,7 +48,6 @@ public class ConsultaProduto extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
@@ -57,7 +56,6 @@ public class ConsultaProduto extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProduto = new javax.swing.JTable();
-        txtCnpj = new javax.swing.JFormattedTextField();
         btnLimpar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -70,8 +68,6 @@ public class ConsultaProduto extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
         jLabel1.setText("Consultar Produto");
-
-        jLabel2.setText("CNPJ Fornecedor:");
 
         jLabel3.setText("Nome:");
 
@@ -117,11 +113,11 @@ public class ConsultaProduto extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nome", "Preço", "Estoque Atual", "CNPJ do Fornecedor"
+                "Código", "Nome", "Preço", "Estoque Atual"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -134,12 +130,6 @@ public class ConsultaProduto extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tblProduto);
-
-        try {
-            txtCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         btnLimpar.setText("Limpar");
         btnLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -159,8 +149,8 @@ public class ConsultaProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -173,27 +163,23 @@ public class ConsultaProduto extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
-                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                                .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel5)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(35, 35, 35)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -210,20 +196,18 @@ public class ConsultaProduto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(44, 44, 44)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jLabel1)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCnpj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -250,27 +234,24 @@ public class ConsultaProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        // Manter apenas números de 0 a 9:
-        String cnpjConvert = txtCnpj.getText().replaceAll("[^0-9]", "");
-       // String telefoneConvert = txtTelefone.getText().replaceAll("[^0-9]", "");
         // Capturar os dados:
-        Fornecedor fornecedor = new Fornecedor();
-        fornecedor.setFornecedorNome(txtNome.getText());
+        Produto produto = new Produto();
+        produto.setProdutoNome(txtNome.getText());
         
-        FachadaFornecedor f = new FachadaFornecedor();
+        FachadaProduto f = new FachadaProduto();
         try {
-            ArrayList<Fornecedor> listarFornecedor;
-            if (fornecedor.getFornecedorNome().isEmpty()){
-                listarFornecedor = f.listarTodos();
+            ArrayList<Produto> listarProduto;
+            if (produto.getProdutoNome().isEmpty()){
+                listarProduto = f.listarTodos();
             } else {
-                listarFornecedor = f.listarPoNome(fornecedor.getFornecedorNome());
-                txtCnpj.setText("");
-                txtNome.setText("");
-               // txtTelefone.setText("");
+                listarProduto = f.listarPoNome(produto.getProdutoNome());
             }
-                readJTable(listarFornecedor);
+            txtNome.setText("");
+            txtEstoque.setText("");
+            txtPreco.setText("");
+            readJTable(listarProduto);
             JOptionPane.showMessageDialog(this, "Pesquisa realizada com sucesso" );
-        }catch (FornecedorException ex) {
+        }catch (ProdutoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } catch (ConexaoException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -282,38 +263,34 @@ public class ConsultaProduto extends javax.swing.JFrame {
     private void tblProdutoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProdutoMouseClicked
         // Preencher campos de texto com o dado selecionado na tabela
         if (tblProduto.getSelectedRow() != -1) {
-            txtCnpj.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 0).toString());
             txtNome.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 1).toString());
-        //    txtTelefone.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
-            txtCnpj.setEnabled(false);
+            txtPreco.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 2).toString());
+            txtEstoque.setText(tblProduto.getValueAt(tblProduto.getSelectedRow(), 3).toString());
         }
     }//GEN-LAST:event_tblProdutoMouseClicked
 
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
-        // Manter apenas números de 0 a 9:
-       // String telefoneConvert = txtTelefone.getText().replaceAll("[^0-9]", "");
-        
-        // Alterar nome e/ou telefone de um fornecedor
+        // Alterar nome, estoque atual e preço de um produto
         try {
             if (tblProduto.getSelectedRow() != -1) {
-                Fornecedor fornecedor = new Fornecedor();
-                FachadaFornecedor f = new FachadaFornecedor();
-                fornecedor.setFornecedorNome(txtNome.getText());
-          //      fornecedor.setFornecedorTel(telefoneConvert);
+                Produto produto = new Produto();
+                FachadaProduto f = new FachadaProduto();
+                produto.setProdutoNome(txtNome.getText());
+                produto.setProdutoEstoque(Integer.parseInt(txtEstoque.getText()));
+                produto.setProdutoPreco(Double.parseDouble(txtPreco.getText()));
                 
-                fornecedor.setFornecedorCnpj(tblProduto.getValueAt(tblProduto.getSelectedRow(), 0).toString());
+                produto.setProdutoCodigo((int)tblProduto.getValueAt(tblProduto.getSelectedRow(), 0));
                 
-                f.alterar(fornecedor);
+                f.alterar(produto);
                 readJTable();
-                txtCnpj.setText("");
-                txtCnpj.setEnabled(true);
                 txtNome.setText("");
-          //      txtTelefone.setText("");
+                txtEstoque.setText("");
+                txtPreco.setText("");
                 JOptionPane.showMessageDialog(this, "Alteração realizada com sucesso");
             } else {
-                JOptionPane.showMessageDialog(null, "Selecione um fornecedor para alterar");
+                JOptionPane.showMessageDialog(null, "Selecione um produto para alterar");
                 }    
-            } catch (FornecedorException ex) {
+            } catch (ProdutoException ex) {
                  JOptionPane.showMessageDialog(this, ex.getMessage());
             } catch (ConexaoException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -324,32 +301,30 @@ public class ConsultaProduto extends javax.swing.JFrame {
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // Limpar campos de texto
-        txtCnpj.setText("");
         txtNome.setText("");
-       // txtTelefone.setText("");
-        txtCnpj.setEnabled(true);
+        txtEstoque.setText("");
+        txtPreco.setText("");
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // Excluir um fornecedor do BD
+        // Excluir um produto do BD
         try{
             if(tblProduto.getSelectedRow() != -1){
-                Fornecedor fornecedor = new Fornecedor();
-                FachadaFornecedor f = new FachadaFornecedor();
+                Produto produto = new Produto();
+                FachadaProduto f = new FachadaProduto();
                 
-                fornecedor.setFornecedorCnpj(tblProduto.getValueAt(tblProduto.getSelectedRow(), 0).toString());
+                produto.setProdutoCodigo((int)tblProduto.getValueAt(tblProduto.getSelectedRow(), 0));
                 
-                f.excluir(fornecedor);
+                f.excluir(produto);
                 readJTable();
-                txtCnpj.setText("");
-                txtCnpj.setEnabled(true);
                 txtNome.setText("");
-            //    txtTelefone.setText("");
+                txtEstoque.setText("");
+                txtPreco.setText("");
                 JOptionPane.showMessageDialog(this, "Exclusão realizada com sucesso");
             } else {
-                JOptionPane.showMessageDialog(null, "Selecione um fornecedor para excluir");
+                JOptionPane.showMessageDialog(null, "Selecione um produto para excluir");
                 }    
-            } catch (FornecedorException ex) {
+            } catch (ProdutoException ex) {
                  JOptionPane.showMessageDialog(this, ex.getMessage());
             } catch (ConexaoException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -361,37 +336,39 @@ public class ConsultaProduto extends javax.swing.JFrame {
     
     /**
      *
-     * @param listaFornecedor
+     * @param listaProduto
      */
-    public void readJTable(ArrayList<Fornecedor> listaFornecedor) {
+    public void readJTable(ArrayList<Produto> listaProduto) {
         
         DefaultTableModel modelo = (DefaultTableModel) tblProduto.getModel();
         modelo.setNumRows(0);
         
-        for (Fornecedor fornecedor : listaFornecedor) {
+        for (Produto produto : listaProduto) {
 
             modelo.addRow(new Object[]{
-                fornecedor.getFornecedorCnpj(),
-                fornecedor.getFornecedorNome(), 
-                fornecedor.getFornecedorTel()
+                produto.getProdutoCodigo(),
+                produto.getProdutoNome(), 
+                produto.getProdutoPreco(),
+                produto.getProdutoEstoque()
             });
         }
     }
     
-    public void readJTable() throws FornecedorException, ConexaoException, DAOException {
+    public void readJTable() throws ProdutoException, ConexaoException, DAOException {
         DefaultTableModel modelo = (DefaultTableModel) tblProduto.getModel();
         modelo.setNumRows(0);
         
-        FachadaFornecedor f = new FachadaFornecedor();
+        FachadaProduto f = new FachadaProduto();
         
-        ArrayList<Fornecedor> listaFornecedor;
-            listaFornecedor = f.listarTodos();
-        for (Fornecedor fornecedor : listaFornecedor) {
+        ArrayList<Produto> listaProduto;
+            listaProduto = f.listarTodos();
+        for (Produto produto : listaProduto) {
 
             modelo.addRow(new Object[]{
-                fornecedor.getFornecedorCnpj(),
-                fornecedor.getFornecedorNome(),
-                fornecedor.getFornecedorTel()
+                produto.getProdutoCodigo(),
+                produto.getProdutoNome(), 
+                produto.getProdutoPreco(),
+                produto.getProdutoEstoque()
             });
         }
     }
@@ -439,13 +416,11 @@ public class ConsultaProduto extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSair;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProduto;
-    private javax.swing.JFormattedTextField txtCnpj;
     private javax.swing.JTextField txtEstoque;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPreco;

@@ -69,7 +69,7 @@ public interface DAOProduto {
      * @throws negocio.exception.DAOException
      * @throws negocio.exception.ConexaoException
      */
-    public ArrayList<Produto> listarPorNome(String produtoNome) throws DAOException, ConexaoException;
+    public ArrayList<Produto> listarPoNome(String produtoNome) throws DAOException, ConexaoException;
     
     /**
      * Consulta chave do último registro inserido 

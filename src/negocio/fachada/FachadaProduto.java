@@ -67,7 +67,7 @@ public class FachadaProduto {
      */
     public void alterar (Produto produto) throws ProdutoException, ConexaoException, DAOException{
         RegraProduto rn = new RegraProduto() ;
-      //  rn.alterar(produto);
+        rn.alterar(produto);
     }
     
     /**
@@ -79,7 +79,7 @@ public class FachadaProduto {
      */
     public void excluir (Produto produto) throws ProdutoException, ConexaoException, DAOException{
         RegraProduto rn = new RegraProduto() ;
-       // rn.excluir(produto);
+        rn.excluir(produto);
     }
     
     /**
@@ -95,16 +95,16 @@ public class FachadaProduto {
     }
     
     /**
-     * Pesquisa um ou mais produto através do nome
+     * Pesquisa um ou mais produto através do nome e/ou CNPJ do fornecedor
      * @param produtoNome primeiro nome ou parte do nome a ser pesquisado
      * @return lista de produto de acordo com a entrada
      * @throws ProdutoException
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException
      */
-    public ArrayList<Produto> listarPorNome (String produtoNome) throws ProdutoException, ConexaoException, DAOException{
+    public ArrayList<Produto> listarPoNome (String produtoNome) throws ProdutoException, ConexaoException, DAOException{
         RegraProduto rp = new RegraProduto();
-        return rp.listarPorNome(produtoNome);
+        return rp.listarPoNome(produtoNome);
         }
     
     /**

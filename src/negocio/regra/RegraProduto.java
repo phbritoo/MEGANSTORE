@@ -9,11 +9,8 @@ import dados.DAOProduto;
 import dados.DAOProdutoImpl;
 import java.util.ArrayList;
 import negocio.basica.Produto;
-import negocio.basica.Produto;
 import negocio.exception.ConexaoException;
 import negocio.exception.DAOException;
-import negocio.exception.ProdutoException;
-import negocio.exception.ProdutoException;
 import negocio.exception.ProdutoException;
 
 /**
@@ -110,9 +107,9 @@ public class RegraProduto{
      * @throws negocio.exception.ConexaoException
      * @throws negocio.exception.DAOException
      */
-    public ArrayList<Produto> listarPorNome(String produtoNome) throws ProdutoException, ConexaoException, DAOException {
+    public ArrayList<Produto> listarPoNome(String produtoNome) throws ProdutoException, ConexaoException, DAOException {
         try {
-            return DAO.listarPorNome(produtoNome);
+            return DAO.listarPoNome(produtoNome);
         }catch(ConexaoException ex){
             throw new ProdutoException("Erro no BD");
         }catch (DAOException ex) {
