@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela de cadastro de pedido/compra responsável por
+ * obter dados para a futura inserção no BD
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package gui;
 
@@ -22,7 +23,7 @@ import java.text.DecimalFormat;
 
 /**
  *
- * @author Gildo
+ * @author Gildo Neto
  */
 public class CadastroPedido extends javax.swing.JFrame {
     CadastroPagamento passavalor;
@@ -268,7 +269,11 @@ public class CadastroPedido extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * adiciona produto no carrinho de compras
+     * @param evt 
+     */
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
         FachadaProduto p = new FachadaProduto();
@@ -304,7 +309,11 @@ public class CadastroPedido extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } 
     }//GEN-LAST:event_btnAdicionarActionPerformed
-
+    
+    /**
+     * chama a tela de Pagamento e envia o valor total da compra
+     * @param evt 
+     */
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // TODO add your handling code here:
        /* CadastroPagamento cp = new CadastroPagamento();
@@ -319,7 +328,11 @@ public class CadastroPedido extends javax.swing.JFrame {
             passavalor.setState(CadastroPagamento.NORMAL);
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
-
+    
+    /**
+     * fecha a janela
+     * @param evt 
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -331,7 +344,11 @@ public class CadastroPedido extends javax.swing.JFrame {
         List<Vendedor> vendedores = f.listarPorNome();*/
         
     }//GEN-LAST:event_boxVendedorComponentShown
-
+    
+    /**
+     * lista todos os clientes, vendedores e produtos
+     * @param evt 
+     */
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         // TODO add your handling code here:
         FachadaProduto fp = new FachadaProduto();
@@ -386,7 +403,10 @@ public class CadastroPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextqtdActionPerformed
 
-
+    /**
+     * Exclui compra selecionada no carrinho
+     * @param evt 
+     */
     private void btnExcluirCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirCompraActionPerformed
         // Ainda em desenvolvimento:
         DefaultTableModel dtmProdutos = (DefaultTableModel) jTProdutos.getModel();

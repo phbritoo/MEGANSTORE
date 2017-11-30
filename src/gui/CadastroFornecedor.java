@@ -1,12 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela de cadastro de Fornecedor responsável por
+ * obter dados para a futura inserção no BD
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package gui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import negocio.basica.Fornecedor;
 import negocio.exception.ConexaoException;
@@ -15,13 +14,13 @@ import negocio.exception.FornecedorException;
 import negocio.fachada.FachadaFornecedor;
 
 /**
- *
- * @author aluno
+ * @author Djalma Arandas
+ * Revisado por Gildo Neto
  */
 public class CadastroFornecedor extends javax.swing.JFrame {
 
     /**
-     * Creates new form CadastroFornecedor
+     * Cria um novo formulário CadastroFornecedor
      */
     public CadastroFornecedor() {
         initComponents();
@@ -155,7 +154,11 @@ public class CadastroFornecedor extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
-
+    
+    /**
+     * botão cadastra novo Fornecedor no BD
+     * @param evt 
+     */
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         // Manter apenas números de 0 a 9:
         String cnpjConvert = txtCnpj.getText().replaceAll("[^0-9]", "");

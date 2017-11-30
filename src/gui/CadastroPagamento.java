@@ -1,7 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Tela de cadastro de pagamento responsável por
+ * obter dados para a futura inserção no BD
+ * PROJETO PROGRAMAÇÃO ORIENTADA A OBJETOS - PROF TITO KENZO 
+ * FACULDADE UNIBRATEC - RECIFE - PERNAMBUCO - BRASIL - NOVEMBRO/2017
  */
 package gui;
 
@@ -12,13 +13,13 @@ import negocio.exception.PagamentoException;
 import negocio.fachada.FachadaPagamento;
 
 /**
- *
- * @author Gildo
+ * @author Heloísa Galvão
+ * Revisado por Djalma Arandas e Gildo Neto
  */
 public class CadastroPagamento extends javax.swing.JFrame {
    
     /**
-     * Creates new form CadastroPagamento
+     * Cria um novo formulário CadastroPagamento
      */
     public CadastroPagamento() {
         initComponents();
@@ -44,10 +45,10 @@ public class CadastroPagamento extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         lblValorParcela = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnFinalizar = new javax.swing.JButton();
         txtNum = new javax.swing.JFormattedTextField();
         txtValidade = new javax.swing.JFormattedTextField();
-        jButton2 = new javax.swing.JButton();
+        btnCalcula = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -98,11 +99,11 @@ public class CadastroPagamento extends javax.swing.JFrame {
         lblValorParcela.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblValorParcela.setText("0,00");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("FINALIZAR COMPRA");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnFinalizar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnFinalizar.setText("FINALIZAR COMPRA");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnFinalizarActionPerformed(evt);
             }
         });
 
@@ -118,10 +119,10 @@ public class CadastroPagamento extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
-        jButton2.setText("Calcular parcela");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCalcula.setText("Calcular parcela");
+        btnCalcula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCalculaActionPerformed(evt);
             }
         });
 
@@ -147,7 +148,7 @@ public class CadastroPagamento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
+                                .addComponent(btnCalcula)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
@@ -164,7 +165,7 @@ public class CadastroPagamento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(87, 87, 87)
-                        .addComponent(jButton1))
+                        .addComponent(btnFinalizar))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -201,13 +202,13 @@ public class CadastroPagamento extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addComponent(txtParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnCalcula)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValor)
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnFinalizar)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -222,8 +223,20 @@ public class CadastroPagamento extends javax.swing.JFrame {
     private void txtParcelasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtParcelasActionPerformed
 
     }//GEN-LAST:event_txtParcelasActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    /**
+     * recebe o valor da tela de pedido/compra
+     * @param recebe 
+     */
+    public void recebendo (String recebe){
+    lblValor.setText(recebe);
+    }
+    
+    /**
+     * Inclui os dados no BD
+     * @param evt 
+     */
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
         // Manter apenas números de 0 a 9:
         String cardNumConvert = txtNum.getText().replaceAll("[^0-9]", "");
         String cardValorConvert = lblValor.getText().replaceAll("[^0-9]", "");
@@ -247,13 +260,17 @@ public class CadastroPagamento extends javax.swing.JFrame {
         }catch(PagamentoException | DAOException ep){
             JOptionPane.showMessageDialog(this,ep.getMessage());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void txtParcelasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtParcelasMouseExited
 
     }//GEN-LAST:event_txtParcelasMouseExited
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    
+    /**
+     * Calcula o valor da parcela
+     * @param evt 
+     */
+    private void btnCalculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculaActionPerformed
         // Capturar os dados:
         Pagamento pagamento = new Pagamento();
         pagamento.setCardParcelas( Integer.parseInt(txtParcelas.getText()) );
@@ -266,7 +283,7 @@ public class CadastroPagamento extends javax.swing.JFrame {
         }catch(PagamentoException ep){
             JOptionPane.showMessageDialog(this,ep.getMessage());
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCalculaActionPerformed
     
     /**
      * @param args the command line arguments
@@ -304,8 +321,8 @@ public class CadastroPagamento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCalcula;
+    private javax.swing.JButton btnFinalizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -320,8 +337,6 @@ public class CadastroPagamento extends javax.swing.JFrame {
     private javax.swing.JTextField txtTitular;
     private javax.swing.JFormattedTextField txtValidade;
     // End of variables declaration//GEN-END:variables
-    public void recebendo (String recebe){
-    lblValor.setText(recebe);
-    }
+   
     
 }
